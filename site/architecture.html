@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenEnvelope 参考架构</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+:root{--ground:#0d1416;--panel:#131d1f;--panel2:#182527;--rule:#24363a;--rule2:#2f464b;--ink:#d8ddd9;--ink2:#a9b6b3;--mute:#7a8f8c;--teal:#4fb3a9;--teal2:#2c6f69;--amber:#d9a441;--red:#c95c4b;--green:#6fb07a;--blue:#6f9fc9;
+--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--serif:"Noto Serif SC","Songti SC","Hiragino Mincho ProN",Georgia,serif;--cond:"IBM Plex Sans Condensed","Arial Narrow",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--serif);font-size:15.5px;line-height:1.75}
+a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal2)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{display:grid;grid-template-columns:210px minmax(0,1fr);gap:40px;max-width:1240px;margin:0 auto;padding:36px 28px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:20px}.rail{position:static!important;display:flex;flex-wrap:wrap;gap:6px 14px}}
+.rail{position:sticky;top:24px;align-self:start;font-family:var(--mono);font-size:12px;line-height:1.5}
+.rail .brand{color:var(--teal);letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.rail a{display:block;color:var(--mute);border:0;padding:4px 0 4px 10px;border-left:2px solid var(--rule)}
+.rail a:hover{color:var(--ink);border-left-color:var(--teal)}
+.rail .meta{margin-top:22px;color:var(--mute);border-top:1px solid var(--rule);padding-top:12px}
+main{min-width:0}
+header h1{font-family:var(--cond);font-weight:600;font-size:38px;line-height:1.1;margin:0 0 6px;text-wrap:balance}
+header .sub{font-family:var(--mono);font-size:12.5px;color:var(--mute);letter-spacing:.04em}
+h2{font-family:var(--cond);font-size:22px;font-weight:600;margin:52px 0 14px;padding-top:18px;border-top:1px solid var(--rule);text-wrap:balance}
+h2 .n{font-family:var(--mono);color:var(--teal);font-size:12px;letter-spacing:.14em;display:block;margin-bottom:6px;font-weight:500}
+h3{font-family:var(--cond);font-size:16.5px;font-weight:600;margin:26px 0 8px}
+p{max-width:68ch;margin:0 0 14px}
+p.lead{font-size:17px;max-width:62ch}
+.k{font-family:var(--mono);font-size:.88em;color:var(--teal)}
+.q{border-left:2px solid var(--teal2);padding:6px 16px;color:var(--ink2);margin:16px 0;max-width:66ch}
+.q b{color:var(--ink);font-weight:500}
+figure{margin:18px 0 22px;background:var(--panel);border:1px solid var(--rule);padding:16px;overflow-x:auto}
+figure svg{max-width:100%;height:auto;min-width:640px;display:block}
+figcaption{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;letter-spacing:.03em;line-height:1.6}
+svg text{font-family:var(--mono)}
+.tbl{overflow-x:auto;margin:14px 0 20px;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;padding:10px 12px;background:var(--panel);border-bottom:1px solid var(--rule2);font-weight:500}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:0}
+td.m{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.chip{font-family:var(--mono);font-size:11px;padding:1px 7px;border:1px solid var(--rule2);border-radius:2px;color:var(--ink2);white-space:nowrap}
+.chip.t1{color:var(--green);border-color:rgba(111,176,122,.5)}.chip.t2{color:var(--blue);border-color:rgba(111,159,201,.5)}.chip.t3{color:var(--amber);border-color:rgba(217,164,65,.5)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--rule);padding:14px 16px}
+.card h4{margin:0 0 8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.card p{font-size:14px;margin:0 0 8px;max-width:none}.card p:last-child{margin:0}
+.small{font-size:12.5px;color:var(--mute);font-family:var(--mono)}
+ol.rules{max-width:68ch;padding-left:1.4em}ol.rules li{margin-bottom:6px}
+.hubbar{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--rule);padding:0 0 10px;margin:0 0 22px;color:var(--mute)}.hubbar a{border:0;color:var(--teal)}.hubbar a:hover{text-decoration:underline}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<nav class="rail" aria-label="目录">
+  <div class="brand">Reference Architecture</div>
+  <a href="#s1">设计原则</a>
+  <a href="#s2">全景：上下游对接</a>
+  <a href="#s2b">OPC UA · LF Energy 对接</a>
+  <a href="#s3">接口矩阵</a>
+  <a href="#s4">层级聚合语义</a>
+  <a href="#s5">校验架构</a>
+  <a href="#s6">规则集</a>
+  <a href="#s7">生命周期时序</a>
+  <a href="#s8">部署拓扑与数据驻留</a>
+  <a href="#s9">治理与一致性</a>
+  <div class="meta">v0.3 · 2026-09-09<br>Apache-2.0 / CC BY 4.0<br>vendor-neutral · no product names</div>
+</nav>
+
+<main>
+<div class="hubbar"><a href="/">◂ OpenEnvelope 工作台</a><span>参考架构 · 中立</span></div>
+<header>
+  <h1>OpenEnvelope 参考架构</h1>
+  <div class="sub">开放 · 开源 · 中立 —— 灵活性资源从设备到市场的对接架构与校验架构（暂定名）</div>
+</header>
+
+<section id="s1">
+<h2><span class="n">§1</span>设计原则</h2>
+<p class="lead">一个时间窗内，一台或一群电力资源"能做什么"，被写成一个可交换、可校验、可签名的对象——Envelope。整个架构围绕这个对象在产业链上下游之间的流动而设计。</p>
+<div class="grid2">
+  <div class="card"><h4>约束集，不是字段集</h4><p>可行域用线性约束加模式变量表达，而不是为每种设备预定义字段。电池、热泵、电解槽、电动车队列共用同一表示；新设备类型不改 schema。</p></div>
+  <div class="card"><h4>四层分离</h4><p>Envelope（可行域）/ Position（轨迹）/ Offer（报价）/ Attestation（证明）各自独立传输与版本化。实现方只实现它需要的层。</p></div>
+  <div class="card"><h4>校验是一等对象</h4><p>"谁、按哪版规则、对哪个输入哈希、得出什么结论"是标准的一部分，不是实现细节。任何人可用同一输入与规则版本复算。</p></div>
+  <div class="card"><h4>只判定，不指令</h4><p>校验层的输出是 verdict 与 violations，永不包含调度指令。这条边界同时是技术边界、商业边界与监管边界。</p></div>
+  <div class="card"><h4>只引用，不造码</h4><p>所有标识为 <span class="k">{scheme, id}</span>：scheme 是发码机构的反向域名，id 是该机构原码。不为任何区域、节点、市场发明新编码。</p></div>
+  <div class="card"><h4>同意显式，默认最保守</h4><p>每个 Envelope 携带 <span class="k">consent{cross_border, training_use, retention_days}</span>。未声明即视为全部禁止。</p></div>
+</div>
+</section>
+
+<section id="s2">
+<h2><span class="n">§2</span>全景：产业上下游对接架构</h2>
+<p>横向读：左侧是资源与设备协议，右侧是市场与系统运营者协议；中间是 Envelope 总线。所有既有协议通过<b>适配器</b>接入总线，总线上只流动四层对象。校验服务与透明日志挂在总线上，不在任何一条业务路径的必经点上——它们是旁路，不是网关。</p>
+<figure>
+<svg viewBox="0 0 1180 640" role="img" aria-label="从资源到市场的对接全景：设备协议经适配器进入 Envelope 总线，市场协议经适配器从总线取 Offer 与 Position；校验服务读 L0–L2 写 L3；透明日志记录 Attestation 哈希">
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6b3"/></marker>
+ <marker id="at" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4fb3a9"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d9a441"/></marker>
+</defs>
+<g font-size="12" fill="#d8ddd9" stroke-width="1">
+ <!-- column headers -->
+ <text x="120" y="28" text-anchor="middle" fill="#7a8f8c" font-size="11" letter-spacing="2">资源 / 设备</text>
+ <text x="330" y="28" text-anchor="middle" fill="#7a8f8c" font-size="11" letter-spacing="2">资源管理 (EMS)</text>
+ <text x="590" y="28" text-anchor="middle" fill="#7a8f8c" font-size="11" letter-spacing="2">ENVELOPE 总线</text>
+ <text x="850" y="28" text-anchor="middle" fill="#7a8f8c" font-size="11" letter-spacing="2">聚合 / 交易</text>
+ <text x="1060" y="28" text-anchor="middle" fill="#7a8f8c" font-size="11" letter-spacing="2">市场 / 系统运营</text>
+ <line x1="20" y1="40" x2="1160" y2="40" stroke="#24363a"/>
+
+ <!-- resources -->
+ <g>
+  <rect x="40" y="70" width="160" height="40" fill="#131d1f" stroke="#2f464b"/><text x="120" y="95" text-anchor="middle">储能 · 电池</text>
+  <rect x="40" y="122" width="160" height="40" fill="#131d1f" stroke="#2f464b"/><text x="120" y="147" text-anchor="middle">分布式发电 · 光伏/风</text>
+  <rect x="40" y="174" width="160" height="40" fill="#131d1f" stroke="#2f464b"/><text x="120" y="199" text-anchor="middle">可控负荷 · 热泵/电解</text>
+  <rect x="40" y="226" width="160" height="40" fill="#131d1f" stroke="#2f464b"/><text x="120" y="251" text-anchor="middle">电动车 · 充电桩</text>
+  <rect x="40" y="278" width="160" height="40" fill="#131d1f" stroke="#2f464b"/><text x="120" y="303" text-anchor="middle">数据中心 · 大负荷</text>
+  <rect x="40" y="330" width="160" height="40" fill="#131d1f" stroke="#2f464b"/><text x="120" y="355" text-anchor="middle">常规机组 · 抽蓄</text>
+ </g>
+ <!-- device protocols -->
+ <g fill="#7a8f8c" font-size="10.5">
+  <text x="210" y="93">S2 (EN 50491-12-2)</text>
+  <text x="210" y="145">IEEE 2030.5 · SunSpec</text>
+  <text x="210" y="197">S2 · OPC UA · BACnet</text>
+  <text x="210" y="249">OCPP · ISO 15118</text>
+  <text x="210" y="301">OPC UA · Redfish</text>
+  <text x="210" y="353">IEC 61850 · OPC UA</text>
+ </g>
+ <g stroke="#a9b6b3">
+  <line x1="200" y1="90" x2="262" y2="90" marker-end="url(#a)"/>
+  <line x1="200" y1="142" x2="262" y2="142" marker-end="url(#a)"/>
+  <line x1="200" y1="194" x2="262" y2="194" marker-end="url(#a)"/>
+  <line x1="200" y1="246" x2="262" y2="246" marker-end="url(#a)"/>
+  <line x1="200" y1="298" x2="262" y2="298" marker-end="url(#a)"/>
+  <line x1="200" y1="350" x2="262" y2="350" marker-end="url(#a)"/>
+ </g>
+ <!-- EMS -->
+ <rect x="265" y="70" width="130" height="300" fill="#131d1f" stroke="#2f464b"/>
+ <text x="330" y="95" text-anchor="middle" font-weight="600">资源管理器</text>
+ <text x="330" y="115" text-anchor="middle" fill="#7a8f8c" font-size="10.5">站点 / 楼宇 / 园区</text>
+ <rect x="280" y="140" width="100" height="34" fill="#182527" stroke="#4fb3a9"/><text x="330" y="162" text-anchor="middle" fill="#4fb3a9" font-size="11">Envelope 适配器</text>
+ <text x="330" y="200" text-anchor="middle" fill="#a9b6b3" font-size="10.5">设备参数 → 约束集</text>
+ <text x="330" y="216" text-anchor="middle" fill="#a9b6b3" font-size="10.5">测量 → Position(measured)</text>
+ <text x="330" y="232" text-anchor="middle" fill="#a9b6b3" font-size="10.5">Position(schedule) → 设备指令</text>
+ <rect x="280" y="300" width="100" height="34" fill="#131d1f" stroke="#2f464b"/><text x="330" y="322" text-anchor="middle" font-size="11">回退规则库</text>
+ <text x="330" y="355" text-anchor="middle" fill="#7a8f8c" font-size="10">离线 · 不依赖在线推理</text>
+
+ <!-- bus -->
+ <rect x="470" y="60" width="240" height="330" fill="#182527" stroke="#4fb3a9" stroke-width="1.4"/>
+ <text x="590" y="88" text-anchor="middle" fill="#4fb3a9" font-weight="600">Envelope 总线</text>
+ <text x="590" y="106" text-anchor="middle" fill="#7a8f8c" font-size="10.5">消息/文件/API 均可 · 只承载四层对象</text>
+ <rect x="490" y="130" width="200" height="40" fill="#0d1416" stroke="#4fb3a9"/><text x="590" y="148" text-anchor="middle" fill="#4fb3a9" font-size="11.5" font-weight="600">L0 Envelope</text><text x="590" y="163" text-anchor="middle" fill="#a9b6b3" font-size="10">window × bounds × A·u≤b · modes · consent</text>
+ <rect x="490" y="182" width="200" height="40" fill="#0d1416" stroke="#2f464b"/><text x="590" y="200" text-anchor="middle" font-size="11.5" font-weight="600">L1 Position</text><text x="590" y="215" text-anchor="middle" fill="#a9b6b3" font-size="10">schedule / cleared / measured</text>
+ <rect x="490" y="234" width="200" height="40" fill="#0d1416" stroke="#2f464b"/><text x="590" y="252" text-anchor="middle" font-size="11.5" font-weight="600">L2 Offer</text><text x="590" y="267" text-anchor="middle" fill="#a9b6b3" font-size="10">price · divisible · linked/exclusive · market_ref</text>
+ <rect x="490" y="286" width="200" height="40" fill="#0d1416" stroke="#d9a441"/><text x="590" y="304" text-anchor="middle" fill="#d9a441" font-size="11.5" font-weight="600">L3 Attestation</text><text x="590" y="319" text-anchor="middle" fill="#a9b6b3" font-size="10">rule_set@ver · input_sha256 · verdict · sig</text>
+ <text x="590" y="360" text-anchor="middle" fill="#7a8f8c" font-size="10.5">每个对象带 provenance{source, retrieved_at, license}</text>
+ <text x="590" y="376" text-anchor="middle" fill="#7a8f8c" font-size="10.5">标识 {scheme, id} · 时间 ISO 8601+tz</text>
+
+ <!-- EMS <-> bus -->
+ <line x1="395" y1="150" x2="468" y2="150" stroke="#4fb3a9" marker-end="url(#at)"/><text x="431" y="143" text-anchor="middle" fill="#4fb3a9" font-size="10">发布 L0</text>
+ <line x1="395" y1="202" x2="468" y2="202" stroke="#4fb3a9" marker-end="url(#at)"/><text x="431" y="195" text-anchor="middle" fill="#4fb3a9" font-size="10">上报 L1 measured</text>
+ <line x1="468" y1="215" x2="395" y2="215" stroke="#a9b6b3" marker-end="url(#a)"/><text x="431" y="230" text-anchor="middle" fill="#a9b6b3" font-size="10">接收 L1 schedule</text>
+
+ <!-- aggregator -->
+ <rect x="770" y="70" width="160" height="150" fill="#131d1f" stroke="#2f464b"/>
+ <text x="850" y="95" text-anchor="middle" font-weight="600">聚合商 / VPP</text>
+ <text x="850" y="112" text-anchor="middle" fill="#7a8f8c" font-size="10.5">Envelope 聚合 (§4)</text>
+ <text x="850" y="140" text-anchor="middle" fill="#a9b6b3" font-size="10.5">Σ L0 → 上层 L0</text>
+ <text x="850" y="156" text-anchor="middle" fill="#a9b6b3" font-size="10.5">L0 + 价格模型 → L2</text>
+ <text x="850" y="172" text-anchor="middle" fill="#a9b6b3" font-size="10.5">cleared L1 → 分解 → 下层 L1</text>
+ <rect x="785" y="185" width="130" height="26" fill="#182527" stroke="#4fb3a9"/><text x="850" y="203" text-anchor="middle" fill="#4fb3a9" font-size="10.5">优化器（实现自选）</text>
+ <!-- trader / retailer -->
+ <rect x="770" y="240" width="160" height="60" fill="#131d1f" stroke="#2f464b"/>
+ <text x="850" y="264" text-anchor="middle" font-weight="600">售电 / BRP</text>
+ <text x="850" y="282" text-anchor="middle" fill="#7a8f8c" font-size="10.5">组合管理 · 计划值同时同量</text>
+ <!-- settlement -->
+ <rect x="770" y="320" width="160" height="50" fill="#131d1f" stroke="#2f464b"/>
+ <text x="850" y="341" text-anchor="middle" font-weight="600">计量 / 结算</text>
+ <text x="850" y="358" text-anchor="middle" fill="#7a8f8c" font-size="10.5">measured vs cleared → 偏差</text>
+
+ <!-- bus <-> aggregator -->
+ <line x1="710" y1="150" x2="768" y2="150" stroke="#4fb3a9" marker-end="url(#at)"/><text x="739" y="143" text-anchor="middle" fill="#4fb3a9" font-size="10">读 L0</text>
+ <line x1="768" y1="200" x2="710" y2="200" stroke="#a9b6b3" marker-end="url(#a)"/><text x="739" y="193" text-anchor="middle" fill="#a9b6b3" font-size="10">写 L1/L2</text>
+ <line x1="710" y1="345" x2="768" y2="345" stroke="#4fb3a9" marker-end="url(#at)"/><text x="739" y="338" text-anchor="middle" fill="#4fb3a9" font-size="10">读 L1</text>
+
+ <!-- market side protocols -->
+ <g fill="#7a8f8c" font-size="10.5">
+  <text x="944" y="93">交易所 API · CIM 62325</text>
+  <text x="944" y="145">Shapeshifter/UFTP</text>
+  <text x="944" y="197">OpenADR 3</text>
+  <text x="944" y="270">CIM 62325 Schedule</text>
+ </g>
+ <g stroke="#a9b6b3">
+  <line x1="930" y1="90" x2="992" y2="90" marker-end="url(#a)"/>
+  <line x1="930" y1="142" x2="992" y2="142" marker-end="url(#a)"/>
+  <line x1="992" y1="194" x2="930" y2="194" marker-end="url(#a)"/>
+  <line x1="930" y1="267" x2="992" y2="267" marker-end="url(#a)"/>
+ </g>
+ <!-- market side -->
+ <rect x="995" y="70" width="150" height="40" fill="#131d1f" stroke="#2f464b"/><text x="1070" y="95" text-anchor="middle">批发电力交易所</text>
+ <rect x="995" y="122" width="150" height="40" fill="#131d1f" stroke="#2f464b"/><text x="1070" y="147" text-anchor="middle">平衡 / 调节力市场</text>
+ <rect x="995" y="174" width="150" height="40" fill="#131d1f" stroke="#2f464b"/><text x="1070" y="199" text-anchor="middle">配电系统运营者</text>
+ <rect x="995" y="247" width="150" height="40" fill="#131d1f" stroke="#2f464b"/><text x="1070" y="272" text-anchor="middle">输电 / 系统运营者</text>
+ <rect x="995" y="320" width="150" height="50" fill="#131d1f" stroke="#2f464b"/><text x="1070" y="341" text-anchor="middle">计量数据管理</text><text x="1070" y="358" text-anchor="middle" fill="#7a8f8c" font-size="10.5">→ Position(measured)</text>
+ <line x1="995" y1="345" x2="932" y2="345" stroke="#a9b6b3" marker-end="url(#a)"/>
+
+ <!-- validation side-car -->
+ <rect x="470" y="430" width="240" height="90" fill="#131d1f" stroke="#d9a441" stroke-width="1.2"/>
+ <text x="590" y="455" text-anchor="middle" fill="#d9a441" font-weight="600">校验服务（任意数量，可多方）</text>
+ <text x="590" y="474" text-anchor="middle" fill="#a9b6b3" font-size="10.5">读 L0+L1(+L2) → 规则集 → 写 L3</text>
+ <text x="590" y="490" text-anchor="middle" fill="#a9b6b3" font-size="10.5">只输出 verdict / violations，不输出指令</text>
+ <text x="590" y="506" text-anchor="middle" fill="#7a8f8c" font-size="10">可部署于客户边界内（§8）</text>
+ <line x1="560" y1="390" x2="560" y2="428" stroke="#d9a441" marker-end="url(#aa)"/><text x="548" y="412" text-anchor="end" fill="#d9a441" font-size="10">读</text>
+ <line x1="620" y1="428" x2="620" y2="390" stroke="#d9a441" marker-end="url(#aa)"/><text x="632" y="412" fill="#d9a441" font-size="10">写 L3</text>
+
+ <!-- transparency log -->
+ <rect x="770" y="430" width="160" height="90" fill="#131d1f" stroke="#2f464b"/>
+ <text x="850" y="455" text-anchor="middle" font-weight="600">透明日志</text>
+ <text x="850" y="473" text-anchor="middle" fill="#a9b6b3" font-size="10.5">仅存 L3 与输入哈希</text>
+ <text x="850" y="489" text-anchor="middle" fill="#a9b6b3" font-size="10.5">哈希链 · 只追加 · 公开可查</text>
+ <text x="850" y="506" text-anchor="middle" fill="#7a8f8c" font-size="10">不存任何 L0/L1/L2 明文</text>
+ <line x1="710" y1="475" x2="768" y2="475" stroke="#d9a441" marker-end="url(#aa)"/><text x="739" y="468" text-anchor="middle" fill="#d9a441" font-size="10">追加 L3</text>
+
+ <!-- conformance / rule registry -->
+ <rect x="265" y="430" width="130" height="90" fill="#131d1f" stroke="#2f464b"/>
+ <text x="330" y="455" text-anchor="middle" font-weight="600">规则集注册表</text>
+ <text x="330" y="473" text-anchor="middle" fill="#a9b6b3" font-size="10.5">版本化 · 开源</text>
+ <text x="330" y="489" text-anchor="middle" fill="#a9b6b3" font-size="10.5">一致性测试向量</text>
+ <text x="330" y="506" text-anchor="middle" fill="#7a8f8c" font-size="10">任何人可拉取复算</text>
+ <line x1="395" y1="475" x2="468" y2="475" stroke="#a9b6b3" marker-end="url(#a)"/><text x="431" y="468" text-anchor="middle" fill="#a9b6b3" font-size="10">rule_set@ver</text>
+
+ <!-- consented feedback -->
+ <rect x="995" y="430" width="150" height="90" fill="#131d1f" stroke="#2f464b" stroke-dasharray="4 3"/>
+ <text x="1070" y="455" text-anchor="middle" font-weight="600">开放数据集</text>
+ <text x="1070" y="473" text-anchor="middle" fill="#a9b6b3" font-size="10.5">violations[] 脱敏样本</text>
+ <text x="1070" y="489" text-anchor="middle" fill="#a9b6b3" font-size="10.5">仅 consent.training_use=true</text>
+ <text x="1070" y="506" text-anchor="middle" fill="#7a8f8c" font-size="10">CC BY 4.0 · 任何人可用</text>
+ <line x1="930" y1="475" x2="992" y2="475" stroke="#a9b6b3" stroke-dasharray="4 3" marker-end="url(#a)"/><text x="961" y="468" text-anchor="middle" fill="#a9b6b3" font-size="10">同意过滤</text>
+
+ <!-- footer legend -->
+ <line x1="20" y1="560" x2="1160" y2="560" stroke="#24363a"/>
+ <g font-size="10.5" fill="#7a8f8c">
+  <line x1="40" y1="590" x2="80" y2="590" stroke="#4fb3a9" marker-end="url(#at)"/><text x="90" y="594">Envelope 对象流（L0/L1/L2）</text>
+  <line x1="300" y1="590" x2="340" y2="590" stroke="#d9a441" marker-end="url(#aa)"/><text x="350" y="594">证明流（L3 与哈希）</text>
+  <line x1="520" y1="590" x2="560" y2="590" stroke="#a9b6b3" marker-end="url(#a)"/><text x="570" y="594">既有协议 / 适配器</text>
+  <line x1="740" y1="590" x2="780" y2="590" stroke="#a9b6b3" stroke-dasharray="4 3" marker-end="url(#a)"/><text x="790" y="594">仅在显式同意下存在的路径</text>
+  <text x="40" y="622">业务路径（设备 → EMS → 聚合 → 市场 → 结算）不经过校验服务；校验是旁路，删除它系统仍能运行，只是没有证明。</text>
+ </g>
+</g>
+</svg>
+<figcaption>图 1 · 上下游对接全景。左侧六类资源经既有设备协议进入资源管理器，由 Envelope 适配器转成 L0/L1；聚合商在总线上读 L0、写 L1/L2，经既有市场协议对接交易所、平衡市场与系统运营者；计量数据回流为 Position(measured)。校验服务、规则集注册表、透明日志、开放数据集四者均为旁路。</figcaption>
+</figure>
+</section>
+
+
+<section id="s2b">
+<h2><span class="n">§2b</span>与 OPC UA 及 LF Energy 既有项目的对接</h2>
+<p>图 1 的两侧并不需要新写协议栈：设备侧已有 OPC UA（IEC 62541）作为工业信息模型的通用载体，LF Energy 已托管覆盖设备接入、变电站、EV、EMS、电网模型、运营者界面的开源实现。本标准的对接原则是<b>信息模型层复用、传输层不管、只在对象语义上对齐</b>。</p>
+
+<h3>OPC UA：把 Envelope 做成一个 companion 信息模型</h3>
+<p>OPC UA 的价值在信息模型与 PubSub，不在具体总线。对本标准而言，正确的对接方式是定义一个 <span class="k">EnvelopeType</span> companion 信息模型：设备或资源管理器在其 OPC UA 地址空间中暴露 L0 的参数与约束、L1(measured) 的实时序列，并提供一个 <span class="k">GetEnvelope(window)</span> 方法返回规范 JSON。已有的 <em>OPC UA for IEC 61850</em> companion 规范（2018 发布候选）把 61850-7-4 逻辑节点与 7-3 公共数据类映射进 OPC UA ◆，因此 DER 控制类节点中的额定/限值数据可以直接作为 L0 <span class="k">bounds</span> 的来源，无需人工填写。</p>
+<figure>
+<svg viewBox="0 0 1000 300" role="img" aria-label="OPC UA 对接：设备的 OPC UA 地址空间中挂 EnvelopeType 对象，变量映射 L0 参数与 L1 测量，方法 GetEnvelope 返回规范 JSON；PubSub 推送 measured；IEC 61850 companion 节点为 bounds 提供来源">
+<defs><marker id="e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6b3"/></marker><marker id="et" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4fb3a9"/></marker></defs>
+<g font-size="12" fill="#d8ddd9">
+ <rect x="20" y="40" width="330" height="230" fill="#131d1f" stroke="#2f464b"/>
+ <text x="185" y="64" text-anchor="middle" font-weight="600">OPC UA 服务器（设备 / 资源管理器）</text>
+ <text x="185" y="82" text-anchor="middle" fill="#7a8f8c" font-size="10.5">地址空间 · IEC 62541</text>
+ <rect x="40" y="100" width="290" height="150" fill="#0d1416" stroke="#4fb3a9"/>
+ <text x="185" y="120" text-anchor="middle" fill="#4fb3a9" font-size="11.5" font-weight="600">Objects / EnvelopeType（companion）</text>
+ <g font-size="10.5" fill="#a9b6b3">
+  <text x="56" y="142">Variables</text>
+  <text x="70" y="158">· Bounds{min,max}  · Params{storage,ramp}</text>
+  <text x="70" y="174">· Modes[]           · Consent{…}</text>
+  <text x="70" y="190">· Measured p[t]  (PubSub 推送)</text>
+  <text x="56" y="212">Methods</text>
+  <text x="70" y="228">· GetEnvelope(window) → L0 JSON</text>
+  <text x="70" y="244">· GetPosition(kind, window) → L1 JSON</text>
+ </g>
+ <!-- 61850 source -->
+ <rect x="20" y="10" width="330" height="0" fill="none"/>
+ <rect x="400" y="40" width="200" height="70" fill="#131d1f" stroke="#2f464b"/>
+ <text x="500" y="64" text-anchor="middle" font-size="11.5" font-weight="600">OPC UA for IEC 61850</text>
+ <text x="500" y="82" text-anchor="middle" fill="#7a8f8c" font-size="10.5">7-4 逻辑节点 / 7-3 CDC 映射</text>
+ <text x="500" y="98" text-anchor="middle" fill="#7a8f8c" font-size="10.5">DER 额定 · 限值 · 状态</text>
+ <line x1="400" y1="75" x2="352" y2="120" stroke="#a9b6b3" marker-end="url(#e)"/><text x="392" y="102" text-anchor="end" fill="#a9b6b3" font-size="10">→ bounds 来源</text>
+ <!-- client / adapter -->
+ <rect x="400" y="150" width="200" height="110" fill="#182527" stroke="#4fb3a9"/>
+ <text x="500" y="174" text-anchor="middle" fill="#4fb3a9" font-weight="600">Envelope 适配器（OPC UA 客户端）</text>
+ <text x="500" y="194" text-anchor="middle" fill="#a9b6b3" font-size="10.5">Browse → 读变量 → 组 L0</text>
+ <text x="500" y="210" text-anchor="middle" fill="#a9b6b3" font-size="10.5">Subscribe PubSub → L1 measured</text>
+ <text x="500" y="226" text-anchor="middle" fill="#a9b6b3" font-size="10.5">写 Setpoint ← L1 schedule</text>
+ <text x="500" y="246" text-anchor="middle" fill="#7a8f8c" font-size="10">传输：UA TCP / MQTT / UDP 均可</text>
+ <line x1="350" y1="205" x2="398" y2="205" stroke="#4fb3a9" marker-end="url(#et)"/>
+ <!-- bus -->
+ <rect x="660" y="150" width="140" height="110" fill="#182527" stroke="#4fb3a9" stroke-width="1.3"/>
+ <text x="730" y="178" text-anchor="middle" fill="#4fb3a9" font-weight="600">Envelope 总线</text>
+ <text x="730" y="200" text-anchor="middle" fill="#a9b6b3" font-size="10.5">L0 · L1</text>
+ <text x="730" y="232" text-anchor="middle" fill="#7a8f8c" font-size="10">与图 1 相同</text>
+ <line x1="600" y1="205" x2="658" y2="205" stroke="#4fb3a9" marker-end="url(#et)"/>
+ <!-- note -->
+ <g fill="#7a8f8c" font-size="10.5">
+  <text x="660" y="60">不做的事：</text>
+  <text x="660" y="78">· 不重定义 OPC UA 安全模型（证书、用户）</text>
+  <text x="660" y="94">· 不规定传输绑定</text>
+  <text x="660" y="110">· 不复制 61850 语义，只引用其节点作为来源</text>
+  <text x="660" y="126">· companion 模型经 OPC Foundation 联合工作组发布 ◇</text>
+ </g>
+</g>
+</svg>
+<figcaption>图 1b · OPC UA 对接。Envelope 以 companion 信息模型出现在设备地址空间中；适配器作为普通 OPC UA 客户端读变量组 L0、订阅 PubSub 得 L1 measured、写 Setpoint 下发 L1 schedule。IEC 61850 companion 节点为 bounds 提供机器可读来源。</figcaption>
+</figure>
+
+<h3>LF Energy：每个既有项目对接到哪一层</h3>
+<p>下表把 LF Energy 已托管项目按"它在图 1 的哪个位置、与哪层对象交换、需要什么适配器"归位。目标是让本标准<b>不与任何一个项目重叠</b>，而是成为它们之间缺失的对象表示。成熟度一栏为项目在 LF Energy 中的状态 ◆（2026-09 检索）。</p>
+<div class="tbl"><table>
+<thead><tr><th>LF Energy 项目</th><th>它是什么</th><th>图 1 位置</th><th>交换层</th><th>对接方式</th></tr></thead>
+<tbody>
+<tr><td class="m">FlexMeasures</td><td>开源 EMS / 调度器；flex-model 命名字段（power-capacity、soc-*、group、S2 power bands）</td><td>资源管理器 · 聚合商优化器</td><td class="m">L0 ⇄ L1</td><td><b>首选第一外部实现</b>：flex-model → L0 无损导出；L1 schedule 导入。其 asset tree 直接对应 §4 层级</td></tr>
+<tr><td class="m">Shapeshifter (UFTP)</td><td>聚合商 ↔ DSO/TSO 灵活性请求/报价/订单/结算消息</td><td>聚合商 ↔ 系统运营者边界</td><td class="m">L2 · L1 cleared</td><td>FlexOffer 载荷携带 L2；FlexOrder 映射 L1(cleared)；FlexRequest 可附 DSO 侧 L0 外近似</td></tr>
+<tr><td class="m">OpenLEADR</td><td>OpenADR（2.0b / 3）参考实现</td><td>聚合商 ↔ DSO 事件边界</td><td class="m">L1 事件 · L2 价格</td><td>event/priceMap → L2.price 上下文；report → L1 measured。不承载 L0</td></tr>
+<tr><td class="m">EVerest</td><td>EV 充电栈：OCPP、ISO 15118</td><td>资源侧（电动车 · 充电桩）</td><td class="m">L0 生成 · L1</td><td>充电会话 + 车辆 SOC/离场时间 → 每桩 L0（含 mode：充/放/停）；充电曲线 → L1 measured</td></tr>
+<tr><td class="m">CUPID</td><td>IEEE 2030.5 客户端/服务端（NATS 传输）+ 遗留协议转换 + 测试</td><td>资源侧（光伏 · 储能 · 逆变器）</td><td class="m">L0 生成 · L1</td><td>2030.5 DERCapability / DERSettings → L0 bounds；DERStatus / MirrorUsagePoint → L1 measured</td></tr>
+<tr><td class="m">CoMPAS · SEAPATH</td><td>IEC 61850 配置工具 · 变电站虚拟化平台</td><td>资源侧（常规机组 · 变电站）</td><td class="m">L0 来源 · network</td><td>SCL 文件中的 DER/机组额定与拓扑 → L0 bounds 与 §5 网络模型；不直接交换 Envelope</td></tr>
+<tr><td class="m">Power Grid Model · PowSyBl</td><td>配网/输网潮流计算库 · 电网建模平台</td><td>校验服务内部</td><td class="m">network → R-PHYS</td><td>为 R-PHYS 提供比直流潮流更强的后端（交流潮流、N-1）；规则 id 不变，方法字段声明后端与版本</td></tr>
+<tr><td class="m">OpenSTEF</td><td>短期负荷/发电预测</td><td>聚合商内部</td><td class="m">—</td><td>预测是 L0 的输入之一，不是标准对象；不对接，仅说明边界</td></tr>
+<tr><td class="m">OperatorFabric</td><td>运营者告警/卡片界面</td><td>系统运营者</td><td class="m">L3</td><td>L3 verdict=fail 生成运营者卡片；这是 L3 在人机界面的自然落点</td></tr>
+<tr><td class="m">URPX</td><td>公用事业费率计划数据交换标准（新）</td><td>市场侧价格上下文</td><td class="m">L2.price</td><td>费率 → L2 price reference；避免本标准自定义费率结构</td></tr>
+<tr><td class="m">AINETUS</td><td>电网运行 AI 决策支持（新）</td><td>系统运营者</td><td class="m">L0 聚合 · L3</td><td>系统级 L0 外近似作为其输入；L3 作为其建议的可信度证据。本标准不介入其决策逻辑</td></tr>
+<tr><td class="m">Carbon Data Specification</td><td>电网碳强度/排放数据规范</td><td>市场侧上下文</td><td class="m">ext</td><td>通过 <span class="k">ext["lfenergy.cds"]</span> 挂载碳强度，不进核心层</td></tr>
+</tbody></table></div>
+<div class="q"><b>对接后的效果：</b>资源侧有 CUPID（2030.5）、EVerest（OCPP）、OPC UA 三条现成路径生成 L0；EMS 侧 FlexMeasures 是现成的 L0/L1 消费者；市场侧 Shapeshifter/OpenLEADR 是现成的 L2/L1 载体；校验侧 Power Grid Model/PowSyBl 是现成的物理后端。<b>本标准自己需要写的只有：四层对象、聚合语义、规则集、一致性测试。</b></div>
+
+<h3>关于数据中心一侧（OCP）</h3>
+<p>数据中心作为大负荷进入图 1 时，其机柜/电源架的遥测走 Redfish 或 OPC UA，不属本标准范围；Open Compute Project 目前没有面向电网的灵活性接口规范 ◇。对数据中心的正确对接点是把整个园区视作一个"站点"级 Envelope，由其能源管理系统生成 L0（含可转移负荷的 mode 约束），经 OpenADR 3 / 2030.5 对接系统运营者。若 OCP 日后发布电力侧接口，它应落在图 1 左侧设备协议列，与 OPC UA 并列。</p>
+</section>
+
+<section id="s3">
+<h2><span class="n">§3</span>接口矩阵</h2>
+<p>每条边界写清：谁与谁、承载哪层、经哪个既有协议、方向、信任假设。表中"适配器"指把既有协议的语义映射到四层对象的开源组件；映射规则是标准的一部分。</p>
+<div class="tbl"><table>
+<thead><tr><th>边界</th><th>承载层</th><th>既有协议 / 适配器</th><th>方向</th><th>信任假设</th><th>成熟度</th></tr></thead>
+<tbody>
+<tr><td>设备 ↔ 资源管理器</td><td class="m">L0 生成源 · L1 measured</td><td>S2 · IEEE 2030.5 (CUPID) · OCPP/ISO 15118 (EVerest) · IEC 61850 (CoMPAS/SEAPATH) · <b>OPC UA</b> companion (§2b)</td><td class="m">双向</td><td>局域网 / 站内；设备身份由既有协议负责</td><td><span class="chip t1">既有</span></td></tr>
+<tr><td>资源管理器 ↔ 总线</td><td class="m">L0 · L1</td><td>Envelope 适配器（本标准）</td><td class="m">L0/L1↑ L1 schedule↓</td><td>资源管理器对 L0 的真实性负责；签名可选</td><td><span class="chip t3">本标准</span></td></tr>
+<tr><td>聚合商 ↔ 总线</td><td class="m">L0 聚合 · L1 · L2</td><td>本标准 §4 聚合语义</td><td class="m">读 L0；写 L1/L2</td><td>聚合商对 L2 与 L0 的一致性负责（可被 L3 检验）</td><td><span class="chip t3">本标准</span></td></tr>
+<tr><td>聚合商 ↔ 交易所</td><td class="m">L2 → 报单；cleared → L1</td><td>交易所 API · IEC 62325 Bid/Schedule MarketDocument</td><td class="m">双向</td><td>交易所会员协议；本标准不介入</td><td><span class="chip t1">既有</span></td></tr>
+<tr><td>聚合商 ↔ DSO / TSO</td><td class="m">L0 摘要 · L2 · L1</td><td>Shapeshifter/UFTP · OpenADR 3 (OpenLEADR) · CIM</td><td class="m">双向</td><td>系统运营者注册；L0 可只发外近似以保护商业信息</td><td><span class="chip t1">既有</span></td></tr>
+<tr><td>计量 → 总线</td><td class="m">L1 measured</td><td>计量数据管理接口（各辖区）</td><td class="m">单向↑</td><td>计量数据为权威源；适配器只做格式转换</td><td><span class="chip t2">辖区差异</span></td></tr>
+<tr><td>任意方 → 校验服务</td><td class="m">L0+L1(+L2) → L3</td><td>HTTPS/JSON；或本地二进制</td><td class="m">请求-响应</td><td>零信任：输入哈希与规则版本进 L3，结果可独立复算</td><td><span class="chip t3">本标准</span></td></tr>
+<tr><td>校验服务 → 透明日志</td><td class="m">L3 + input_sha256</td><td>只追加哈希链（实现自选）</td><td class="m">单向</td><td>日志不含明文；任何人可审计一致性</td><td><span class="chip t3">本标准</span></td></tr>
+<tr><td>校验服务 → 开放数据集</td><td class="m">violations[] 脱敏</td><td>同意过滤器（本标准）</td><td class="m">单向，条件</td><td>仅 <span class="k">consent.training_use=true</span>；违反即不合规</td><td><span class="chip t3">本标准</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s4">
+<h2><span class="n">§4</span>层级聚合语义</h2>
+<p>从设备到系统有五级。每一级的 Envelope 是下一级 Envelope 的聚合。聚合在数学上是可行域的 Minkowski 和，一般不精确、不可逆；标准因此要求聚合结果<b>显式声明近似方向</b>，否则两个实现会得到不同的可行域，一致性无法判定。学术文献把「内近似且可分解」的聚合称为 <em>realizable</em>（可实现）[A4][A5]；本标准的 <span class="k">inner</span> 声明加 <span class="k">agg.sum</span> 规则就是该性质的可检验版本，L3 对应文献中的 ex-post realizability verification [A16]。</p>
+<figure>
+<svg viewBox="0 0 1000 380" role="img" aria-label="五级层级：设备、站点、聚合商、区域、系统；每级向上聚合时声明 inner 或 outer 近似；向下分解时 Position 必须落在各下级 Envelope 内">
+<defs><marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4fb3a9"/></marker>
+<marker id="bg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6b3"/></marker></defs>
+<g font-size="12" fill="#d8ddd9">
+ <!-- levels -->
+ <g>
+  <rect x="40" y="150" width="140" height="70" fill="#131d1f" stroke="#2f464b"/><text x="110" y="180" text-anchor="middle" font-weight="600">设备</text><text x="110" y="200" text-anchor="middle" fill="#7a8f8c" font-size="10.5">精确 L0</text>
+  <rect x="240" y="150" width="140" height="70" fill="#131d1f" stroke="#2f464b"/><text x="310" y="180" text-anchor="middle" font-weight="600">站点</text><text x="310" y="200" text-anchor="middle" fill="#7a8f8c" font-size="10.5">共享接入点约束</text>
+  <rect x="440" y="150" width="140" height="70" fill="#182527" stroke="#4fb3a9"/><text x="510" y="180" text-anchor="middle" font-weight="600" fill="#4fb3a9">聚合商</text><text x="510" y="200" text-anchor="middle" fill="#7a8f8c" font-size="10.5">商业边界</text>
+  <rect x="640" y="150" width="140" height="70" fill="#131d1f" stroke="#2f464b"/><text x="710" y="180" text-anchor="middle" font-weight="600">区域</text><text x="710" y="200" text-anchor="middle" fill="#7a8f8c" font-size="10.5">网络约束 · 价格区</text>
+  <rect x="840" y="150" width="140" height="70" fill="#131d1f" stroke="#2f464b"/><text x="910" y="180" text-anchor="middle" font-weight="600">系统</text><text x="910" y="200" text-anchor="middle" fill="#7a8f8c" font-size="10.5">平衡 · 备用</text>
+ </g>
+ <!-- up arrows (aggregate) -->
+ <g stroke="#4fb3a9">
+  <line x1="180" y1="170" x2="238" y2="170" marker-end="url(#b)"/>
+  <line x1="380" y1="170" x2="438" y2="170" marker-end="url(#b)"/>
+  <line x1="580" y1="170" x2="638" y2="170" marker-end="url(#b)"/>
+  <line x1="780" y1="170" x2="838" y2="170" marker-end="url(#b)"/>
+ </g>
+ <text x="510" y="120" text-anchor="middle" fill="#4fb3a9" font-size="11">向上：聚合 L0 → L0′，声明 approximation ∈ {inner, outer, exact}</text>
+ <!-- down arrows (disaggregate) -->
+ <g stroke="#a9b6b3">
+  <line x1="838" y1="200" x2="780" y2="200" marker-end="url(#bg)"/>
+  <line x1="638" y1="200" x2="580" y2="200" marker-end="url(#bg)"/>
+  <line x1="438" y1="200" x2="380" y2="200" marker-end="url(#bg)"/>
+  <line x1="238" y1="200" x2="180" y2="200" marker-end="url(#bg)"/>
+ </g>
+ <text x="510" y="255" text-anchor="middle" fill="#a9b6b3" font-size="11">向下：分解 L1 → {L1ᵢ}，校验规则：每个 L1ᵢ ∈ L0ᵢ 且 Σ L1ᵢ = L1</text>
+
+ <!-- set diagram -->
+ <g transform="translate(40,285)">
+  <rect x="0" y="0" width="120" height="60" fill="none" stroke="#a9b6b3" stroke-dasharray="4 3"/><text x="60" y="-6" text-anchor="middle" fill="#a9b6b3" font-size="10.5">outer ⊇ Σ</text>
+  <rect x="14" y="10" width="92" height="40" fill="none" stroke="#4fb3a9"/><text x="60" y="34" text-anchor="middle" fill="#4fb3a9" font-size="10.5">Σ 真实可行域</text>
+  <rect x="30" y="20" width="60" height="20" fill="#182527" stroke="#6fb07a"/><text x="60" y="70" text-anchor="middle" fill="#6fb07a" font-size="10.5">inner ⊆ Σ</text>
+ </g>
+ <g fill="#a9b6b3" font-size="11">
+  <text x="200" y="300">inner：向系统运营者承诺时使用——承诺的每一点都可兑现。</text>
+  <text x="200" y="320">outer：向市场公布可用性时可使用——不泄露内部结构，但成交后须能分解。</text>
+  <text x="200" y="340">exact：仅当下级 L0 全为盒约束且无耦合时成立；实现须证明，否则不得声明。</text>
+  <text x="200" y="365" fill="#7a8f8c" font-size="10.5">阈值型监管（例如按聚合规模指定关键基础设施）落在"聚合商"级；标准只记录聚合容量，不判断适用性。</text>
+ </g>
+</g>
+</svg>
+<figcaption>图 2 · 五级层级与聚合语义。向上聚合必须声明近似方向；向下分解必须通过"每个下级 Position 落在其 Envelope 内且求和等于上级 Position"的校验。</figcaption>
+</figure>
+</section>
+
+<section id="s5">
+<h2><span class="n">§5</span>校验架构</h2>
+<p>校验服务是一条确定性的流水线：同样的输入、同样的规则版本，任何人在任何地方运行都得到同样的 L3。它没有状态，不做优化，不产生指令。多个独立方可以同时运行校验服务并互相比对。</p>
+<figure>
+<svg viewBox="0 0 1180 470" role="img" aria-label="校验流水线：接收 L0/L1/L2 → schema 校验 → 规范化与哈希 → 规则引擎（物理、包络、市场、同意四组规则，从规则集注册表拉取版本）→ 签名 → 输出 L3 给请求方、追加透明日志、同意过滤后进入开放数据集">
+<defs><marker id="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6b3"/></marker>
+<marker id="ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d9a441"/></marker>
+<marker id="cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#c95c4b"/></marker></defs>
+<g font-size="12" fill="#d8ddd9">
+ <!-- input -->
+ <rect x="20" y="120" width="130" height="80" fill="#131d1f" stroke="#2f464b"/>
+ <text x="85" y="148" text-anchor="middle" font-weight="600">请求方</text>
+ <text x="85" y="166" text-anchor="middle" fill="#a9b6b3" font-size="10.5">L0 + L1 (+ L2)</text>
+ <text x="85" y="182" text-anchor="middle" fill="#a9b6b3" font-size="10.5">+ 可选网络模型</text>
+ <line x1="150" y1="160" x2="188" y2="160" stroke="#a9b6b3" marker-end="url(#c)"/>
+ <!-- stage 1 -->
+ <rect x="190" y="120" width="130" height="80" fill="#131d1f" stroke="#2f464b"/>
+ <text x="255" y="148" text-anchor="middle" font-weight="600">① Schema 校验</text>
+ <text x="255" y="166" text-anchor="middle" fill="#a9b6b3" font-size="10.5">JSON Schema 2020-12</text>
+ <text x="255" y="182" text-anchor="middle" fill="#a9b6b3" font-size="10.5">版本协商 · 引用解析</text>
+ <line x1="320" y1="160" x2="358" y2="160" stroke="#a9b6b3" marker-end="url(#c)"/>
+ <!-- stage 2 -->
+ <rect x="360" y="120" width="130" height="80" fill="#131d1f" stroke="#2f464b"/>
+ <text x="425" y="148" text-anchor="middle" font-weight="600">② 规范化 · 哈希</text>
+ <text x="425" y="166" text-anchor="middle" fill="#a9b6b3" font-size="10.5">键排序 · 数值归一</text>
+ <text x="425" y="182" text-anchor="middle" fill="#a9b6b3" font-size="10.5">→ input_sha256</text>
+ <line x1="490" y1="160" x2="528" y2="160" stroke="#a9b6b3" marker-end="url(#c)"/>
+ <!-- stage 3 rule engine -->
+ <rect x="530" y="60" width="300" height="200" fill="#182527" stroke="#4fb3a9" stroke-width="1.3"/>
+ <text x="680" y="85" text-anchor="middle" font-weight="600" fill="#4fb3a9">③ 规则引擎（确定性 · 无状态）</text>
+ <rect x="545" y="100" width="130" height="34" fill="#0d1416" stroke="#2f464b"/><text x="610" y="115" text-anchor="middle" font-size="11">R-PHYS 物理</text><text x="610" y="128" text-anchor="middle" fill="#7a8f8c" font-size="9.5">KCL · KVL · 线路限额</text>
+ <rect x="685" y="100" width="130" height="34" fill="#0d1416" stroke="#2f464b"/><text x="750" y="115" text-anchor="middle" font-size="11">R-ENV 包络</text><text x="750" y="128" text-anchor="middle" fill="#7a8f8c" font-size="9.5">L1 ∈ L0 · 爬坡 · SOC 轨迹</text>
+ <rect x="545" y="144" width="130" height="34" fill="#0d1416" stroke="#2f464b"/><text x="610" y="159" text-anchor="middle" font-size="11">R-MKT 市场</text><text x="610" y="172" text-anchor="middle" fill="#7a8f8c" font-size="9.5">L2 ⊆ L0 · block/linked 一致</text>
+ <rect x="685" y="144" width="130" height="34" fill="#0d1416" stroke="#2f464b"/><text x="750" y="159" text-anchor="middle" font-size="11">R-AGG 聚合</text><text x="750" y="172" text-anchor="middle" fill="#7a8f8c" font-size="9.5">Σ L1ᵢ = L1 · 近似声明</text>
+ <rect x="545" y="188" width="270" height="34" fill="#0d1416" stroke="#d9a441"/><text x="680" y="203" text-anchor="middle" font-size="11" fill="#d9a441">R-CONSENT 同意</text><text x="680" y="216" text-anchor="middle" fill="#7a8f8c" font-size="9.5">cross_border · training_use · retention 与请求上下文一致</text>
+ <text x="680" y="245" text-anchor="middle" fill="#7a8f8c" font-size="10">每条规则输出 {rule, where, residual, detail}</text>
+ <!-- registry -->
+ <rect x="530" y="300" width="300" height="60" fill="#131d1f" stroke="#2f464b"/>
+ <text x="680" y="323" text-anchor="middle" font-weight="600">规则集注册表（开源 · 版本化）</text>
+ <text x="680" y="342" text-anchor="middle" fill="#a9b6b3" font-size="10.5">rule_set{id, version, source} · 一致性测试向量 · 变更记录</text>
+ <line x1="680" y1="298" x2="680" y2="262" stroke="#a9b6b3" marker-end="url(#c)"/><text x="692" y="284" fill="#a9b6b3" font-size="10">按版本拉取</text>
+ <!-- stage 4 -->
+ <line x1="830" y1="160" x2="868" y2="160" stroke="#a9b6b3" marker-end="url(#c)"/>
+ <rect x="870" y="120" width="130" height="80" fill="#131d1f" stroke="#d9a441"/>
+ <text x="935" y="148" text-anchor="middle" font-weight="600" fill="#d9a441">④ 签名</text>
+ <text x="935" y="166" text-anchor="middle" fill="#a9b6b3" font-size="10.5">signer{id, alg, sig}</text>
+ <text x="935" y="182" text-anchor="middle" fill="#a9b6b3" font-size="10.5">密钥属校验方，可多方</text>
+ <!-- outputs -->
+ <line x1="1000" y1="140" x2="1038" y2="110" stroke="#d9a441" marker-end="url(#ca)"/>
+ <rect x="1040" y="80" width="120" height="50" fill="#131d1f" stroke="#2f464b"/><text x="1100" y="101" text-anchor="middle" font-size="11.5">L3 → 请求方</text><text x="1100" y="118" text-anchor="middle" fill="#7a8f8c" font-size="10">verdict · violations[]</text>
+ <line x1="1000" y1="160" x2="1038" y2="160" stroke="#d9a441" marker-end="url(#ca)"/>
+ <rect x="1040" y="140" width="120" height="50" fill="#131d1f" stroke="#2f464b"/><text x="1100" y="161" text-anchor="middle" font-size="11.5">透明日志</text><text x="1100" y="178" text-anchor="middle" fill="#7a8f8c" font-size="10">L3 + input_sha256</text>
+ <line x1="1000" y1="180" x2="1038" y2="215" stroke="#a9b6b3" stroke-dasharray="4 3" marker-end="url(#c)"/>
+ <rect x="1040" y="200" width="120" height="50" fill="#131d1f" stroke="#2f464b" stroke-dasharray="4 3"/><text x="1100" y="221" text-anchor="middle" font-size="11.5">开放数据集</text><text x="1100" y="238" text-anchor="middle" fill="#7a8f8c" font-size="10">仅 training_use=true</text>
+ <!-- reject path -->
+ <line x1="255" y1="200" x2="255" y2="250" stroke="#c95c4b" marker-end="url(#cr)"/>
+ <rect x="190" y="252" width="130" height="40" fill="#131d1f" stroke="#c95c4b"/><text x="255" y="277" text-anchor="middle" fill="#c95c4b" font-size="11">拒绝：不合 schema</text>
+ <text x="255" y="310" text-anchor="middle" fill="#7a8f8c" font-size="10">不进日志，不留数据</text>
+ <!-- reproduce path -->
+ <rect x="20" y="380" width="1140" height="60" fill="none" stroke="#24363a"/>
+ <text x="40" y="404" fill="#a9b6b3" font-size="11.5" font-weight="600">复算路径（任何第三方）：</text>
+ <text x="220" y="404" fill="#a9b6b3" font-size="11">取 L3.rule_set{id,version} → 从注册表拉同版规则 → 用原输入重跑 ①②③ → 比较 input_sha256 与 verdict → 一致即证明成立，不一致即校验方作假或注册表被改。</text>
+ <text x="40" y="426" fill="#7a8f8c" font-size="10.5">校验方不需要被信任；需要被信任的只有规则集注册表的版本历史与透明日志的只追加性——两者都可由多方镜像。</text>
+</g>
+</svg>
+<figcaption>图 3 · 校验流水线。四个阶段全部确定性；规则集从开源注册表按版本拉取；输出三路——返回请求方、追加透明日志、同意过滤后进入开放数据集。不合 schema 的输入被拒绝且不留痕。</figcaption>
+</figure>
+</section>
+
+<section id="s6">
+<h2><span class="n">§6</span>规则集</h2>
+<p>规则集是标准的可执行部分。每条规则有稳定 id、版本、输入层、输出字段和至少一对 pass/fail 测试向量。首版规则集刻意只含<b>无需模型即可判定</b>的规则；任何需要学习模型的规则不得进入基础规则集。</p>
+<div class="tbl"><table>
+<thead><tr><th class="m">规则 id</th><th>组</th><th>读取</th><th>判定</th><th>方法</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td class="m">phys.kcl</td><td>R-PHYS</td><td class="m">L1 + network</td><td>每节点注入 − 负荷 − 净支路流出 = 0（容差）</td><td>直流潮流；A·f − P 残差。后端可换 Power Grid Model / PowSyBl（交流）</td><td><span class="chip t1">已实现</span></td></tr>
+<tr><td class="m">phys.kvl</td><td>R-PHYS</td><td class="m">L1 + network</td><td>声明支路流与某组节点相角一致（环路律）</td><td>X·f = A·θ 最小二乘残差</td><td><span class="chip t1">已实现</span></td></tr>
+<tr><td class="m">phys.limit</td><td>R-PHYS</td><td class="m">L1 + network</td><td>|支路流| ≤ 限额</td><td>逐支路比较</td><td><span class="chip t1">已实现</span></td></tr>
+<tr><td class="m">env.membership</td><td>R-ENV</td><td class="m">L0 + L1</td><td>每步 p[t] ∈ bounds（含所处 mode 的 bounds）且满足所有 A·u ≤ b</td><td>线性不等式逐条求值</td><td><span class="chip t3">0.0.3</span></td></tr>
+<tr><td class="m">env.ramp</td><td>R-ENV</td><td class="m">L0 + L1</td><td>|p[t] − p[t−lag]| ≤ rhs</td><td>diff 约束求值</td><td><span class="chip t3">0.0.3</span></td></tr>
+<tr><td class="m">env.soc</td><td>R-ENV</td><td class="m">L0.params.storage + L1</td><td>SOC 轨迹在 [soc_min, soc_max] 内，含效率</td><td>前向积分</td><td><span class="chip t3">0.0.3</span></td></tr>
+<tr><td class="m">env.mode</td><td>R-ENV</td><td class="m">L0.modes + L1</td><td>模式切换满足最小持续时间 / 最大切换次数；每时步恰一模式</td><td>整数约束枚举</td><td><span class="chip t3">0.0.3 · 新增</span></td></tr>
+<tr><td class="m">mkt.subset</td><td>R-MKT</td><td class="m">L0 + L2</td><td>报价量在可行域内；block 全量约定条件下仍可行</td><td>把 L2 视作 L1 候选调用 env.*</td><td><span class="chip t3">0.0.3</span></td></tr>
+<tr><td class="m">mkt.links</td><td>R-MKT</td><td class="m">L2 集合</td><td>linked / exclusive_group 无环、无自引用、互斥组内不同时接受</td><td>图检查</td><td><span class="chip t3">0.0.3</span></td></tr>
+<tr><td class="m">agg.sum</td><td>R-AGG</td><td class="m">L1 上级 + {L1ᵢ}</td><td>Σ L1ᵢ = L1（容差）且每个 L1ᵢ ∈ L0ᵢ</td><td>求和 + 调用 env.membership</td><td><span class="chip t3">0.0.3</span></td></tr>
+<tr><td class="m">agg.approx</td><td>R-AGG</td><td class="m">L0 上级 + {L0ᵢ}</td><td>声明 inner 时：上级任意顶点可分解；声明 exact 时：下级全为盒约束</td><td>顶点抽样分解 / 结构检查</td><td><span class="chip t3">0.1</span></td></tr>
+<tr><td class="m">consent.scope</td><td>R-CONSENT</td><td class="m">L0.consent + 请求上下文</td><td>请求方所在辖区与 cross_border 一致；数据集写入与 training_use 一致；保留期未过</td><td>字段比较</td><td><span class="chip t3">0.0.3</span></td></tr>
+</tbody></table></div>
+<div class="q"><b>明确排除：</b>任何"预测是否合理""报价是否最优""应当如何调整"的规则。这些属于优化与咨询，不属于校验；把它们放进规则集会让 verdict 失去确定性，也会让校验服务越过"不指令"的边界。</div>
+</section>
+
+<section id="s7">
+<h2><span class="n">§7</span>生命周期时序</h2>
+<p>一个交易周期内四层对象的产生顺序。市场的具体时刻（日前、日内、实时）由各辖区定义；本图只定义对象之间的先后与依赖。</p>
+<figure>
+<svg viewBox="0 0 1100 520" role="img" aria-label="时序图：资源管理器发布 L0；聚合商聚合并生成 L2 送交易所；交易所返回 cleared 成为 L1；聚合商分解 L1 下发；校验服务在 L2 提交前与 L1 分解后各出一次 L3；计量回流 measured 后再出一次 L3 用于结算比对">
+<defs><marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6b3"/></marker>
+<marker id="da" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d9a441"/></marker></defs>
+<g font-size="12" fill="#d8ddd9">
+ <!-- lanes -->
+ <g font-weight="600" text-anchor="middle">
+  <text x="120" y="30">资源管理器</text><text x="380" y="30">聚合商</text><text x="640" y="30">校验服务</text><text x="900" y="30">市场 / 系统运营者</text>
+ </g>
+ <g stroke="#24363a"><line x1="120" y1="42" x2="120" y2="500"/><line x1="380" y1="42" x2="380" y2="500"/><line x1="640" y1="42" x2="640" y2="500"/><line x1="900" y1="42" x2="900" y2="500"/></g>
+ <!-- 1 publish L0 -->
+ <line x1="120" y1="80" x2="378" y2="80" stroke="#a9b6b3" marker-end="url(#d)"/><text x="250" y="72" text-anchor="middle" fill="#a9b6b3" font-size="11">① 发布 L0 Envelope（含 consent）</text>
+ <!-- 2 aggregate -->
+ <rect x="330" y="100" width="100" height="26" fill="#131d1f" stroke="#2f464b"/><text x="380" y="118" text-anchor="middle" font-size="10.5">② 聚合 → L0′</text>
+ <!-- 3 pre-check L2 -->
+ <line x1="380" y1="150" x2="638" y2="150" stroke="#a9b6b3" marker-end="url(#d)"/><text x="510" y="142" text-anchor="middle" fill="#a9b6b3" font-size="11">③ L0′ + L2 草案</text>
+ <line x1="640" y1="172" x2="382" y2="172" stroke="#d9a441" marker-end="url(#da)"/><text x="510" y="188" text-anchor="middle" fill="#d9a441" font-size="11">L3 · mkt.subset / mkt.links</text>
+ <!-- 4 submit offer -->
+ <line x1="380" y1="215" x2="898" y2="215" stroke="#a9b6b3" marker-end="url(#d)"/><text x="640" y="207" text-anchor="middle" fill="#a9b6b3" font-size="11">④ 提交 L2（经交易所 / DSO 协议）</text>
+ <rect x="850" y="232" width="100" height="26" fill="#131d1f" stroke="#2f464b"/><text x="900" y="250" text-anchor="middle" font-size="10.5">出清</text>
+ <!-- 5 cleared -->
+ <line x1="900" y1="282" x2="382" y2="282" stroke="#a9b6b3" marker-end="url(#d)"/><text x="640" y="274" text-anchor="middle" fill="#a9b6b3" font-size="11">⑤ 成交 → L1(cleared)</text>
+ <!-- 6 disaggregate -->
+ <rect x="330" y="300" width="100" height="26" fill="#131d1f" stroke="#2f464b"/><text x="380" y="318" text-anchor="middle" font-size="10.5">⑥ 分解 → {L1ᵢ}</text>
+ <line x1="380" y1="345" x2="638" y2="345" stroke="#a9b6b3" marker-end="url(#d)"/><text x="510" y="337" text-anchor="middle" fill="#a9b6b3" font-size="11">L1 + {L1ᵢ} + {L0ᵢ}</text>
+ <line x1="640" y1="365" x2="382" y2="365" stroke="#d9a441" marker-end="url(#da)"/><text x="510" y="381" text-anchor="middle" fill="#d9a441" font-size="11">L3 · agg.sum / env.* / phys.*</text>
+ <!-- 7 dispatch -->
+ <line x1="380" y1="405" x2="122" y2="405" stroke="#a9b6b3" marker-end="url(#d)"/><text x="250" y="397" text-anchor="middle" fill="#a9b6b3" font-size="11">⑦ 下发 L1ᵢ(schedule)</text>
+ <text x="120" y="425" text-anchor="middle" fill="#7a8f8c" font-size="10">资源管理器自行转成设备指令；</text><text x="120" y="439" text-anchor="middle" fill="#7a8f8c" font-size="10">回退规则库在指令缺失时接管</text>
+ <!-- 8 measured -->
+ <line x1="900" y1="465" x2="122" y2="465" stroke="#a9b6b3" marker-end="url(#d)"/><text x="510" y="457" text-anchor="middle" fill="#a9b6b3" font-size="11">⑧ 计量 → L1(measured)，同时可送校验：L3 · measured vs cleared → 偏差证明</text>
+ <line x1="640" y1="470" x2="640" y2="486" stroke="#d9a441"/><circle cx="640" cy="490" r="4" fill="#d9a441"/>
+ <text x="640" y="512" text-anchor="middle" fill="#7a8f8c" font-size="10">校验服务从不出现在①④⑤⑦的路径上；③⑥⑧是可选旁路</text>
+</g>
+</svg>
+<figcaption>图 4 · 生命周期。业务路径 ①→②→④→⑤→⑥→⑦→⑧ 不依赖校验服务；③、⑥后、⑧后三处校验是可选旁路，分别证明"报价可行""分解可行""履约偏差"。</figcaption>
+</figure>
+</section>
+
+<section id="s8">
+<h2><span class="n">§8</span>部署拓扑与数据驻留</h2>
+<p>校验服务是无状态的确定性程序，因此可以部署在数据所在处。三种拓扑对应三种数据驻留要求；三者输出的 L3 格式相同，可互相比对。</p>
+<div class="grid2">
+  <div class="card"><h4>A · 边界内本地</h4><p>校验二进制运行在资源管理器或聚合商自己的环境内。L0/L1/L2 明文不出边界；只有 L3 与 input_sha256 可选择性外发到透明日志。</p><p class="small">适用：cross_border=false；关键基础设施运营者；审查辖区。</p></div>
+  <div class="card"><h4>B · 托管校验</h4><p>请求方把 L0/L1/L2 发给第三方校验服务。数据传输受 consent 约束；校验方不得存储明文超过 retention_days。</p><p class="small">适用：小型聚合商；无本地运维能力者。</p></div>
+  <div class="card"><h4>C · 多方交叉</h4><p>同一输入送给 ≥2 个独立校验方，比对 L3。任一不一致即触发复算路径（§5）。</p><p class="small">适用：争议结算；监管抽查；规则集新版本上线期。</p></div>
+</div>
+<div class="tbl"><table>
+<thead><tr><th>数据</th><th>拓扑 A</th><th>拓扑 B</th><th>拓扑 C</th><th>透明日志</th><th>开放数据集</th></tr></thead>
+<tbody>
+<tr><td class="m">L0/L1/L2 明文</td><td>不出边界</td><td>传输至校验方；限期删除</td><td>传输至各校验方</td><td>从不</td><td>从不</td></tr>
+<tr><td class="m">input_sha256</td><td>可外发</td><td>随 L3 返回</td><td>比对键</td><td>存</td><td>不需要</td></tr>
+<tr><td class="m">L3 Attestation</td><td>本地 + 可外发</td><td>返回请求方</td><td>多份</td><td>存</td><td>不存</td></tr>
+<tr><td class="m">violations[] 脱敏</td><td>仅 consent</td><td>仅 consent</td><td>仅 consent</td><td>不存</td><td>存（CC BY 4.0）</td></tr>
+<tr><td class="m">网络模型</td><td>不出边界</td><td>可用外近似 / 等值</td><td>同 B</td><td>从不</td><td>从不</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s9">
+<h2><span class="n">§9</span>治理与一致性</h2>
+<div class="grid2">
+  <div class="card"><h4>许可</h4><p>规范文本 CC BY 4.0；schema、适配器、参考校验器、一致性测试 Apache-2.0（含专利授权）。不接受 NC 或专有条款；ext 命名空间任何人可注册，无独占。</p></div>
+  <div class="card"><h4>版本</h4><p>四层独立语义化版本；规则集独立版本。L3 永远记录它使用的每个版本号。破坏性变更须附迁移说明与双向测试向量。</p></div>
+  <div class="card"><h4>一致性 = 通过测试</h4><p>"符合标准"没有其他定义：实现对全部测试向量产生期望输出即为符合。测试向量与规范同库同版本，任何人可提交新向量。</p></div>
+  <div class="card"><h4>中立性硬约束</h4><p>维护者中任一雇主不得占多数；规则集变更须至少两个独立组织的实现通过测试；目标托管于既有开源能源基金会，不成立新联盟。</p></div>
+  <div class="card"><h4>与既有标准的关系</h4><p>作为 S2 之上的聚合层 profile、Shapeshifter/CIM 之下的可行域与证明层提交。凡既有标准已定义的语义（block、linked、exclusive、FRBC 存储模型）一律映射，不重定义。</p></div>
+  <div class="card"><h4>托管路径</h4><p>LF Energy 项目生命周期：Sandbox → Incubation → Graduated ◆。申请 Sandbox 的前置：Apache-2.0、公开治理文件、至少两个独立组织的贡献者、与既有项目（FlexMeasures、Shapeshifter、CUPID）的明确边界说明——即 §2b 表。OPC UA companion 模型另经 OPC Foundation 联合工作组路径 ◇。</p></div>
+  <div class="card"><h4>退出条款</h4><p>若既有标准吸收了约束集表示与证明对象，本标准转为该标准的兼容层并冻结。标准的成功定义包括"被吸收后消失"。</p></div>
+</div>
+<p class="small" id="sources">统一来源编号见仓库 <span class="k">docs/SOURCES.md</span>。本页直接依赖：<a href="https://flexmeasures.readthedocs.io/stable/concepts/flexibility-configuration.html">[L4] FlexMeasures ★</a> · <a href="https://lfenergy.org/cupid-ieee-2030-5-der-interoperability/">[L6] CUPID ◆</a> · <a href="https://channellife.co.uk/story/lf-energy-adds-members-projects-to-boost-grid-tools">[L7] LF Energy 新项目 ◆</a> · <a href="https://lfenergy.org/lf-energy-summit-europe-2026-agenda-is-live/">[L8] Summit Europe 2026 ◆</a> · <a href="https://opcfoundation.org/markets-collaboration/iec61850/">[O1] OPC UA for IEC 61850 ◆</a> · <a href="https://opcfoundation.org/about/opc-technologies/opc-ua/ua-companion-specifications/">[O2] OPC companion specs ◆</a> · <a href="https://arxiv.org/abs/2606.01562">[A5] Realizability guarantees ◆</a> · <a href="https://www.semanticscholar.org/paper/3904e31ce9693b57a7441250cff5770321ec3920">[A1] Nosair &amp; Bouffard 2015 ◆</a></p><p class="small">Schema 对应版本 envelope 0.0.3（modes · aggregation）。本文为参考架构，非法律或税务意见。</p>
+</section>
+</main>
+</div>
+
+</body>
+</html>

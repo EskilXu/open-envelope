@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>OpenEnvelope 审查与图景</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+:root{--ground:#0d1416;--panel:#131d1f;--panel2:#182527;--rule:#24363a;--rule2:#2f464b;--ink:#d8ddd9;--ink2:#a9b6b3;--mute:#7a8f8c;--teal:#4fb3a9;--teal2:#2c6f69;--amber:#d9a441;--red:#c95c4b;--green:#6fb07a;--blue:#6f9fc9;
+--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--serif:"Noto Serif SC","Songti SC","Hiragino Mincho ProN",Georgia,serif;--cond:"IBM Plex Sans Condensed","Arial Narrow",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--serif);font-size:15.5px;line-height:1.75}
+a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal2)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{display:grid;grid-template-columns:210px minmax(0,1fr);gap:40px;max-width:1240px;margin:0 auto;padding:36px 28px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:20px}.rail{position:static!important;display:flex;flex-wrap:wrap;gap:6px 14px}}
+.rail{position:sticky;top:24px;align-self:start;font-family:var(--mono);font-size:12px;line-height:1.5}
+.rail .brand{color:var(--teal);letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.rail a{display:block;color:var(--mute);border:0;padding:4px 0 4px 10px;border-left:2px solid var(--rule)}
+.rail a:hover{color:var(--ink);border-left-color:var(--teal)}
+.rail .meta{margin-top:22px;color:var(--mute);border-top:1px solid var(--rule);padding-top:12px}
+main{min-width:0}
+header h1{font-family:var(--cond);font-weight:600;font-size:38px;line-height:1.1;margin:0 0 6px;text-wrap:balance}
+header .sub{font-family:var(--mono);font-size:12.5px;color:var(--mute)}
+h2{font-family:var(--cond);font-size:22px;font-weight:600;margin:52px 0 14px;padding-top:18px;border-top:1px solid var(--rule);text-wrap:balance}
+h2 .n{font-family:var(--mono);color:var(--teal);font-size:12px;letter-spacing:.14em;display:block;margin-bottom:6px;font-weight:500}
+h3{font-family:var(--cond);font-size:16.5px;font-weight:600;margin:26px 0 8px}
+p{max-width:68ch;margin:0 0 14px}
+p.lead{font-size:17px;max-width:62ch}
+.k{font-family:var(--mono);font-size:.88em;color:var(--teal)}
+.q{border-left:2px solid var(--teal2);padding:6px 16px;color:var(--ink2);margin:16px 0;max-width:66ch}
+.q b{color:var(--ink);font-weight:500}
+.ann{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:22px 0 8px}
+.ann .tile{background:var(--panel);padding:12px 14px;font-family:var(--mono);min-height:84px;display:flex;flex-direction:column;justify-content:space-between}
+.ann .lbl{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.ann .val{font-size:22px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.ann .val small{font-size:11px;font-weight:400;color:var(--mute);margin-left:4px}
+.ann .st{font-size:11px;color:var(--ink2)}
+.tbl{overflow-x:auto;margin:14px 0 20px;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;padding:10px 12px;background:var(--panel);border-bottom:1px solid var(--rule2);font-weight:500}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:0}
+td.m{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+tbody tr.grp td:first-child{font-family:var(--cond);font-weight:600;color:var(--teal);background:var(--panel);font-size:13px}
+.chip{font-family:var(--mono);font-size:11px;padding:1px 7px;border:1px solid var(--rule2);border-radius:2px;color:var(--ink2);white-space:nowrap}
+.chip.a{color:var(--green);border-color:rgba(111,176,122,.5)}.chip.b{color:var(--blue);border-color:rgba(111,159,201,.5)}.chip.c{color:var(--amber);border-color:rgba(217,164,65,.5)}.chip.fix{color:var(--green);border-color:rgba(111,176,122,.5)}.chip.open{color:var(--amber);border-color:rgba(217,164,65,.5)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--rule);padding:14px 16px}
+.card h4{margin:0 0 8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.card p{font-size:14px;margin:0 0 8px;max-width:none}.card p:last-child{margin:0}
+.small{font-size:12.5px;color:var(--mute);font-family:var(--mono)}
+.src{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+.hubbar{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--rule);padding:0 0 10px;margin:0 0 22px;color:var(--mute)}.hubbar a{border:0;color:var(--teal)}.hubbar a:hover{text-decoration:underline}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<nav class="rail" aria-label="目录">
+  <div class="brand">Review · Landscape</div>
+  <a href="#s0">状态板</a>
+  <a href="#s1">三轮审查记录</a>
+  <a href="#s2">引用对齐</a>
+  <a href="#s3">研究话题图景</a>
+  <a href="#s4">学者与团队</a>
+  <a href="#s5">公司与产品</a>
+  <a href="#s6">政策与报告</a>
+  <a href="#s7">对 OpenEnvelope 的含义</a>
+  <a href="#s8">仍未核</a>
+  <div class="meta">2026-09-09<br>★ 一手已核 ◆ 可信二手 ◇ 未核<br><br>来源编号 = docs/SOURCES.md</div>
+</nav>
+
+<main>
+<div class="hubbar"><a href="/">◂ OpenEnvelope 工作台</a><span>审查与图景 · 内部</span></div>
+<header>
+  <h1>OpenEnvelope 审查与图景</h1>
+  <div class="sub">对战略审查 / 参考架构 / 术语辞典 / 标准库四页与仓库的三轮审查，以及围绕"灵活性包络 · 聚合 · 校验"的顶刊、学者、公司与报告图景</div>
+</header>
+
+<section id="s0">
+<div class="ann" role="list">
+  <div class="tile" role="listitem"><span class="lbl">审查发现</span><span class="val">11<small>项</small></span><span class="st">9 已修 · 2 记录待办</span></div>
+  <div class="tile" role="listitem"><span class="lbl">Schema</span><span class="val">0.0.3</span><span class="st">+modes · +aggregation · 7 tests</span></div>
+  <div class="tile" role="listitem"><span class="lbl">统一来源</span><span class="val">57<small>条</small></span><span class="st">14★ · 43◆ · 0◇（已剔除）</span></div>
+  <div class="tile" role="listitem"><span class="lbl">术语对齐</span><span class="val">inner<small>= realizable</small></span><span class="st">与 2025–26 文献用语接上</span></div>
+  <div class="tile" role="listitem"><span class="lbl">最强外部信号</span><span class="val">DC<small>flex</small></span><span class="st">数据中心灵活性成顶刊与监管热点</span></div>
+</div>
+</section>
+
+<section id="s1">
+<h2><span class="n">§1</span>三轮审查记录</h2>
+<p>第一轮：跨页机械一致性（版本号、日期、计数、遗留词、URL）。第二轮：事实核对与文献对齐（每条外部声明找来源或降级）。第三轮：逻辑与结构（页面之间的论证是否互相支撑、是否有已被后续修正却未回写的判断）。</p>
+<div class="tbl"><table>
+<thead><tr><th class="m">#</th><th class="m">轮</th><th>页面</th><th>发现</th><th>处理</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td class="m">F1</td><td class="m">1</td><td>架构 / 审查 / 库</td><td>架构页 L0 已写 <span class="k">modes</span> 与 <span class="k">env.mode</span>，标准库示例映射目标 <span class="k">modes[]</span>，但仓库 schema 0.0.2 没有该字段——文档先于实现，一致性测试无法覆盖</td><td>发布 envelope 0.0.3：新增 <span class="k">modes[]</span>（含 min_duration_steps / max_switches / transitions_to / startup_cost）与 <span class="k">aggregation{approximation, of, method}</span>；新增聚合示例；测试通过</td><td><span class="chip fix">已修</span></td></tr>
+<tr><td class="m">F2</td><td class="m">1</td><td>审查页</td><td>§3 两条 WEAK（线性约束集不够、聚合语义未定义）在架构 v0.2 已解决，但审查页未回写，读者会以为仍是缺陷</td><td>两条加"已修正"标记并指向 schema 0.0.3 / 架构 §4</td><td><span class="chip fix">已修</span></td></tr>
+<tr><td class="m">F3</td><td class="m">1</td><td>审查 / 辞典 / 库</td><td>版本与日期不一致：审查页 rail 仍 rev 2 · 09-04；辞典覆盖范围写 v0.2；库示例映射 target 0.0.2</td><td>统一：审查 rev 3、架构 v0.3、辞典 v2、库 v0.2，全部 2026-09-09；映射 target 0.0.3</td><td><span class="chip fix">已修</span></td></tr>
+<tr><td class="m">F4</td><td class="m">1</td><td>四页</td><td>来源只有文字，无超链接；各页编号互不相通</td><td>建 <span class="k">docs/SOURCES.md</span> 统一编号（J/L/O/E/C/R/A 七组），四页页脚替换为带链接的来源块</td><td><span class="chip fix">已修</span></td></tr>
+<tr><td class="m">F5</td><td class="m">2</td><td>架构 §4 / 辞典</td><td>"inner 近似"是自造描述；文献有成熟术语 <em>realizability</em>（Elsaadany–Almassalkhi–Tindemans 2025；arXiv 2606.01562 2026），且 2026 文献已提出 "ex-post realizability verification"——与 L3 完全对应，未引用</td><td>架构 §4 加术语对齐段落 [A4][A5][A16]；辞典新增 Realizability、Polymatroid/zonotope 条目</td><td><span class="chip fix">已修</span></td></tr>
+<tr><td class="m">F6</td><td class="m">2</td><td>辞典</td><td>"flexibility envelope 是既有学术术语"未给出处</td><td>核实为 Nosair &amp; Bouffard, IEEE TSTE 6(3):800–809, 2015 [A1]；新增条目</td><td><span class="chip fix">已修</span></td></tr>
+<tr><td class="m">F7</td><td class="m">2</td><td>库</td><td>中国政策层缺最上位文件：GB/T 44241 与三份团标之上是 2025-04-08 发改委/能源局《指导意见》（2027 &gt;20 GW、2030 &gt;50 GW）</td><td>登记表新增一行 [C7]；辞典新增条目</td><td><span class="chip fix">已修</span></td></tr>
+<tr><td class="m">F8</td><td class="m">2</td><td>辞典 / 库</td><td>一致性认证的现实参照缺失：SunSpec CSIP 认证（52 家 / 77 项）与 CSIP-AUS 认证手册是最接近本标准"测试即标准"的运行中范例</td><td>辞典新增 CSIP 认证条目 [E2][R12]；库页来源加 [E2]</td><td><span class="chip fix">已修</span></td></tr>
+<tr><td class="m">F9</td><td class="m">3</td><td>审查 §5 / 架构 §2b</td><td>数据中心侧只写了"OCP 无灵活性接口"，未接入正在发生的事实：EPRI DCFlex（&gt;40 家）、Duke《Rethinking Load Growth》（76–126 GW）、Google 1 GW DR 合同、Nature Reviews EE / iScience / NBER 2025–26 论文——这是本标准"站点级 Envelope"最强的外部需求信号</td><td>辞典新增 DCFlex；本页 §3/§6 展开；架构页不改（保持中立），含义写入 §7</td><td><span class="chip fix">已修</span></td></tr>
+<tr><td class="m">F10</td><td class="m">3</td><td>审查页</td><td>页内仍含 HDEB / 14B / 深度动力等内部语言。该页定位为内部战略，不是中立文档，可保留；但公开仓库 <span class="k">docs/</span> 里同时放着中立架构页与这份内部页，外部读者会一起看到</td><td>记录为待办：公开前把审查页移出 <span class="k">docs/</span>，或去内部语言后再放</td><td><span class="chip open">待办</span></td></tr>
+<tr><td class="m">F11</td><td class="m">3</td><td>审查 §6</td><td>ROI 表以 JPY 计价、以日本单一市场为前提；F9 与 §3 图景显示数据中心灵活性在美国/欧洲已成监管与顶刊热点，日本反而是滞后市场。"先日后欧"的假设需要重新论证，而不是默认</td><td>记录为待办：下一版审查页加"市场顺序"一节，把日本（同時市場 2030s）与美国（FERC 2222 落地、DCFlex）、欧洲（DR 网络准则 2027）并列比较</td><td><span class="chip open">待办</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">§2</span>引用对齐：一份来源表，七组编号</h2>
+<p>四页与仓库文档现在共用 <span class="k">docs/SOURCES.md</span>。每条有置信标记；本轮把所有此前 ◇ 的外部声明要么核到 ★/◆，要么改写成不需要外部依据的表述。分组与计数：</p>
+<div class="tbl"><table>
+<thead><tr><th class="m">组</th><th>范围</th><th class="m">条数</th><th>★</th><th>本页新增</th></tr></thead>
+<tbody>
+<tr><td class="m">J</td><td>日本监管与市场（METI / JEPX / 資源エネルギー庁）</td><td class="m">5</td><td>J1 J2 J3</td><td>J5</td></tr>
+<tr><td class="m">L</td><td>LF Energy 与开源实现</td><td class="m">9</td><td>L1–L5</td><td>L9</td></tr>
+<tr><td class="m">O · E</td><td>OPC Foundation · ENTSO-E · SunSpec · LBNL</td><td class="m">5</td><td>—</td><td>E2</td></tr>
+<tr><td class="m">C</td><td>中国标准与政策</td><td class="m">7</td><td>C1–C6</td><td>C7</td></tr>
+<tr><td class="m">R</td><td>国际政策与行业报告</td><td class="m">13</td><td>—</td><td>R1–R13 全部</td></tr>
+<tr><td class="m">A</td><td>学术论文</td><td class="m">18</td><td>—</td><td>A1–A18 全部</td></tr>
+</tbody></table></div>
+<p class="small">★ 的判据是"本会话打开了原文或官方页并读到了所引内容"；检索摘要即使来自官方域名也只记 ◆。学术条目全部为 ◆：核了题名、作者、期刊/编号，未逐篇读正文。</p>
+</section>
+
+<section id="s3">
+<h2><span class="n">§3</span>研究话题图景（2024–2026）</h2>
+<p>围绕本标准的五个话题，按"它在顶刊/主流会议里的形态"整理。期刊缩写：TPWRS = IEEE Trans. Power Systems，TSG = IEEE Trans. Smart Grid，TSTE = IEEE Trans. Sustainable Energy，L-CSS = IEEE Control Systems Letters，SEGAN = Sustainable Energy, Grids and Networks。</p>
+<div class="tbl"><table>
+<thead><tr><th>话题</th><th>核心问题</th><th>代表工作</th><th>与本标准的接口</th></tr></thead>
+<tbody>
+<tr><td><b>灵活性包络</b></td><td>把资源在时间约束下能提供的功率/能量范围写成一个几何对象，供运行规划与市场使用</td><td>Nosair &amp; Bouffard, TSTE 2015 [A1]（术语起点）；Huo &amp; Bouffard 配电网扩展 [A2]；ETH NCCR Automation 2025 "trajectory-independent envelopes" [A9]；SEGAN 2026 能源社区偏好感知包络 [A16]</td><td class="m">L0 的定义与名字</td></tr>
+<tr><td><b>聚合可行域表示</b></td><td>多个资源的 Minkowski 和如何精确或近似表示；维数灾难</td><td>Zhao–Zhang–Hao–Kalsi TPWRS 2017 几何法 [A3]；Öztürk et al. TSG 2024 维数灾缓解 [A6]；Wen et al. TSG 2024 改进内近似 [A17]；Mukhi–Loho–Abate 2025 广义拟阵精确刻画 [A7]；constrained zonotope 2025 [A10]；EV 拟阵表示 2025 [A11]</td><td class="m">aggregation.method 取值集</td></tr>
+<tr><td><b>可实现性 realizability</b></td><td>聚合域内的点能否真的分解到每个成员且各自可行；有无线性充分条件</td><td>Elsaadany–Almassalkhi–Tindemans L-CSS 2025 [A4]；"Making Aggregations Reliable" 2026 [A5]；Taha–Vincent–Bitar TSG 2024 EV 群 [A18]；SEGAN 2026 提出 ex-post realizability verification 阶段 [A16]</td><td class="m">inner 声明 · agg.sum · L3</td></tr>
+<tr><td><b>聚合灵活性投标</b></td><td>把聚合可行域变成交易所能接受的报价（block/linked/exclusive、三部件）</td><td>"Bidding Aggregated Flexibility in European Electricity Auctions" 2025 [A12]；日本同時市場 TPO 设计 [J1]</td><td class="m">L2 · mkt.subset</td></tr>
+<tr><td><b>数据中心作为灵活负荷</b></td><td>AI 负荷能否在不影响服务下削减/转移；对系统成本与排放的净效应</td><td>Nature Reviews EE 2025 综述 [A14]；iScience / NBER 2026 "降成本但可能增排放" [A13]；"Large-Load Demand Flexibility as Virtual Storage" 2026 [A15]；Duke 报告 [R1]；EPRI DCFlex [R2]</td><td class="m">站点级 L0 · modes（可转移/不可转移）</td></tr>
+</tbody></table></div>
+<div class="q"><b>一条趋势判断：</b>2024 年以前文献的重心是"怎么算出聚合域"（表示与近似）；2025–26 的重心转到"算出来的东西能不能兑现"（realizability）与"谁来事后验证"。后者正是 L3 的学术位置——本标准不是在提出新理论，而是把这条已经出现的验证阶段做成可交换、可复算的对象。</div>
+</section>
+
+<section id="s4">
+<h2><span class="n">§4</span>学者与团队（按话题簇）</h2>
+<div class="tbl"><table>
+<thead><tr><th>学者 / 团队</th><th>机构</th><th>贡献簇</th><th>与本标准最相关的一点</th><th>置信</th></tr></thead>
+<tbody>
+<tr class="grp"><td colspan="5">包络与聚合表示</td></tr>
+<tr><td>François Bouffard（与 Nosair、Huo）</td><td>McGill / GERAD</td><td>灵活性包络概念的提出者与延伸</td><td>L0 的术语与语义源头 [A1][A2]</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Gabriela Hug 等 · NCCR Automation</td><td>ETH Zürich</td><td>能量受限负荷的可扩展聚合、轨迹无关包络 [A8][A9]</td><td>aggregation.method 的候选算法来源</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Lin Zhao / Wei Zhang / He Hao / Karanjit Kalsi</td><td>Ohio State · PNNL</td><td>TCL 聚合的几何法 [A3]</td><td>早期"用几何对象表示聚合灵活性"的定调工作</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Mukhi · Loho · Abate</td><td>Oxford（Abate）等</td><td>广义拟阵精确刻画 [A7]</td><td>当下级为特定结构时 exact 声明的数学依据</td><td><span class="chip b">◆</span></td></tr>
+<tr class="grp"><td colspan="5">可实现性与分解</td></tr>
+<tr><td>Mads Almassalkhi（与 Elsaadany、Tindemans）</td><td>University of Vermont · TU Delft</td><td>可实现分解的线性条件 [A4][A5]</td><td>inner + agg.sum 的理论背书；"realizable"术语来源</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Simon Tindemans</td><td>TU Delft</td><td>储能群聚合与恢复保证</td><td>同上；欧洲侧对接人选</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Eilyan Bitar（与 Taha、Vincent）</td><td>Cornell</td><td>EV 群聚合灵活性的高效量化 [A18]</td><td>EVerest 路径生成 L0 的算法参照</td><td><span class="chip b">◆</span></td></tr>
+<tr class="grp"><td colspan="5">数据中心灵活性</td></tr>
+<tr><td>Tyler Norris 等 · GRACE Lab / Nicholas Institute</td><td>Duke</td><td>《Rethinking Load Growth》[R1]</td><td>"可削减新负荷"的量化框架；站点级 Envelope 的需求侧论证</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>iScience / NBER 作者团队（2026）</td><td>—</td><td>灵活数据中心降成本但可能增排放 [A13]</td><td>提示 L0 应可挂碳强度上下文（ext lfenergy.cds）</td><td><span class="chip c">◇ 作者未核</span></td></tr>
+<tr class="grp"><td colspan="5">开源实现（工程侧）</td></tr>
+<tr><td>Nicolas Höning · Seita / FlexMeasures 维护者</td><td>Seita（荷兰）</td><td>FlexMeasures，S2 生态 [L1][L4]</td><td>第一外部实现的对接对象</td><td><span class="chip a">★</span></td></tr>
+<tr><td>Jorrit Nutma · TNO</td><td>TNO</td><td>S2 标准推广 [L1]</td><td>S2 profile 的对接对象</td><td><span class="chip a">★</span></td></tr>
+<tr><td>Alliander 开源团队</td><td>Alliander（荷兰 DSO）</td><td>Power Grid Model、OpenSTEF</td><td>R-PHYS 交流潮流后端的维护方</td><td><span class="chip b">◆</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s5">
+<h2><span class="n">§5</span>公司与产品（按它们在图 1 的位置）</h2>
+<p>只列与本标准有直接接口关系的；每家写它在架构里坐哪、会消费或生产哪层对象。未核的公司事实标 ◇。</p>
+<div class="tbl"><table>
+<thead><tr><th>公司</th><th>地区</th><th>在架构里的位置</th><th>接口层</th><th>备注</th><th>置信</th></tr></thead>
+<tbody>
+<tr class="grp"><td colspan="6">数据中心灵活性（最活跃的新簇）</td></tr>
+<tr><td>Google</td><td>US</td><td>大负荷 · 站点级资源管理器</td><td class="m">L0 · L1</td><td>与多家美国公用事业签 1 GW 需求响应合同 [R2 相关报道]；DCFlex 参与方</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Microsoft · Meta</td><td>US</td><td>同上</td><td class="m">L0 · L1</td><td>DCFlex 参与方 [R2]</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Emerald AI</td><td>US</td><td>数据中心侧 EMS / 编排层</td><td class="m">L0 生成 · L1</td><td>宣称 25% 削减不中断 GPU 服务；已获日本大型电力公司风险投资（2026-08）</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>EPRI（DCFlex 召集方）</td><td>US</td><td>试验与方法论提供者</td><td class="m">L3 潜在采用方</td><td>&gt;40 家参与、三年计划 [R2]</td><td><span class="chip b">◆</span></td></tr>
+<tr class="grp"><td colspan="6">聚合商 / VPP 平台（L0 消费者、L2 生产者）</td></tr>
+<tr><td>Octopus Energy（Kraken）</td><td>UK / 全球</td><td>聚合商 + 售电</td><td class="m">L0 · L2 · L1</td><td>Kraken 平台授权给多家公用事业</td><td><span class="chip c">◇</span></td></tr>
+<tr><td>Tesla（Autobidder / VPP）</td><td>US / AU</td><td>聚合商</td><td class="m">L0 · L2</td><td>南澳 VPP 试点参与方 [R11]</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Next Kraftwerke（Shell）· Sympower · Flexcity</td><td>EU</td><td>聚合商</td><td class="m">L2 · L1</td><td>欧洲 DR 网络准则的直接受影响方 [R6]</td><td><span class="chip c">◇</span></td></tr>
+<tr><td>Voltus · CPower · Uplight (AutoGrid)</td><td>US</td><td>聚合商 / DR 平台</td><td class="m">L2 · L1</td><td>FERC 2222 各 RTO 落地的参与方 [R10]</td><td><span class="chip c">◇</span></td></tr>
+<tr><td>Tensor Energy · GRID · Shizen Connect · エナリス</td><td>JP</td><td>聚合商 / 投标 SaaS</td><td class="m">L0 · L2</td><td>日本需給調整市場参与者；同時市場转换期的首批潜在 L0 生产者</td><td><span class="chip c">◇</span></td></tr>
+<tr class="grp"><td colspan="6">灵活性市场平台（L2 载体）</td></tr>
+<tr><td>Piclo · Electron</td><td>UK / EU</td><td>DSO 侧灵活性交易平台</td><td class="m">L2 · L0 外近似</td><td>Electron 跟踪 EU DR 网络准则 [R6 相关]</td><td><span class="chip c">◇</span></td></tr>
+<tr class="grp"><td colspan="6">设备与接入（L0 生产者）</td></tr>
+<tr><td>SunSpec 认证厂商（52 家 / 77 项）</td><td>US / AU</td><td>逆变器 · 网关</td><td class="m">L0 bounds 来源</td><td>CSIP 认证 [E2]；CSIP-AUS 首家 v1.2 认证 2025</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Kitu Systems</td><td>US</td><td>2030.5 软件栈</td><td class="m">L0 · L1</td><td>CSIP 端到端认证</td><td><span class="chip b">◆</span></td></tr>
+<tr><td>Stekker · Seita · TNO</td><td>NL</td><td>S2 实现方</td><td class="m">L0 生成</td><td>S2-Ruby、FlexMeasures、S2 推广 [L1]</td><td><span class="chip a">★</span></td></tr>
+<tr class="grp"><td colspan="6">中国（L0 聚合 · cn-vpp profile 的目标用户）</td></tr>
+<tr><td>国家电网 / 南方电网 VPP 平台</td><td>CN</td><td>省级聚合与调度接入</td><td class="m">L0 聚合 · L1</td><td>GB/T 44241、团标的主要实施者；负荷管理系统的所有者</td><td><span class="chip c">◇</span></td></tr>
+<tr><td>深圳虚拟电厂管理中心 · 冀北 VPP</td><td>CN</td><td>地方 VPP 运营</td><td class="m">L0 · L2</td><td>2025 指导意见的示范落点 [C7]</td><td><span class="chip c">◇</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">§6</span>政策与报告（2025–2026）</h2>
+<div class="tbl"><table>
+<thead><tr><th class="m">日期</th><th>发布方 · 文件</th><th>要点</th><th>对本标准</th><th>置信</th></tr></thead>
+<tbody>
+<tr><td class="m">2025-01</td><td>EU DSO Entity — Technical Vision [R9]</td><td>配电侧数字化与灵活性的技术愿景</td><td>DSO 侧 L0 外近似的需求方</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">2025-02</td><td>Duke Nicholas Institute — Rethinking Load Growth [R1]</td><td>22 个平衡区可容纳 76–126 GW 可削减新负荷（削减 0.25–1% 时间）；该所下载量最高的报告</td><td>站点级 Envelope 的宏观论证</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">2025-03-07</td><td>ACER — Network Code on Demand Response [R6]</td><td>欧盟统一准则提交欧委会；2026-07 国家评估、2027-01 目标、2027 起实施</td><td>L2/L1 在欧洲的制度时间表</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">2025-04-08</td><td>发改委 · 能源局 — 虚拟电厂指导意见 [C7]</td><td>2027 &gt;20 GW、2030 &gt;50 GW</td><td>cn-vpp profile 的政策上位</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">2025-04-16 / 07-25</td><td>ENTSO-E + DSO Entity — 灵活性需求评估方法论；ACER 批准 [R7]</td><td>统一各国灵活性需求评估的数据类型与格式</td><td>系统级 L0 聚合可能的报送格式对象</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">2025-09</td><td>CSIP-AUS 测试与认证手册 [R12]</td><td>澳大利亚 2030.5 profile 的认证流程</td><td>一致性认证的运行中范例</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">2025-10-15</td><td>METI — 同時市場 第二次中間取りまとめ [J1]</td><td>TPO 结构、2030 年代前半、block 入札 60–80% / 约定率数%</td><td>L2 日本 profile；能量块表达不足的官方量化</td><td><span class="chip a">★</span></td></tr>
+<tr><td class="m">2025-11</td><td>ENTSO-E — Flexibility from RES Report [R8]</td><td>可再生侧灵活性需求 2025→2033 约翻倍</td><td>需求侧背景</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">2026</td><td>IEA — Electricity 2026 · Flexibility 章 [R3]；Scaling Up Demand Flexibility [R4]；Value of Demand Flexibility [R5]</td><td>需求响应与储能专章；南非/泰国/爱尔兰案例</td><td>国际叙事背景</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">2026-03</td><td>FERC 2222 实施进展汇总（PJM 等）[R10]</td><td>ISO-NE 能量/辅助服务 2026-11-01；CIM 被点名为 DER 数据交换框架</td><td>美国侧 L2/L1 载体倾向 CIM</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">2024–2027</td><td>EPRI — DCFlex [R2]</td><td>&gt;40 家；DR、负载转移、UPS 作为电网资源实测</td><td>站点级 L0（含 modes）最现实的试验场</td><td><span class="chip b">◆</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s7">
+<h2><span class="n">§7</span>图景对 OpenEnvelope 意味着什么</h2>
+<div class="grid2">
+  <div class="card"><h4>术语要接上文献</h4><p>用 <em>realizable</em> 而不是自造的"inner 且可分解"；用 <em>flexibility envelope</em> 并注明 Nosair &amp; Bouffard 2015。这让学术读者一眼知道你站在哪条线上，也让 L3 有现成的学术位置（ex-post realizability verification）。</p></div>
+  <div class="card"><h4>数据中心是最强需求信号，但不在日本</h4><p>DCFlex、Duke 报告、Google 1 GW、三篇 2025–26 顶刊级论文全部在美国。站点级 Envelope 的第一个真实用户可能是一个美国数据中心运营者，而不是日本聚合商。审查页 F11 待办由此而来。</p></div>
+  <div class="card"><h4>碳强度必须能挂上</h4><p>iScience/NBER 2026 的结论"灵活数据中心降成本但可能增排放"意味着任何 L0 消费者都会被问"你的削减是不是在把负荷推向更脏的时段"。<span class="k">ext["lfenergy.cds"]</span> 从可选变成应有。</p></div>
+  <div class="card"><h4>一致性认证有现成模板</h4><p>SunSpec CSIP（52 家 / 77 项）与 CSIP-AUS 手册证明"选一个功能子集 + 规定实现方式 + 第三方测试"在 DER 领域可运转。本标准的一致性向量可以直接照这个组织形式做，不必发明流程。</p></div>
+  <div class="card"><h4>欧洲有明确的时间表</h4><p>DR 网络准则 2027 实施、灵活性需求评估方法论已获批。L2/L1 在欧洲有制度落点和截止日期；FlexMeasures/S2 生态也在欧洲。这与 §6 优先级"先 FlexMeasures、再 S2"一致。</p></div>
+  <div class="card"><h4>中国的上位文件已齐</h4><p>指导意见（2025-04）→ GB/T 44241 → 三份团标，政策到接口的链条完整。cn-vpp profile 不缺依据，缺的是团标文本的字段级获取（库页 V4）。</p></div>
+</div>
+</section>
+
+<section id="s8">
+<h2><span class="n">§8</span>仍未核（本轮新增）</h2>
+<div class="tbl"><table>
+<thead><tr><th class="m">#</th><th>事项</th><th>为什么重要</th></tr></thead>
+<tbody>
+<tr><td class="m">U1</td><td>[A13] iScience/NBER 2026 论文的作者与机构</td><td>§4 表中标 ◇；若为知名团队应补入学者表</td></tr>
+<tr><td class="m">U2</td><td>§5 中标 ◇ 的公司事实（Kraken 授权范围、Next Kraftwerke 现状、日本四家聚合商的市场参与细节、国网/南网 VPP 平台名称）</td><td>公司表只用于定位，不用于论证；发布前逐条核或删</td></tr>
+<tr><td class="m">U3</td><td>Google 1 GW 需求响应合同的一手来源（公用事业公告或 Google 博客）</td><td>目前来自二手报道</td></tr>
+<tr><td class="m">U4</td><td>Emerald AI 获日本电力公司投资的一手公告</td><td>来自项目内部记忆，未在本会话核</td></tr>
+<tr><td class="m">U5</td><td>OPC Foundation 是否已有能源灵活性联合工作组（库页 V5 延续）</td><td>决定 EnvelopeType companion 提交路径</td></tr>
+</tbody></table></div>
+<p class="src">来源编号见仓库 <span class="k">docs/SOURCES.md</span>（57 条，含链接）。本页学术条目核了题名/作者/期刊，未逐篇读正文；公司条目以 ◇ 者为多，仅作定位。</p>
+</section>
+</main>
+</div>
+
+</body>
+</html>

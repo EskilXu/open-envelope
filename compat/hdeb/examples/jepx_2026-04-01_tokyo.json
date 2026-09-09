@@ -1,0 +1,4566 @@
+{
+ "hdeb_version": "0.1",
+ "generated_at": "2026-09-04T03:18:09+00:00",
+ "blocks": [
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:01:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T00:00:00+09:00",
+    "end": "2026-04-01T00:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 35482100.0
+   },
+   "energy": {
+    "kwh": 17741050.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 17.75,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 27474550.0,
+    "buy_bid_kwh": 22189150.0,
+    "cleared_kwh": 17741050.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 8938850.0,
+    "sell_block_cleared_kwh": 3146000.0,
+    "buy_block_bid_kwh": 1198550.0,
+    "buy_block_cleared_kwh": 823850.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 2"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 1,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:01:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:01:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T00:00:00+09:00",
+    "end": "2026-04-01T00:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.15,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 2"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:02:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T00:30:00+09:00",
+    "end": "2026-04-01T01:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 36092800.0
+   },
+   "energy": {
+    "kwh": 18046400.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 14.83,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 28671000.0,
+    "buy_bid_kwh": 21485150.0,
+    "cleared_kwh": 18046400.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 11120400.0,
+    "sell_block_cleared_kwh": 4151950.0,
+    "buy_block_bid_kwh": 1179050.0,
+    "buy_block_cleared_kwh": 821800.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 3"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 2,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:02:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:02:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T00:30:00+09:00",
+    "end": "2026-04-01T01:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.44,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 3"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:03:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T01:00:00+09:00",
+    "end": "2026-04-01T01:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 36748700.0
+   },
+   "energy": {
+    "kwh": 18374350.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 12.7,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29196500.0,
+    "buy_bid_kwh": 21271000.0,
+    "cleared_kwh": 18374350.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12131200.0,
+    "sell_block_cleared_kwh": 4710500.0,
+    "buy_block_bid_kwh": 1239600.0,
+    "buy_block_cleared_kwh": 840700.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 4"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 3,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:03:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:03:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T01:00:00+09:00",
+    "end": "2026-04-01T01:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 14.83,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 4"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:04:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T01:30:00+09:00",
+    "end": "2026-04-01T02:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 36754300.0
+   },
+   "energy": {
+    "kwh": 18377150.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 13.21,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29509550.0,
+    "buy_bid_kwh": 21469950.0,
+    "cleared_kwh": 18377150.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12709150.0,
+    "sell_block_cleared_kwh": 4865400.0,
+    "buy_block_bid_kwh": 1258200.0,
+    "buy_block_cleared_kwh": 840400.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 5"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 4,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:04:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:04:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T01:30:00+09:00",
+    "end": "2026-04-01T02:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 15.45,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 5"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:05:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T02:00:00+09:00",
+    "end": "2026-04-01T02:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 36880700.0
+   },
+   "energy": {
+    "kwh": 18440350.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 14.83,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29512150.0,
+    "buy_bid_kwh": 21821200.0,
+    "cleared_kwh": 18440350.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12751250.0,
+    "sell_block_cleared_kwh": 4859650.0,
+    "buy_block_bid_kwh": 1257850.0,
+    "buy_block_cleared_kwh": 841250.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 6"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 5,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:05:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:05:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T02:00:00+09:00",
+    "end": "2026-04-01T02:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 16.07,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 6"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:06:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T02:30:00+09:00",
+    "end": "2026-04-01T03:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 36694000.0
+   },
+   "energy": {
+    "kwh": 18347000.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 17.01,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29357850.0,
+    "buy_bid_kwh": 22311800.0,
+    "cleared_kwh": 18347000.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12565250.0,
+    "sell_block_cleared_kwh": 4719300.0,
+    "buy_block_bid_kwh": 1256500.0,
+    "buy_block_cleared_kwh": 840700.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 7"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 6,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:06:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:06:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T02:30:00+09:00",
+    "end": "2026-04-01T03:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 17.93,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 7"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:07:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T03:00:00+09:00",
+    "end": "2026-04-01T03:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 37220800.0
+   },
+   "energy": {
+    "kwh": 18610400.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 17.95,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29205500.0,
+    "buy_bid_kwh": 22814850.0,
+    "cleared_kwh": 18610400.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12175250.0,
+    "sell_block_cleared_kwh": 4597600.0,
+    "buy_block_bid_kwh": 1278050.0,
+    "buy_block_cleared_kwh": 862550.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 8"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 7,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:07:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:07:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T03:00:00+09:00",
+    "end": "2026-04-01T03:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.44,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 8"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:08:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T03:30:00+09:00",
+    "end": "2026-04-01T04:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 37006300.0
+   },
+   "energy": {
+    "kwh": 18503150.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.0,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 28814250.0,
+    "buy_bid_kwh": 23116700.0,
+    "cleared_kwh": 18503150.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12002700.0,
+    "sell_block_cleared_kwh": 4570600.0,
+    "buy_block_bid_kwh": 1309350.0,
+    "buy_block_cleared_kwh": 893550.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 9"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 8,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:08:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:08:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T03:30:00+09:00",
+    "end": "2026-04-01T04:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.71,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 9"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:09:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T04:00:00+09:00",
+    "end": "2026-04-01T04:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 37040600.0
+   },
+   "energy": {
+    "kwh": 18520300.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.65,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 28759750.0,
+    "buy_bid_kwh": 23467900.0,
+    "cleared_kwh": 18520300.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12048500.0,
+    "sell_block_cleared_kwh": 4699800.0,
+    "buy_block_bid_kwh": 1309950.0,
+    "buy_block_cleared_kwh": 898050.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 10"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 9,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:09:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:09:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T04:00:00+09:00",
+    "end": "2026-04-01T04:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.71,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 10"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:10:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T04:30:00+09:00",
+    "end": "2026-04-01T05:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 37014400.0
+   },
+   "energy": {
+    "kwh": 18507200.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.71,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 28714600.0,
+    "buy_bid_kwh": 23662950.0,
+    "cleared_kwh": 18507200.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12089000.0,
+    "sell_block_cleared_kwh": 4677000.0,
+    "buy_block_bid_kwh": 1311300.0,
+    "buy_block_cleared_kwh": 898750.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 11"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 10,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:10:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:10:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T04:30:00+09:00",
+    "end": "2026-04-01T05:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.91,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 11"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:11:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T05:00:00+09:00",
+    "end": "2026-04-01T05:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 37552200.0
+   },
+   "energy": {
+    "kwh": 18776100.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.06,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 28764150.0,
+    "buy_bid_kwh": 24195050.0,
+    "cleared_kwh": 18776100.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12072600.0,
+    "sell_block_cleared_kwh": 4742550.0,
+    "buy_block_bid_kwh": 1316400.0,
+    "buy_block_cleared_kwh": 900300.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 12"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 11,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:11:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:11:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T05:00:00+09:00",
+    "end": "2026-04-01T05:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.53,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 12"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:12:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T05:30:00+09:00",
+    "end": "2026-04-01T06:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 37854100.0
+   },
+   "energy": {
+    "kwh": 18927050.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.29,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 28742500.0,
+    "buy_bid_kwh": 24144250.0,
+    "cleared_kwh": 18927050.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12065150.0,
+    "sell_block_cleared_kwh": 4764450.0,
+    "buy_block_bid_kwh": 1036500.0,
+    "buy_block_cleared_kwh": 691350.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 13"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 12,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:12:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:12:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T05:30:00+09:00",
+    "end": "2026-04-01T06:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.8,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 13"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:13:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T06:00:00+09:00",
+    "end": "2026-04-01T06:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 38040300.0
+   },
+   "energy": {
+    "kwh": 19020150.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.95,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29003350.0,
+    "buy_bid_kwh": 24100450.0,
+    "cleared_kwh": 19020150.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12080750.0,
+    "sell_block_cleared_kwh": 4678300.0,
+    "buy_block_bid_kwh": 862300.0,
+    "buy_block_cleared_kwh": 513550.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 14"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 13,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:13:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:13:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T06:00:00+09:00",
+    "end": "2026-04-01T06:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.64,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 14"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:14:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T06:30:00+09:00",
+    "end": "2026-04-01T07:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 38397600.0
+   },
+   "energy": {
+    "kwh": 19198800.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.79,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29595100.0,
+    "buy_bid_kwh": 24139750.0,
+    "cleared_kwh": 19198800.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12170050.0,
+    "sell_block_cleared_kwh": 4752200.0,
+    "buy_block_bid_kwh": 815000.0,
+    "buy_block_cleared_kwh": 413750.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 15"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 14,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:14:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:14:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T06:30:00+09:00",
+    "end": "2026-04-01T07:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.32,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 15"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:15:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T07:00:00+09:00",
+    "end": "2026-04-01T07:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 39132900.0
+   },
+   "energy": {
+    "kwh": 19566450.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.0,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 30413200.0,
+    "buy_bid_kwh": 24325950.0,
+    "cleared_kwh": 19566450.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12365100.0,
+    "sell_block_cleared_kwh": 4771600.0,
+    "buy_block_bid_kwh": 822850.0,
+    "buy_block_cleared_kwh": 421450.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 16"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 15,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:15:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:15:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T07:00:00+09:00",
+    "end": "2026-04-01T07:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.6,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 16"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:16:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T07:30:00+09:00",
+    "end": "2026-04-01T08:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 41747800.0
+   },
+   "energy": {
+    "kwh": 20873900.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 18.44,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 31653250.0,
+    "buy_bid_kwh": 24993800.0,
+    "cleared_kwh": 20873900.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12242450.0,
+    "sell_block_cleared_kwh": 4771600.0,
+    "buy_block_bid_kwh": 838050.0,
+    "buy_block_cleared_kwh": 539150.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 17"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 16,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:16:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:16:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T07:30:00+09:00",
+    "end": "2026-04-01T08:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 19.6,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 17"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:17:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T08:00:00+09:00",
+    "end": "2026-04-01T08:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 46301600.0
+   },
+   "energy": {
+    "kwh": 23150800.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 21.71,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32212800.0,
+    "buy_bid_kwh": 28830500.0,
+    "cleared_kwh": 23150800.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 11950500.0,
+    "sell_block_cleared_kwh": 4490950.0,
+    "buy_block_bid_kwh": 836050.0,
+    "buy_block_cleared_kwh": 560600.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 18"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 17,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:17:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:17:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T08:00:00+09:00",
+    "end": "2026-04-01T08:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 25.13,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 18"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:18:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T08:30:00+09:00",
+    "end": "2026-04-01T09:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 47781600.0
+   },
+   "energy": {
+    "kwh": 23890800.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 23.82,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32496800.0,
+    "buy_bid_kwh": 30656350.0,
+    "cleared_kwh": 23890800.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 11932550.0,
+    "sell_block_cleared_kwh": 4448550.0,
+    "buy_block_bid_kwh": 1215750.0,
+    "buy_block_cleared_kwh": 614100.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 19"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 18,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:18:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:18:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T08:30:00+09:00",
+    "end": "2026-04-01T09:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 32.4,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 19"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:19:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T09:00:00+09:00",
+    "end": "2026-04-01T09:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 44526500.0
+   },
+   "energy": {
+    "kwh": 22263250.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.28,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32200400.0,
+    "buy_bid_kwh": 29694200.0,
+    "cleared_kwh": 22263250.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 11800150.0,
+    "sell_block_cleared_kwh": 4415950.0,
+    "buy_block_bid_kwh": 1867650.0,
+    "buy_block_cleared_kwh": 632700.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 20"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 19,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:19:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:19:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T09:00:00+09:00",
+    "end": "2026-04-01T09:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 22.66,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 20"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:20:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T09:30:00+09:00",
+    "end": "2026-04-01T10:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45506200.0
+   },
+   "energy": {
+    "kwh": 22753100.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.53,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32506300.0,
+    "buy_bid_kwh": 30286600.0,
+    "cleared_kwh": 22753100.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12158950.0,
+    "sell_block_cleared_kwh": 4467100.0,
+    "buy_block_bid_kwh": 2311400.0,
+    "buy_block_cleared_kwh": 745950.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 21"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 20,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:20:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:20:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T09:30:00+09:00",
+    "end": "2026-04-01T10:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 22.99,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 21"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:21:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T10:00:00+09:00",
+    "end": "2026-04-01T10:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45027500.0
+   },
+   "energy": {
+    "kwh": 22513750.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.96,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32120400.0,
+    "buy_bid_kwh": 29768250.0,
+    "cleared_kwh": 22513750.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12745900.0,
+    "sell_block_cleared_kwh": 4745500.0,
+    "buy_block_bid_kwh": 2282900.0,
+    "buy_block_cleared_kwh": 708500.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 22"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 21,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:21:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:21:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T10:00:00+09:00",
+    "end": "2026-04-01T10:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 25.01,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 22"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:22:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T10:30:00+09:00",
+    "end": "2026-04-01T11:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45465500.0
+   },
+   "energy": {
+    "kwh": 22732750.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 21.0,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32465800.0,
+    "buy_bid_kwh": 29535050.0,
+    "cleared_kwh": 22732750.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12915250.0,
+    "sell_block_cleared_kwh": 4771200.0,
+    "buy_block_bid_kwh": 2277000.0,
+    "buy_block_cleared_kwh": 795600.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 23"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 22,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:22:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:22:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T10:30:00+09:00",
+    "end": "2026-04-01T11:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 25.01,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 23"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:23:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T11:00:00+09:00",
+    "end": "2026-04-01T11:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45523500.0
+   },
+   "energy": {
+    "kwh": 22761750.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 21.35,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32443300.0,
+    "buy_bid_kwh": 29875550.0,
+    "cleared_kwh": 22761750.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 13041450.0,
+    "sell_block_cleared_kwh": 4787200.0,
+    "buy_block_bid_kwh": 2281900.0,
+    "buy_block_cleared_kwh": 800400.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 24"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 23,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:23:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:23:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T11:00:00+09:00",
+    "end": "2026-04-01T11:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 31.22,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 24"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:24:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T11:30:00+09:00",
+    "end": "2026-04-01T12:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45456500.0
+   },
+   "energy": {
+    "kwh": 22728250.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 21.51,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32340200.0,
+    "buy_bid_kwh": 29940000.0,
+    "cleared_kwh": 22728250.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 13077000.0,
+    "sell_block_cleared_kwh": 4770100.0,
+    "buy_block_bid_kwh": 2396200.0,
+    "buy_block_cleared_kwh": 737200.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 25"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 24,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:24:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:24:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T11:30:00+09:00",
+    "end": "2026-04-01T12:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 32.39,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 25"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:25:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T12:00:00+09:00",
+    "end": "2026-04-01T12:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 43982100.0
+   },
+   "energy": {
+    "kwh": 21991050.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.61,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32283250.0,
+    "buy_bid_kwh": 29357100.0,
+    "cleared_kwh": 21991050.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 13203400.0,
+    "sell_block_cleared_kwh": 4783150.0,
+    "buy_block_bid_kwh": 2868950.0,
+    "buy_block_cleared_kwh": 715500.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 26"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 25,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:25:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:25:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T12:00:00+09:00",
+    "end": "2026-04-01T12:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 30.0,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 26"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:26:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T12:30:00+09:00",
+    "end": "2026-04-01T13:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 43757900.0
+   },
+   "energy": {
+    "kwh": 21878950.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.96,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 32041800.0,
+    "buy_bid_kwh": 29625150.0,
+    "cleared_kwh": 21878950.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 13240650.0,
+    "sell_block_cleared_kwh": 4803950.0,
+    "buy_block_bid_kwh": 3194500.0,
+    "buy_block_cleared_kwh": 619750.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 27"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 26,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:26:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:26:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T12:30:00+09:00",
+    "end": "2026-04-01T13:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 31.22,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 27"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:27:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T13:00:00+09:00",
+    "end": "2026-04-01T13:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 44068700.0
+   },
+   "energy": {
+    "kwh": 22034350.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 25.0,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 31353100.0,
+    "buy_bid_kwh": 31316700.0,
+    "cleared_kwh": 22034350.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 13066050.0,
+    "sell_block_cleared_kwh": 4847000.0,
+    "buy_block_bid_kwh": 3078550.0,
+    "buy_block_cleared_kwh": 605600.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 28"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 27,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:27:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:27:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T13:00:00+09:00",
+    "end": "2026-04-01T13:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 44.7,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 28"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:28:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T13:30:00+09:00",
+    "end": "2026-04-01T14:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 43380000.0
+   },
+   "energy": {
+    "kwh": 21690000.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 25.95,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 30819950.0,
+    "buy_bid_kwh": 31233150.0,
+    "cleared_kwh": 21690000.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12868000.0,
+    "sell_block_cleared_kwh": 4929400.0,
+    "buy_block_bid_kwh": 2500400.0,
+    "buy_block_cleared_kwh": 611450.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 29"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 28,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:28:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:28:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T13:30:00+09:00",
+    "end": "2026-04-01T14:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 44.38,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 29"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:29:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T14:00:00+09:00",
+    "end": "2026-04-01T14:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 43647600.0
+   },
+   "energy": {
+    "kwh": 21823800.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 31.42,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 30411800.0,
+    "buy_bid_kwh": 30617700.0,
+    "cleared_kwh": 21823800.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12678700.0,
+    "sell_block_cleared_kwh": 5178700.0,
+    "buy_block_bid_kwh": 1910350.0,
+    "buy_block_cleared_kwh": 612900.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 30"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 29,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:29:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:29:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T14:00:00+09:00",
+    "end": "2026-04-01T14:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 43.41,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 30"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:30:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T14:30:00+09:00",
+    "end": "2026-04-01T15:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 44389600.0
+   },
+   "energy": {
+    "kwh": 22194800.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 32.0,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 30307100.0,
+    "buy_bid_kwh": 30347300.0,
+    "cleared_kwh": 22194800.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12556250.0,
+    "sell_block_cleared_kwh": 5374700.0,
+    "buy_block_bid_kwh": 1868550.0,
+    "buy_block_cleared_kwh": 600600.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 31"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 30,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:30:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:30:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T14:30:00+09:00",
+    "end": "2026-04-01T15:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 42.22,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 31"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:31:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T15:00:00+09:00",
+    "end": "2026-04-01T15:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 44909200.0
+   },
+   "energy": {
+    "kwh": 22454600.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 31.8,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 30371600.0,
+    "buy_bid_kwh": 29634100.0,
+    "cleared_kwh": 22454600.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12615800.0,
+    "sell_block_cleared_kwh": 5561250.0,
+    "buy_block_bid_kwh": 1312750.0,
+    "buy_block_cleared_kwh": 574450.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 32"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 31,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:31:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:31:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T15:00:00+09:00",
+    "end": "2026-04-01T15:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 42.89,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 32"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:32:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T15:30:00+09:00",
+    "end": "2026-04-01T16:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 46052600.0
+   },
+   "energy": {
+    "kwh": 23026300.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 30.0,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 30596900.0,
+    "buy_bid_kwh": 29621400.0,
+    "cleared_kwh": 23026300.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12447800.0,
+    "sell_block_cleared_kwh": 5793150.0,
+    "buy_block_bid_kwh": 1073950.0,
+    "buy_block_cleared_kwh": 521450.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 33"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 32,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:32:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:32:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T15:30:00+09:00",
+    "end": "2026-04-01T16:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 32.0,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 33"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:33:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T16:00:00+09:00",
+    "end": "2026-04-01T16:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 46031300.0
+   },
+   "energy": {
+    "kwh": 23015650.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 30.84,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 30172200.0,
+    "buy_bid_kwh": 29840350.0,
+    "cleared_kwh": 23015650.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12167100.0,
+    "sell_block_cleared_kwh": 6015050.0,
+    "buy_block_bid_kwh": 926400.0,
+    "buy_block_cleared_kwh": 492450.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 34"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 33,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:33:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:33:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T16:00:00+09:00",
+    "end": "2026-04-01T16:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 32.58,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 34"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:34:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T16:30:00+09:00",
+    "end": "2026-04-01T17:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45876500.0
+   },
+   "energy": {
+    "kwh": 22938250.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 32.39,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29878150.0,
+    "buy_bid_kwh": 30080750.0,
+    "cleared_kwh": 22938250.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12091650.0,
+    "sell_block_cleared_kwh": 6012200.0,
+    "buy_block_bid_kwh": 778950.0,
+    "buy_block_cleared_kwh": 442500.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 35"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 34,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:34:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:34:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T16:30:00+09:00",
+    "end": "2026-04-01T17:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 35.83,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 35"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:35:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T17:00:00+09:00",
+    "end": "2026-04-01T17:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45472000.0
+   },
+   "energy": {
+    "kwh": 22736000.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 30.0,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29918550.0,
+    "buy_bid_kwh": 29515200.0,
+    "cleared_kwh": 22736000.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12233250.0,
+    "sell_block_cleared_kwh": 6063400.0,
+    "buy_block_bid_kwh": 781900.0,
+    "buy_block_cleared_kwh": 429500.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 36"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 35,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:35:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:35:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T17:00:00+09:00",
+    "end": "2026-04-01T17:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 32.0,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 36"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:36:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T17:30:00+09:00",
+    "end": "2026-04-01T18:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45294700.0
+   },
+   "energy": {
+    "kwh": 22647350.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 34.6,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29770550.0,
+    "buy_bid_kwh": 29775700.0,
+    "cleared_kwh": 22647350.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12271500.0,
+    "sell_block_cleared_kwh": 5968700.0,
+    "buy_block_bid_kwh": 782500.0,
+    "buy_block_cleared_kwh": 425550.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 37"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 36,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:36:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:36:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T17:30:00+09:00",
+    "end": "2026-04-01T18:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 42.44,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 37"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:37:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T18:00:00+09:00",
+    "end": "2026-04-01T18:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45130400.0
+   },
+   "energy": {
+    "kwh": 22565200.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 34.6,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29729400.0,
+    "buy_bid_kwh": 29992550.0,
+    "cleared_kwh": 22565200.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12273700.0,
+    "sell_block_cleared_kwh": 5983000.0,
+    "buy_block_bid_kwh": 781800.0,
+    "buy_block_cleared_kwh": 423500.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 38"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 37,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:37:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:37:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T18:00:00+09:00",
+    "end": "2026-04-01T18:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 39.6,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 38"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:38:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T18:30:00+09:00",
+    "end": "2026-04-01T19:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 45244000.0
+   },
+   "energy": {
+    "kwh": 22622000.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 34.6,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29622600.0,
+    "buy_bid_kwh": 30053450.0,
+    "cleared_kwh": 22622000.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12194300.0,
+    "sell_block_cleared_kwh": 5901450.0,
+    "buy_block_bid_kwh": 779750.0,
+    "buy_block_cleared_kwh": 422050.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 39"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 38,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:38:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:38:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T18:30:00+09:00",
+    "end": "2026-04-01T19:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 38.54,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 39"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:39:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T19:00:00+09:00",
+    "end": "2026-04-01T19:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 44537900.0
+   },
+   "energy": {
+    "kwh": 22268950.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 34.6,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29411700.0,
+    "buy_bid_kwh": 29308250.0,
+    "cleared_kwh": 22268950.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12134850.0,
+    "sell_block_cleared_kwh": 5858350.0,
+    "buy_block_bid_kwh": 882400.0,
+    "buy_block_cleared_kwh": 419850.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 40"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 39,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:39:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:39:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T19:00:00+09:00",
+    "end": "2026-04-01T19:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 31.8,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 40"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:40:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T19:30:00+09:00",
+    "end": "2026-04-01T20:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 43986000.0
+   },
+   "energy": {
+    "kwh": 21993000.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 31.61,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29453500.0,
+    "buy_bid_kwh": 28791300.0,
+    "cleared_kwh": 21993000.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12164900.0,
+    "sell_block_cleared_kwh": 5876600.0,
+    "buy_block_bid_kwh": 881100.0,
+    "buy_block_cleared_kwh": 418050.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 41"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 40,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:40:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:40:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T19:30:00+09:00",
+    "end": "2026-04-01T20:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 31.03,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 41"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:41:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T20:00:00+09:00",
+    "end": "2026-04-01T20:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 43085500.0
+   },
+   "energy": {
+    "kwh": 21542750.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 24.52,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29417300.0,
+    "buy_bid_kwh": 28250200.0,
+    "cleared_kwh": 21542750.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12283600.0,
+    "sell_block_cleared_kwh": 5843950.0,
+    "buy_block_bid_kwh": 875650.0,
+    "buy_block_cleared_kwh": 413100.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 42"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 41,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:41:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:41:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T20:00:00+09:00",
+    "end": "2026-04-01T20:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 23.61,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 42"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:42:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T20:30:00+09:00",
+    "end": "2026-04-01T21:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 43021300.0
+   },
+   "energy": {
+    "kwh": 21510650.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 24.5,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29359450.0,
+    "buy_bid_kwh": 28243800.0,
+    "cleared_kwh": 21510650.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12405550.0,
+    "sell_block_cleared_kwh": 5877150.0,
+    "buy_block_bid_kwh": 872600.0,
+    "buy_block_cleared_kwh": 409500.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 43"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 42,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:42:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:42:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T20:30:00+09:00",
+    "end": "2026-04-01T21:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 24.31,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 43"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:43:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T21:00:00+09:00",
+    "end": "2026-04-01T21:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 41233600.0
+   },
+   "energy": {
+    "kwh": 20616800.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 22.43,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29099250.0,
+    "buy_bid_kwh": 27453700.0,
+    "cleared_kwh": 20616800.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12528250.0,
+    "sell_block_cleared_kwh": 5792600.0,
+    "buy_block_bid_kwh": 864700.0,
+    "buy_block_cleared_kwh": 403500.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 44"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 43,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:43:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:43:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T21:00:00+09:00",
+    "end": "2026-04-01T21:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 23.55,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 44"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:44:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T21:30:00+09:00",
+    "end": "2026-04-01T22:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 40059800.0
+   },
+   "energy": {
+    "kwh": 20029900.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 21.49,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29345200.0,
+    "buy_bid_kwh": 26796050.0,
+    "cleared_kwh": 20029900.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12995100.0,
+    "sell_block_cleared_kwh": 5793400.0,
+    "buy_block_bid_kwh": 1042000.0,
+    "buy_block_cleared_kwh": 538100.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 45"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 44,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:44:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:44:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T21:30:00+09:00",
+    "end": "2026-04-01T22:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 22.18,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 45"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:45:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T22:00:00+09:00",
+    "end": "2026-04-01T22:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 40961100.0
+   },
+   "energy": {
+    "kwh": 20480550.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.95,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 30257250.0,
+    "buy_bid_kwh": 26010800.0,
+    "cleared_kwh": 20480550.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 13139000.0,
+    "sell_block_cleared_kwh": 5828450.0,
+    "buy_block_bid_kwh": 1045350.0,
+    "buy_block_cleared_kwh": 542300.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 46"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 45,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:45:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:45:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T22:00:00+09:00",
+    "end": "2026-04-01T22:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 21.5,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 46"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:46:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T22:30:00+09:00",
+    "end": "2026-04-01T23:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 40495500.0
+   },
+   "energy": {
+    "kwh": 20247750.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.29,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 30176750.0,
+    "buy_bid_kwh": 25110500.0,
+    "cleared_kwh": 20247750.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 13110900.0,
+    "sell_block_cleared_kwh": 5869500.0,
+    "buy_block_bid_kwh": 1042900.0,
+    "buy_block_cleared_kwh": 539900.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 47"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 46,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:46:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:46:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T22:30:00+09:00",
+    "end": "2026-04-01T23:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 21.3,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 47"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:47:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T23:00:00+09:00",
+    "end": "2026-04-01T23:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 39324100.0
+   },
+   "energy": {
+    "kwh": 19662050.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.53,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 29192800.0,
+    "buy_bid_kwh": 24812750.0,
+    "cleared_kwh": 19662050.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 12695850.0,
+    "sell_block_cleared_kwh": 5802650.0,
+    "buy_block_bid_kwh": 1034300.0,
+    "buy_block_cleared_kwh": 537600.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 48"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 47,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:47:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:47:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T23:00:00+09:00",
+    "end": "2026-04-01T23:30:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 21.33,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 48"
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:48:system",
+   "parent_id": null,
+   "hierarchy_level": "system",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T23:30:00+09:00",
+    "end": "2026-04-02T00:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {
+    "scheduled_kw": 38118200.0
+   },
+   "energy": {
+    "kwh": 19059100.0,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.29,
+    "reference": "system"
+   },
+   "market_volume": {
+    "sell_bid_kwh": 28272650.0,
+    "buy_bid_kwh": 23397400.0,
+    "cleared_kwh": 19059100.0
+   },
+   "market_block": {
+    "sell_block_bid_kwh": 11700550.0,
+    "sell_block_cleared_kwh": 5383700.0,
+    "buy_block_bid_kwh": 740750.0,
+    "buy_block_cleared_kwh": 391550.0
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 49"
+   },
+   "ext": {
+    "jp.jepx": {
+     "時刻コード": 48,
+     "受渡日": "2026/04/01"
+    }
+   }
+  },
+  {
+   "hdeb_version": "0.1",
+   "block_id": "urn:jepx:spot:2026-04-01:48:JP-TOKYO",
+   "parent_id": "urn:jepx:spot:2026-04-01:48:system",
+   "hierarchy_level": "area",
+   "kind": "cleared",
+   "resource": {
+    "type": "market",
+    "bus": null,
+    "area": "JP-TOKYO",
+    "voltage_kv": null
+   },
+   "window": {
+    "start": "2026-04-01T23:30:00+09:00",
+    "end": "2026-04-02T00:00:00+09:00",
+    "resolution_min": 30
+   },
+   "power": {},
+   "energy": {
+    "kwh": null,
+    "direction": "bidirectional"
+   },
+   "price": {
+    "currency": "JPY",
+    "unit": "per_kWh",
+    "value": 20.95,
+    "reference": "area"
+   },
+   "provenance": {
+    "source": "JEPX spot_summary",
+    "url": "tests/fixtures/jepx_spot_summary_2026-04-01.csv",
+    "retrieved_at": "2026-09-04T03:18:09+00:00",
+    "license": "JEPX website terms: reuse permitted with attribution",
+    "attribution": "© Japan Electric Power Exchange",
+    "generator": "jepx_to_hdeb.py/0.1",
+    "raw_ref": "line 49"
+   }
+  }
+ ]
+}

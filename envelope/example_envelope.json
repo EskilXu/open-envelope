@@ -1,0 +1,106 @@
+{
+ "oe": "0.0.3",
+ "layer": "envelope",
+ "id": "urn:oe:env:demo",
+ "resource_ref": {
+  "area": {
+   "scheme": "jp.occto.area",
+   "id": "03"
+  },
+  "node": {
+   "scheme": "iec.cim.mrid",
+   "id": "_b3"
+  }
+ },
+ "window": {
+  "start": "2026-09-04T12:00:00+09:00",
+  "end": "2026-09-04T13:00:00+09:00",
+  "step_min": 30
+ },
+ "vars": [
+  "p"
+ ],
+ "bounds": {
+  "p": [
+   -250,
+   250
+  ]
+ },
+ "constraints": [
+  {
+   "name": "ramp_up",
+   "diff": {
+    "var": "p",
+    "lag": 1
+   },
+   "rhs": 150,
+   "sense": "<="
+  },
+  {
+   "name": "energy_cap",
+   "terms": [
+    {
+     "var": "p",
+     "t": "*",
+     "coef": 0.5
+    }
+   ],
+   "rhs": 300,
+   "sense": "<="
+  }
+ ],
+ "params": {
+  "storage": {
+   "capacity_kwh": 1000,
+   "soc0": 0.6,
+   "eta_c": 0.95,
+   "eta_d": 0.95
+  }
+ },
+ "fallback": {
+  "mode": "rulebook",
+  "ref": "mpc-safe-v3",
+  "timeout_s": 2
+ },
+ "consent": {
+  "cross_border": false,
+  "training_use": false,
+  "retention_days": 30
+ },
+ "provenance": {
+  "source": "example",
+  "retrieved_at": "2026-09-04T00:00:00+00:00"
+ },
+ "modes": [
+  {
+   "id": "charge",
+   "bounds": {
+    "p": [
+     -250,
+     0
+    ]
+   },
+   "min_duration_steps": 2,
+   "startup_cost": 0
+  },
+  {
+   "id": "discharge",
+   "bounds": {
+    "p": [
+     0,
+     250
+    ]
+   },
+   "min_duration_steps": 2
+  },
+  {
+   "id": "idle",
+   "bounds": {
+    "p": [
+     0,
+     0
+    ]
+   }
+  }
+ ]
+}

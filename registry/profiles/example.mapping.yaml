@@ -1,0 +1,26 @@
+# 示例：S2 FRBC → L0 Envelope（节选）
+source:
+  standard: iec.s2
+  version: '1.0'
+  object: FRBC.SystemDescription
+target:
+  layer: envelope
+  version: 0.0.3
+fields:
+- from: actuator_descriptions[].operation_modes[].elements[].power_ranges[]
+  to: bounds.p
+  note: 取各模式并集为外框；模式细节进 modes[]
+- from: actuator_descriptions[].operation_modes[]
+  to: modes[]
+  note: OMBC/FRBC 模式 → mode 变量；transitions → env.mode 最小持续时间
+- from: storage.fill_level_range
+  to: params.storage.soc_min/soc_max
+  unit: fraction
+- from: storage.leakage_behaviour
+  to: params.storage.leak_kw_per_h
+  lossy: 'false'
+- from: (none)
+  to: consent
+  default: '{cross_border: false, training_use: false, retention_days: 0}'
+lossy_back: true
+lossy_back_note: L0 → S2 会丢失 A·u≤b 中非模式类耦合约束

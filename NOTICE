@@ -1,0 +1,15 @@
+Open Envelope
+Copyright 2026 Eskil Xu and contributors
+Licensed under the Apache License, Version 2.0 (code, schemas, tools, tests).
+Specification prose in docs/ and site/ is additionally available under CC BY 4.0.
+
+compat/hdeb/ contains a bridge format ("HDEB v0.1") reconstructed independently from
+publicly described lineage (exchange block orders -> flexible energy blocks). The term
+appears in third-party literature; no proprietary material is included. It is kept for
+migration only and is frozen; Open Envelope (envelope/) is the successor.
+
+tests/fixtures/jepx_spot_summary_2026-04-01.csv: data (c) Japan Electric Power Exchange,
+redistributed with attribution as required by JEPX website terms. Not affiliated with JEPX.
+
+Protocol and standard names (OPC UA, OpenADR, IEC 61850, S2, IEEE 2030.5, ...) belong to
+their respective organisations and are referenced here only as interoperability targets.

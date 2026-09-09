@@ -1,0 +1,27 @@
+{
+ "oe": "0.0.3",
+ "layer": "attestation",
+ "id": "urn:oe:att:demo-1",
+ "subject_refs": [
+  "urn:oe:env:demo"
+ ],
+ "input_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+ "rule_set": {
+  "id": "oe-rules/kclkvl",
+  "version": "0.1.0",
+  "source": "https://github.com/OWNER/openenvelope/blob/main/tools/kclkvl_check.py"
+ },
+ "verdict": "fail",
+ "violations": [
+  {
+   "rule": "kcl",
+   "where": "B1",
+   "residual_kw": 100.0
+  }
+ ],
+ "checked_at": "2026-09-04T00:00:00+00:00",
+ "provenance": {
+  "source": "kclkvl_check.py",
+  "retrieved_at": "2026-09-04T00:00:00+00:00"
+ }
+}

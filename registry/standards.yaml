@@ -1,0 +1,347 @@
+# OpenEnvelope 标准库 · 登记表 v0.1 (2026-09-09)
+# confidence: A = 一手已核 / B = 可信二手 / C = 未核
+# access: open = 全文免费 / paid = 付费 / member = 会员
+# maps_to: 本标准四层 (L0 envelope / L1 position / L2 offer / L3 attestation / net = 网络模型 / ctx = 上下文)
+ecosystems:
+  opc:   {name: OPC Foundation, kind: industrial-interop}
+  lfe:   {name: LF Energy (Linux Foundation), kind: open-source-foundation}
+  iec:   {name: IEC TC57 / CENELEC / IEEE, kind: sdo}
+  cn:    {name: 中国 GB / DL/T / 团体标准, kind: national}
+standards:
+- id: opc.ua
+  eco: opc
+  title: OPC UA (IEC 62541)
+  role: 设备信息模型+传输
+  maps_to:
+  - L0
+  - L1
+  adapter: opcua-envelope
+  access: open
+  confidence: B
+- id: opc.ua.61850
+  eco: opc
+  title: OPC UA for IEC 61850 companion
+  role: 61850 节点→OPC UA
+  maps_to:
+  - L0
+  - net
+  adapter: opcua-envelope
+  access: open
+  confidence: B
+- id: opc.ua.pubsub
+  eco: opc
+  title: OPC UA Part 14 PubSub
+  role: L1 measured 推送
+  maps_to:
+  - L1
+  adapter: opcua-envelope
+  access: open
+  confidence: B
+- id: lfe.flexmeasures
+  eco: lfe
+  title: FlexMeasures flex-model / flex-context
+  role: EMS/调度器
+  maps_to:
+  - L0
+  - L1
+  adapter: flexmeasures
+  access: open
+  confidence: A
+- id: lfe.shapeshifter
+  eco: lfe
+  title: Shapeshifter (UFTP)
+  role: AGR↔DSO/TSO 消息
+  maps_to:
+  - L2
+  - L1
+  adapter: shapeshifter
+  access: open
+  confidence: B
+- id: lfe.openleadr
+  eco: lfe
+  title: OpenLEADR (OpenADR 2.0b/3)
+  role: DR 事件
+  maps_to:
+  - L1
+  - ctx
+  adapter: openadr
+  access: open
+  confidence: B
+- id: lfe.everest
+  eco: lfe
+  title: EVerest (OCPP, ISO 15118)
+  role: EV 充电栈
+  maps_to:
+  - L0
+  - L1
+  adapter: ocpp
+  access: open
+  confidence: B
+- id: lfe.cupid
+  eco: lfe
+  title: CUPID (IEEE 2030.5 over NATS)
+  role: DER 接入
+  maps_to:
+  - L0
+  - L1
+  adapter: ieee2030-5
+  access: open
+  confidence: B
+- id: lfe.compas
+  eco: lfe
+  title: CoMPAS (IEC 61850 SCL)
+  role: 变电站配置
+  maps_to:
+  - L0
+  - net
+  adapter: scl
+  access: open
+  confidence: B
+- id: lfe.pgm
+  eco: lfe
+  title: Power Grid Model
+  role: 潮流后端
+  maps_to:
+  - net
+  adapter: (R-PHYS backend)
+  access: open
+  confidence: B
+- id: lfe.powsybl
+  eco: lfe
+  title: PowSyBl
+  role: 潮流/N-1 后端
+  maps_to:
+  - net
+  adapter: (R-PHYS backend)
+  access: open
+  confidence: B
+- id: lfe.urpx
+  eco: lfe
+  title: URPX 费率交换
+  role: 价格上下文
+  maps_to:
+  - ctx
+  adapter: urpx
+  access: open
+  confidence: B
+- id: lfe.cds
+  eco: lfe
+  title: Carbon Data Specification
+  role: 碳强度上下文
+  maps_to:
+  - ctx
+  adapter: ext:lfenergy.cds
+  access: open
+  confidence: B
+- id: iec.s2
+  eco: iec
+  title: S2 · EN 50491-12-2 (FRBC/OMBC/PEBC)
+  role: 户内灵活性
+  maps_to:
+  - L0
+  - L1
+  adapter: s2
+  access: paid(spec)/open(json)
+  confidence: A
+- id: iec.61850
+  eco: iec
+  title: IEC 61850 (7-3/7-4/7-420/SCL)
+  role: 设备信息模型
+  maps_to:
+  - L0
+  - net
+  adapter: scl,opcua-envelope
+  access: paid
+  confidence: B
+- id: iec.62325
+  eco: iec
+  title: IEC 62325 CIM 市场文档
+  role: 交易所报价/计划
+  maps_to:
+  - L2
+  - L1
+  adapter: cim-market
+  access: paid
+  confidence: B
+- id: iec.61970
+  eco: iec
+  title: IEC 61970 CIM (CGMES)
+  role: 网络模型
+  maps_to:
+  - net
+  adapter: cgmes
+  access: paid
+  confidence: B
+- id: ieee.2030-5
+  eco: iec
+  title: IEEE 2030.5 / CSIP / CSIP-AUS
+  role: DER 接入
+  maps_to:
+  - L0
+  - L1
+  adapter: ieee2030-5
+  access: paid(IEEE)/open(CSIP)
+  confidence: B
+- id: cn.gbt44241
+  eco: cn
+  title: GB/T 44241-2024 虚拟电厂管理规范
+  role: VPP 管理/资源/评估
+  maps_to:
+  - L0 聚合
+  - ctx
+  adapter: cn-vpp
+  access: open(GB全文公开)
+  confidence: A
+- id: cn.vpp-guide
+  eco: cn
+  title: 虚拟电厂技术导则 (国标计划)
+  role: VPP 技术总则
+  maps_to:
+  - L0
+  - L1
+  adapter: cn-vpp
+  access: pending
+  confidence: B
+- id: cn.tcits195
+  eco: cn
+  title: T/CITS 195-2024 虚拟电厂信息通信技术规范
+  role: VPP 通信架构/协议/接口/安全
+  maps_to:
+  - L0
+  - L1
+  - L2
+  adapter: cn-vpp
+  access: paid/团标
+  confidence: A
+- id: cn.tciep0261
+  eco: cn
+  title: T/CIEP 0261-2025 虚拟电厂平台设计技术规范
+  role: 平台架构/接入/指标
+  maps_to:
+  - L0
+  - L1
+  adapter: cn-vpp
+  access: 团标
+  confidence: A
+- id: cn.tbepia001
+  eco: cn
+  title: T/BEPIA 001-2025 虚拟电厂建设及运营技术规范
+  role: 资源接入/运营/测试
+  maps_to:
+  - L0
+  - L1
+  adapter: cn-vpp
+  access: 团标
+  confidence: A
+- id: cn.gbt32672
+  eco: cn
+  title: GB/T 32672 电力需求响应系统通用技术规范
+  role: DR 系统
+  maps_to:
+  - L1
+  - ctx
+  adapter: cn-dr
+  access: open
+  confidence: B
+- id: cn.gbt36547
+  eco: cn
+  title: GB/T 36547 电化学储能系统接入电网技术规定
+  role: 储能并网要求
+  maps_to:
+  - L0 bounds
+  adapter: cn-ess
+  access: open
+  confidence: B
+- id: cn.gbt36548
+  eco: cn
+  title: GB/T 36548 电化学储能系统接入电网测试规范
+  role: 储能测试
+  maps_to:
+  - L3 测试向量来源
+  adapter: cn-ess
+  access: open
+  confidence: B
+- id: cn.gbt33593
+  eco: cn
+  title: GB/T 33593 分布式电源并网技术要求
+  role: DER 并网要求
+  maps_to:
+  - L0 bounds
+  adapter: cn-der
+  access: open
+  confidence: B
+- id: cn.gbt27930
+  eco: cn
+  title: GB/T 27930 电动汽车非车载充电机与BMS通信协议
+  role: EV 充电通信
+  maps_to:
+  - L0
+  - L1
+  adapter: cn-ev
+  access: open
+  confidence: B
+- id: cn.dlt860
+  eco: cn
+  title: DL/T 860 (= IEC 61850 采标)
+  role: 变电站/DER 信息模型
+  maps_to:
+  - L0
+  - net
+  adapter: scl,opcua-envelope (复用)
+  access: paid
+  confidence: A
+- id: cn.dlt890
+  eco: cn
+  title: DL/T 890 (= IEC 61970 CIM 采标)
+  role: 网络模型
+  maps_to:
+  - net
+  adapter: cgmes (复用)
+  access: paid
+  confidence: B
+- id: cn.dlt1080
+  eco: cn
+  title: DL/T 1080 (= IEC 61968 采标)
+  role: 配电信息交换
+  maps_to:
+  - L1
+  - ctx
+  adapter: cim-dist
+  access: paid
+  confidence: B
+- id: cn.spot-rules
+  eco: cn
+  title: 电力现货市场基本规则 (发改委/能源局 2023)
+  role: 现货市场规则
+  maps_to:
+  - L2 profile
+  adapter: cn-market
+  access: open
+  confidence: B
+- id: cn.gbt36572
+  eco: cn
+  title: GB/T 36572 电力监控系统网络安全防护导则
+  role: 安全分区
+  maps_to:
+  - 部署拓扑约束
+  adapter: —
+  access: open
+  confidence: B
+- id: cn.gbt22239
+  eco: cn
+  title: GB/T 22239 网络安全等级保护基本要求
+  role: 等保
+  maps_to:
+  - 部署拓扑约束
+  adapter: —
+  access: open
+  confidence: B
+- id: cn.data-export
+  eco: cn
+  title: 数据安全法 / 数据出境安全评估办法
+  role: 重要数据出境
+  maps_to:
+  - consent.cross_border
+  adapter: —
+  access: open
+  confidence: B

@@ -1,0 +1,645 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/OWNER/openenvelope/schema/envelope-0.0.3.schema.json",
+  "title": "OpenEnvelope 0.0.3 (draft) — Envelope / Position / Offer / Attestation",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/envelope"
+    },
+    {
+      "$ref": "#/$defs/position"
+    },
+    {
+      "$ref": "#/$defs/offer"
+    },
+    {
+      "$ref": "#/$defs/attestation"
+    }
+  ],
+  "$defs": {
+    "base": {
+      "type": "object",
+      "required": [
+        "oe",
+        "layer",
+        "id",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^urn:oe:(env|pos|off|att):"
+        },
+        "provenance": {
+          "type": "object",
+          "required": [
+            "source",
+            "retrieved_at"
+          ],
+          "properties": {
+            "source": {
+              "type": "string"
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "retrieved_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "license": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "generator": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "ext": {
+          "type": "object"
+        },
+        "oe": {
+          "const": "0.0.3"
+        }
+      }
+    },
+    "resource_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/identifier"
+        },
+        "node": {
+          "$ref": "#/$defs/identifier"
+        },
+        "area": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "term": {
+      "type": "object",
+      "required": [
+        "var",
+        "coef"
+      ],
+      "properties": {
+        "var": {
+          "type": "string"
+        },
+        "t": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "const": "*"
+            }
+          ]
+        },
+        "coef": {
+          "type": "number"
+        }
+      }
+    },
+    "constraint": {
+      "type": "object",
+      "required": [
+        "name",
+        "rhs",
+        "sense"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "sense": {
+          "enum": [
+            "<=",
+            ">=",
+            "=="
+          ]
+        },
+        "rhs": {
+          "type": "number"
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/term"
+          }
+        },
+        "diff": {
+          "type": "object",
+          "required": [
+            "var",
+            "lag"
+          ],
+          "properties": {
+            "var": {
+              "type": "string"
+            },
+            "lag": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "description": "shorthand for var[t]-var[t-lag]"
+        }
+      }
+    },
+    "envelope": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "window",
+            "vars",
+            "bounds",
+            "consent"
+          ],
+          "properties": {
+            "layer": {
+              "const": "envelope"
+            },
+            "resource_ref": {
+              "$ref": "#/$defs/resource_ref"
+            },
+            "window": {
+              "type": "object",
+              "required": [
+                "start",
+                "end",
+                "step_min"
+              ],
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "end": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "step_min": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
+            "vars": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "bounds": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "constraints": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/constraint"
+              }
+            },
+            "params": {
+              "type": "object"
+            },
+            "fallback": {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "enum": [
+                    "hold",
+                    "curtail",
+                    "island",
+                    "rulebook"
+                  ]
+                },
+                "ref": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "timeout_s": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "consent": {
+              "type": "object",
+              "required": [
+                "cross_border",
+                "training_use",
+                "retention_days"
+              ],
+              "properties": {
+                "cross_border": {
+                  "type": "boolean"
+                },
+                "training_use": {
+                  "type": "boolean"
+                },
+                "retention_days": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "modes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/mode"
+              },
+              "description": "Discrete operating modes (on/off, charge/discharge/idle). Exactly one mode per step in a Position; enables integer constraints (min run time, start-up cost) that A·u≤b cannot express."
+            },
+            "aggregation": {
+              "type": "object",
+              "required": [
+                "approximation"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "approximation": {
+                  "enum": [
+                    "inner",
+                    "outer",
+                    "exact"
+                  ]
+                },
+                "of": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "envelope ids aggregated (Minkowski sum)"
+                },
+                "method": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "position": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "envelope_ref",
+            "kind",
+            "series"
+          ],
+          "properties": {
+            "layer": {
+              "const": "position"
+            },
+            "envelope_ref": {
+              "type": "string"
+            },
+            "kind": {
+              "enum": [
+                "schedule",
+                "cleared",
+                "measured"
+              ]
+            },
+            "series": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "offer": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "envelope_ref",
+            "market_ref",
+            "price"
+          ],
+          "properties": {
+            "layer": {
+              "const": "offer"
+            },
+            "envelope_ref": {
+              "type": "string"
+            },
+            "market_ref": {
+              "type": "object",
+              "required": [
+                "venue",
+                "product"
+              ],
+              "properties": {
+                "venue": {
+                  "type": "string"
+                },
+                "product": {
+                  "type": "string"
+                }
+              }
+            },
+            "price": {
+              "type": "object",
+              "required": [
+                "currency",
+                "unit",
+                "value"
+              ],
+              "properties": {
+                "currency": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{3}$"
+                },
+                "unit": {
+                  "enum": [
+                    "per_kWh",
+                    "per_MWh",
+                    "per_kW"
+                  ]
+                },
+                "value": {
+                  "type": "number"
+                }
+              }
+            },
+            "divisible": {
+              "type": "boolean"
+            },
+            "min_acceptance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "linked": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "exclusive_group": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "attestation": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "subject_refs",
+            "input_sha256",
+            "rule_set",
+            "verdict",
+            "checked_at"
+          ],
+          "properties": {
+            "layer": {
+              "const": "attestation"
+            },
+            "subject_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "input_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "rule_set": {
+              "type": "object",
+              "required": [
+                "id",
+                "version"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "verdict": {
+              "enum": [
+                "pass",
+                "fail",
+                "inconclusive"
+              ]
+            },
+            "violations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "rule"
+                ],
+                "properties": {
+                  "rule": {
+                    "type": "string"
+                  },
+                  "where": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "residual_kw": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "detail": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "checked_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "signer": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "alg": {
+                  "type": "string"
+                },
+                "sig": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "identifier": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "id"
+      ],
+      "additionalProperties": false,
+      "description": "Namespaced identifier. scheme = reverse-DNS of the issuing authority (e.g. jp.occto.area, eu.entsoe.eic, iec.cim.mrid); id = that authority's own code, verbatim. Never mint codes.",
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "mode": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bounds": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "description": "per-variable bounds while in this mode"
+        },
+        "min_duration_steps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_switches": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "transitions_to": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "allowed next modes; null = any"
+        },
+        "startup_cost": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "min_output_cost": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Z]{3}$"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenEnvelope 标准库</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+:root{--ground:#0d1416;--panel:#131d1f;--panel2:#182527;--rule:#24363a;--rule2:#2f464b;--ink:#d8ddd9;--ink2:#a9b6b3;--mute:#7a8f8c;--teal:#4fb3a9;--teal2:#2c6f69;--amber:#d9a441;--red:#c95c4b;--green:#6fb07a;--blue:#6f9fc9;
+--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--serif:"Noto Serif SC","Songti SC","Hiragino Mincho ProN",Georgia,serif;--cond:"IBM Plex Sans Condensed","Arial Narrow",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--serif);font-size:15.5px;line-height:1.75}
+a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal2)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{display:grid;grid-template-columns:210px minmax(0,1fr);gap:40px;max-width:1240px;margin:0 auto;padding:36px 28px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:20px}.rail{position:static!important;display:flex;flex-wrap:wrap;gap:6px 14px}}
+.rail{position:sticky;top:24px;align-self:start;font-family:var(--mono);font-size:12px;line-height:1.5}
+.rail .brand{color:var(--teal);letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.rail a{display:block;color:var(--mute);border:0;padding:4px 0 4px 10px;border-left:2px solid var(--rule)}
+.rail a:hover{color:var(--ink);border-left-color:var(--teal)}
+.rail .meta{margin-top:22px;color:var(--mute);border-top:1px solid var(--rule);padding-top:12px}
+main{min-width:0}
+header h1{font-family:var(--cond);font-weight:600;font-size:38px;line-height:1.1;margin:0 0 6px;text-wrap:balance}
+header .sub{font-family:var(--mono);font-size:12.5px;color:var(--mute)}
+h2{font-family:var(--cond);font-size:22px;font-weight:600;margin:52px 0 14px;padding-top:18px;border-top:1px solid var(--rule);text-wrap:balance}
+h2 .n{font-family:var(--mono);color:var(--teal);font-size:12px;letter-spacing:.14em;display:block;margin-bottom:6px;font-weight:500}
+h3{font-family:var(--cond);font-size:16.5px;font-weight:600;margin:26px 0 8px}
+p{max-width:68ch;margin:0 0 14px}
+p.lead{font-size:17px;max-width:62ch}
+.k{font-family:var(--mono);font-size:.88em;color:var(--teal)}
+.q{border-left:2px solid var(--teal2);padding:6px 16px;color:var(--ink2);margin:16px 0;max-width:66ch}
+.q b{color:var(--ink);font-weight:500}
+figure{margin:18px 0 22px;background:var(--panel);border:1px solid var(--rule);padding:16px;overflow-x:auto}
+figure svg{max-width:100%;height:auto;min-width:640px;display:block}
+figcaption{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;line-height:1.6}
+svg text{font-family:var(--mono)}
+.tbl{overflow-x:auto;margin:14px 0 20px;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;padding:10px 12px;background:var(--panel);border-bottom:1px solid var(--rule2);font-weight:500}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:0}
+td.m{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+tbody tr.eco td:first-child{font-family:var(--cond);font-weight:600;color:var(--teal);background:var(--panel);font-size:13px;letter-spacing:.04em}
+.chip{font-family:var(--mono);font-size:11px;padding:1px 7px;border:1px solid var(--rule2);border-radius:2px;color:var(--ink2);white-space:nowrap}
+.chip.a{color:var(--green);border-color:rgba(111,176,122,.5)}.chip.b{color:var(--blue);border-color:rgba(111,159,201,.5)}.chip.c{color:var(--amber);border-color:rgba(217,164,65,.5)}
+.chip.open{color:var(--green);border-color:rgba(111,176,122,.5)}.chip.paid{color:var(--amber);border-color:rgba(217,164,65,.5)}.chip.tb{color:var(--blue);border-color:rgba(111,159,201,.5)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--rule);padding:14px 16px}
+.card h4{margin:0 0 8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.card p{font-size:14px;margin:0 0 8px;max-width:none}.card p:last-child{margin:0}
+pre{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;font-family:var(--mono);font-size:12.5px;line-height:1.6;overflow-x:auto;margin:14px 0;color:var(--ink2)}
+pre b{color:var(--teal);font-weight:500}
+.small{font-size:12.5px;color:var(--mute);font-family:var(--mono)}
+.hubbar{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--rule);padding:0 0 10px;margin:0 0 22px;color:var(--mute)}.hubbar a{border:0;color:var(--teal)}.hubbar a:hover{text-decoration:underline}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<nav class="rail" aria-label="目录">
+  <div class="brand">Standards Library</div>
+  <a href="#s1">为什么是"库"</a>
+  <a href="#s2">三个生态 × 四层</a>
+  <a href="#s3">登记表</a>
+  <a href="#s4">中国标准的结构特征</a>
+  <a href="#s5">库的目录与映射文件</a>
+  <a href="#s6">映射优先级</a>
+  <a href="#s7">访问性与许可</a>
+  <a href="#s8">待核</a>
+  <div class="meta">v0.2 · 2026-09-09<br>★ 一手已核 ◆ 可信二手 ◇ 未核<br><br>机器可读：<br>registry/standards.yaml<br>registry/profiles/</div>
+</nav>
+
+<main>
+<div class="hubbar"><a href="/">◂ OpenEnvelope 工作台</a><span>标准库 · 中立</span></div>
+<header>
+  <h1>OpenEnvelope 标准库</h1>
+  <div class="sub">把 OPC Foundation、LF Energy、IEC/IEEE 与中国 GB / DL/T / 团体标准按四层归位，作为可贡献、可测试的映射库来设计</div>
+</header>
+
+<section id="s1">
+<h2><span class="n">§1</span>为什么是"库"，不是"又一个标准"</h2>
+<p class="lead">灵活性资源领域不缺标准，缺的是它们之间的<b>对象级对齐</b>。标准库的定义：一个开源仓库，登记每个既有标准，给出它到四层对象（Envelope / Position / Offer / Attestation）的字段级映射、测试向量与访问性说明；映射本身受一致性测试约束。</p>
+<p>三条设计约束决定了它的形态。第一，多数既有标准是付费文本（IEC、DL/T、IEEE），库<b>只引用字段名与语义，不复制文本</b>。第二，映射必须可测：每条映射带成对的输入/期望输出向量，实现通过向量即"符合"。第三，中国标准体系通过采标与 IEC 在信息模型层重合、在业务层分叉，库的结构要能同时表达"复用"与"独有"。</p>
+</section>
+
+<section id="s2">
+<h2><span class="n">§2</span>三个生态 × 四层：一张图看重合与空位</h2>
+<figure>
+<svg viewBox="0 0 1180 520" role="img" aria-label="矩阵：行为 OpenEnvelope 的层（网络模型、L0、L1、L2、L3、部署约束），列为 OPC Foundation、LF Energy、IEC/IEEE、中国；单元格列出对应标准；中国列在信息模型层通过采标与 IEC 重合，在 VPP/DR/市场层有独有标准，L3 在所有生态均为空">
+<defs><marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4fb3a9"/></marker></defs>
+<g font-size="11.5" fill="#d8ddd9">
+ <!-- column headers -->
+ <g font-weight="600" text-anchor="middle" font-size="12.5">
+  <text x="330" y="34">OPC Foundation</text><text x="540" y="34">LF Energy</text><text x="750" y="34">IEC / CENELEC / IEEE</text><text x="990" y="34">中国 GB · DL/T · 团标</text>
+ </g>
+ <line x1="20" y1="46" x2="1160" y2="46" stroke="#2f464b"/>
+ <!-- row labels -->
+ <g font-weight="600" fill="#4fb3a9">
+  <text x="30" y="88">网络模型 net</text>
+  <text x="30" y="160">L0 Envelope</text>
+  <text x="30" y="250">L1 Position</text>
+  <text x="30" y="330">L2 Offer</text>
+  <text x="30" y="400">L3 Attestation</text>
+  <text x="30" y="465">部署约束</text>
+ </g>
+ <g fill="#7a8f8c" font-size="10">
+  <text x="30" y="104">拓扑 · 参数</text>
+  <text x="30" y="176">可行域 · 模式</text>
+  <text x="30" y="266">计划 · 成交 · 实测</text>
+  <text x="30" y="346">报价 · 价格</text>
+  <text x="30" y="416">证明 · 复算</text>
+  <text x="30" y="481">安全 · 驻留</text>
+ </g>
+ <g stroke="#24363a"><line x1="20" y1="120" x2="1160" y2="120"/><line x1="20" y1="210" x2="1160" y2="210"/><line x1="20" y1="290" x2="1160" y2="290"/><line x1="20" y1="365" x2="1160" y2="365"/><line x1="20" y1="435" x2="1160" y2="435"/></g>
+ <line x1="225" y1="46" x2="225" y2="500" stroke="#24363a"/>
+ <!-- cells: OPC -->
+ <g text-anchor="middle" fill="#a9b6b3" font-size="10.5">
+  <text x="330" y="88">OPC UA for IEC 61850</text><text x="330" y="103">（节点 → 拓扑片段）</text>
+  <text x="330" y="150">OPC UA 地址空间</text><text x="330" y="165" fill="#4fb3a9">EnvelopeType companion ◇</text><text x="330" y="180">OPC UA for 61850 → bounds</text>
+  <text x="330" y="245">PubSub (Part 14)</text><text x="330" y="260">→ measured</text>
+  <text x="330" y="330" fill="#7a8f8c">—</text>
+  <text x="330" y="400" fill="#7a8f8c">—</text>
+  <text x="330" y="465">Part 2 安全模型</text><text x="330" y="480">（证书 · 用户）</text>
+ </g>
+ <!-- LF Energy -->
+ <g text-anchor="middle" fill="#a9b6b3" font-size="10.5">
+  <text x="540" y="88">Power Grid Model · PowSyBl</text><text x="540" y="103">CoMPAS (SCL)</text>
+  <text x="540" y="150">FlexMeasures flex-model</text><text x="540" y="165">CUPID (2030.5) · EVerest</text><text x="540" y="180">(生成 L0 的三条路径)</text>
+  <text x="540" y="245">FlexMeasures schedule</text><text x="540" y="260">OpenLEADR report · Shapeshifter Order</text>
+  <text x="540" y="322">Shapeshifter FlexOffer</text><text x="540" y="337">OpenLEADR priceMap · URPX</text><text x="540" y="352">Carbon Data Spec (ctx)</text>
+  <text x="540" y="400" fill="#7a8f8c">—（OperatorFabric 可显示 L3）</text>
+  <text x="540" y="465">SEAPATH（边界内部署平台）</text>
+ </g>
+ <!-- IEC -->
+ <g text-anchor="middle" fill="#a9b6b3" font-size="10.5">
+  <text x="750" y="88">IEC 61970 CIM / CGMES</text><text x="750" y="103">IEC 61850 SCL</text>
+  <text x="750" y="150">S2 EN 50491-12-2</text><text x="750" y="165">IEC 61850-7-420 DER 节点</text><text x="750" y="180">IEEE 2030.5 DERCapability</text>
+  <text x="750" y="245">IEC 62325 Schedule_MarketDocument</text><text x="750" y="260">2030.5 MirrorUsagePoint</text>
+  <text x="750" y="330">IEC 62325 Bid_MarketDocument</text><text x="750" y="345">(block / linked / exclusive)</text>
+  <text x="750" y="400" fill="#7a8f8c">—</text>
+  <text x="750" y="465">IEC 62351 安全</text>
+ </g>
+ <!-- China -->
+ <g text-anchor="middle" fill="#a9b6b3" font-size="10.5">
+  <text x="990" y="88">DL/T 890 (=61970) · DL/T 860 (=61850)</text><text x="990" y="103" fill="#6fb07a">采标 → 复用 IEC 列适配器</text>
+  <text x="990" y="143">GB/T 36547 储能并网 · GB/T 33593 DER 并网</text><text x="990" y="158">→ bounds 来源</text>
+  <text x="990" y="173" fill="#d9a441">GB/T 44241 VPP 管理 · T/CITS 195 通信</text><text x="990" y="188" fill="#d9a441">T/CIEP 0261 平台 · T/BEPIA 001 建设运营</text>
+  <text x="990" y="245">GB/T 32672 需求响应</text><text x="990" y="260">新型电力负荷管理系统 ◇ · GB/T 27930 EV</text>
+  <text x="990" y="322" fill="#d9a441">电力现货市场基本规则</text><text x="990" y="337" fill="#d9a441">各省现货细则 · 交易中心接口 ◇</text>
+  <text x="990" y="400" fill="#7a8f8c">—</text>
+  <text x="990" y="458">GB/T 36572 安全分区 · 等保 GB/T 22239</text><text x="990" y="473">数据安全法 · 出境评估 → consent</text>
+ </g>
+ <!-- annotations -->
+ <rect x="20" y="368" width="1140" height="64" fill="rgba(217,164,65,.06)" stroke="none"/>
+ <text x="590" y="425" text-anchor="middle" fill="#d9a441" font-size="11">L3 行在四个生态中均为空：证明对象是本库唯一"新增"的东西，其余全部是映射</text>
+ <!-- arrow china reuse -->
+ <line x1="870" y1="95" x2="838" y2="95" stroke="#4fb3a9" marker-end="url(#m)"/>
+</g>
+</svg>
+<figcaption>图 1 · 生态 × 层矩阵。绿色：中国列在信息模型层经采标（DL/T 860 = IEC 61850，DL/T 890 = IEC 61970）与 IEC 重合，适配器可直接复用。琥珀色：中国在 VPP / 需求响应 / 现货市场层有一套无国际对应物的标准，需要独立的 <span class="k">cn-*</span> profile。L3 行全空。</figcaption>
+</figure>
+<div class="q"><b>结构性发现：</b>中国标准体系不是一个平行宇宙。设备与电网模型层它就是 IEC；分叉发生在"聚合以上"——虚拟电厂、需求响应、现货规则。这恰好也是 OpenEnvelope 的 L0 聚合语义与 L2 所在的层。因此库对中国的工作量集中在 <span class="k">cn-vpp</span>、<span class="k">cn-dr</span>、<span class="k">cn-market</span> 三个 profile，而不是重做设备层。</div>
+</section>
+
+<section id="s3">
+<h2><span class="n">§3</span>登记表（与 <span class="k">registry/standards.yaml</span> 同步）</h2>
+<p>每行：标准、它管什么、映射到哪层、需要哪个适配器、全文是否可免费获取、置信。适配器名对应 <span class="k">registry/profiles/</span> 下的目录。</p>
+<div class="tbl"><table>
+<thead><tr><th>标准</th><th>管什么</th><th class="m">映射层</th><th class="m">适配器</th><th>访问</th><th>置信</th></tr></thead>
+<tbody>
+<tr class="eco"><td colspan="6">OPC Foundation</td></tr>
+<tr><td class="m">OPC UA (IEC 62541)</td><td>工业信息模型 + 服务 + 传输；地址空间、订阅、方法</td><td class="m">L0 · L1</td><td class="m">opcua-envelope</td><td><span class="chip open">规范免费</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">OPC UA for IEC 61850</td><td>61850-7-4 逻辑节点 / 7-3 CDC → OPC UA 对象</td><td class="m">L0 bounds · net</td><td class="m">opcua-envelope</td><td><span class="chip open">免费</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">OPC UA Part 14 PubSub</td><td>发布/订阅传输（UDP / MQTT）</td><td class="m">L1 measured</td><td class="m">opcua-envelope</td><td><span class="chip open">免费</span></td><td><span class="chip b">◆</span></td></tr>
+<tr class="eco"><td colspan="6">LF Energy</td></tr>
+<tr><td class="m">FlexMeasures</td><td>flex-model（命名字段）/ flex-context；MILP 调度</td><td class="m">L0 ⇄ L1</td><td class="m">flexmeasures</td><td><span class="chip open">Apache-2.0</span></td><td><span class="chip a">★</span></td></tr>
+<tr><td class="m">Shapeshifter (UFTP)</td><td>AGR ↔ DSO/TSO：Request / Offer / Order / Settlement</td><td class="m">L2 · L1 cleared</td><td class="m">shapeshifter</td><td><span class="chip open">Apache-2.0</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">OpenLEADR</td><td>OpenADR 2.0b / 3 参考实现</td><td class="m">L1 · ctx</td><td class="m">openadr</td><td><span class="chip open">Apache-2.0</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">EVerest</td><td>OCPP / ISO 15118 充电栈</td><td class="m">L0 · L1</td><td class="m">ocpp</td><td><span class="chip open">Apache-2.0</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">CUPID</td><td>IEEE 2030.5 over NATS；遗留协议转换；测试</td><td class="m">L0 · L1</td><td class="m">ieee2030-5</td><td><span class="chip open">开源</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">CoMPAS</td><td>IEC 61850 SCL 配置</td><td class="m">L0 · net</td><td class="m">scl</td><td><span class="chip open">Apache-2.0</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">Power Grid Model · PowSyBl</td><td>潮流 / 状态估计 / N-1</td><td class="m">net → R-PHYS</td><td class="m">(后端)</td><td><span class="chip open">MPL / MPL</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">URPX · Carbon Data Spec</td><td>费率 · 碳强度</td><td class="m">ctx</td><td class="m">urpx · ext</td><td><span class="chip open">开源</span></td><td><span class="chip b">◆</span></td></tr>
+<tr class="eco"><td colspan="6">IEC / CENELEC / IEEE</td></tr>
+<tr><td class="m">S2 · EN 50491-12-2</td><td>户内 CEM ↔ RM；FRBC / OMBC / PEBC</td><td class="m">L0 · L1</td><td class="m">s2</td><td><span class="chip paid">文本付费</span> <span class="chip open">JSON 开源</span></td><td><span class="chip a">★</span></td></tr>
+<tr><td class="m">IEC 61850 (7-3 / 7-4 / 7-420 / SCL)</td><td>设备与 DER 信息模型、配置语言</td><td class="m">L0 · net</td><td class="m">scl · opcua-envelope</td><td><span class="chip paid">付费</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">IEC 62325 CIM 市场</td><td>Bid / Schedule / Publication MarketDocument</td><td class="m">L2 · L1</td><td class="m">cim-market</td><td><span class="chip paid">付费</span>（ENTSO-E profile 免费）</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">IEC 61970 CIM / CGMES</td><td>网络模型交换</td><td class="m">net</td><td class="m">cgmes</td><td><span class="chip paid">付费</span>（CGMES 文档免费）</td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">IEEE 2030.5 / CSIP</td><td>DER 能力、设定、状态、计量</td><td class="m">L0 · L1</td><td class="m">ieee2030-5</td><td><span class="chip paid">IEEE 付费</span> <span class="chip open">CSIP 免费</span></td><td><span class="chip b">◆</span></td></tr>
+<tr class="eco"><td colspan="6">中国 · 国家标准 GB/T（全文公开系统可免费阅读）</td></tr>
+<tr><td class="m">GB/T 44241-2024 虚拟电厂管理规范</td><td>VPP 定义、资源配置与评估、管理要求；归口 TC575，中电联主管</td><td class="m">L0 聚合 · ctx</td><td class="m">cn-vpp</td><td><span class="chip open">公开</span></td><td><span class="chip a">★</span></td></tr>
+<tr><td class="m">虚拟电厂技术导则（国标计划）</td><td>VPP 技术总则</td><td class="m">L0 · L1</td><td class="m">cn-vpp</td><td><span class="chip c">制定中</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">GB/T 32672 电力需求响应系统通用技术规范</td><td>DR 系统架构与接口</td><td class="m">L1 · ctx</td><td class="m">cn-dr</td><td><span class="chip open">公开</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">GB/T 36547 / 36548 电化学储能接入电网</td><td>并网技术规定 / 测试规范</td><td class="m">L0 bounds / L3 向量来源</td><td class="m">cn-ess</td><td><span class="chip open">公开</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">GB/T 33593 分布式电源并网技术要求</td><td>DER 并网限值与响应要求</td><td class="m">L0 bounds</td><td class="m">cn-der</td><td><span class="chip open">公开</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">GB/T 27930 EV 充电通信协议</td><td>充电机 ↔ BMS（对应 ISO 15118 位置）</td><td class="m">L0 · L1</td><td class="m">cn-ev</td><td><span class="chip open">公开</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">GB/T 36572 电力监控系统网络安全防护导则 · GB/T 22239 等保</td><td>安全分区、等级保护</td><td class="m">部署拓扑约束</td><td class="m">—</td><td><span class="chip open">公开</span></td><td><span class="chip b">◆</span></td></tr>
+<tr class="eco"><td colspan="6">中国 · 行业标准 DL/T（采标，付费）</td></tr>
+<tr><td class="m">DL/T 860 系列</td><td>= IEC 61850 采标（含配置工具规范）</td><td class="m">L0 · net</td><td class="m">scl · opcua-envelope <b>复用</b></td><td><span class="chip paid">付费</span></td><td><span class="chip a">★</span></td></tr>
+<tr><td class="m">DL/T 890 系列</td><td>= IEC 61970 CIM 采标</td><td class="m">net</td><td class="m">cgmes <b>复用</b></td><td><span class="chip paid">付费</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">DL/T 1080 系列</td><td>= IEC 61968 采标（配电信息交换）</td><td class="m">L1 · ctx</td><td class="m">cim-dist</td><td><span class="chip paid">付费</span></td><td><span class="chip b">◆</span></td></tr>
+<tr class="eco"><td colspan="6">中国 · 团体标准与规则</td></tr>
+<tr><td class="m">T/CITS 195-2024 虚拟电厂信息通信技术规范</td><td>VPP 通信架构、数据要求、协议与接口、性能、网络安全；适用于接入电网管理或参与市场化交易的 VPP</td><td class="m">L0 · L1 · L2</td><td class="m">cn-vpp</td><td><span class="chip tb">团标</span></td><td><span class="chip a">★</span></td></tr>
+<tr><td class="m">T/CIEP 0261-2025 虚拟电厂平台设计技术规范</td><td>平台总体架构、资源接入与调度接入、功能、性能指标、运行效果评价</td><td class="m">L0 · L1</td><td class="m">cn-vpp</td><td><span class="chip tb">团标</span></td><td><span class="chip a">★</span></td></tr>
+<tr><td class="m">T/BEPIA 001-2025 虚拟电厂建设及运营技术规范</td><td>建设、聚合资源接入、运营管理、测试</td><td class="m">L0 · L1</td><td class="m">cn-vpp</td><td><span class="chip tb">团标</span></td><td><span class="chip a">★</span></td></tr>
+<tr><td class="m">《关于加快推进虚拟电厂发展的指导意见》（发改委 / 能源局 2025-04-08）</td><td>VPP 定义、2027/2030 容量目标（&gt;20 / &gt;50 GW）、参与市场与调度的原则</td><td class="m">ctx · L0 聚合</td><td class="m">cn-vpp</td><td><span class="chip open">公开</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">电力现货市场基本规则（发改委 / 能源局，2023）</td><td>现货市场总体规则；各省细则在此之下</td><td class="m">L2 profile</td><td class="m">cn-market</td><td><span class="chip open">公开</span></td><td><span class="chip b">◆</span></td></tr>
+<tr><td class="m">新型电力负荷管理系统（电网企业技术规范）</td><td>可调节负荷接入、控制、计量</td><td class="m">L0 · L1</td><td class="m">cn-dr</td><td><span class="chip c">企标 ◇</span></td><td><span class="chip c">◇</span></td></tr>
+<tr><td class="m">数据安全法 · 数据出境安全评估办法</td><td>重要数据出境评估</td><td class="m">consent.cross_border</td><td class="m">—</td><td><span class="chip open">公开</span></td><td><span class="chip b">◆</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s4">
+<h2><span class="n">§4</span>中国标准的四个结构特征（决定 profile 怎么写）</h2>
+<div class="grid2">
+  <div class="card"><h4>采标层可直接复用</h4><p>DL/T 860 与 DL/T 890 是 IEC 61850 与 61970 的等同/修改采用。SCL 文件、逻辑节点、CIM 类名在中国部署中原样存在。库对这两层<b>不写 cn 映射</b>，只在 NOTES 里记录采标版本差异（如 61850 Ed.1 vs Ed.2）。</p></div>
+  <div class="card"><h4>VPP 层是"管理规范"而非"接口规范"</h4><p>GB/T 44241 定义的是虚拟电厂是什么、资源怎么分类评估、怎么管理；接口细节落在团标（T/CITS 195 给通信架构与协议）。因此 <span class="k">cn-vpp</span> profile 的主要工作是：把 44241 的<b>资源分类与可调能力评估指标</b>映射为 L0 的 params 与 bounds，把 T/CITS 195 的<b>数据要求与接口</b>映射为 L0/L1 的传输绑定。</p></div>
+  <div class="card"><h4>市场层是规则文件，不是数据标准</h4><p>现货市场"基本规则 + 各省细则"以政策文件形式存在，报价格式由各交易中心技术规范定义 ◇。<span class="k">cn-market</span> profile 只能做到：L2 的通用字段 + 每省一个 <span class="k">ext["cn.market.&lt;省&gt;"]</span> 子命名空间，字段由该省交易中心公开文档决定。</p></div>
+  <div class="card"><h4>安全与驻留是硬约束</h4><p>GB/T 36572 的安全分区（生产控制大区 / 管理信息大区）决定校验服务只能部署在拓扑 A（边界内）；数据出境评估把电力运行数据视为重要数据，因此 <span class="k">consent.cross_border</span> 在中国默认恒为 false，且开放数据集的脱敏规则需单独审查。</p></div>
+</div>
+<p>由此得出一条工程结论：面向中国的实现，<b>设备层零新增、聚合层一个 profile、市场层按省扩展、校验层只能本地部署</b>。这与图 1 全景的"校验是旁路"设计是相容的——旁路可以整个搬进边界内。</p>
+</section>
+
+<section id="s5">
+<h2><span class="n">§5</span>库的目录与映射文件格式</h2>
+<pre><b>registry/</b>
+  standards.yaml            登记表：id · 生态 · 管什么 · 映射层 · 适配器 · 访问 · 置信
+  <b>profiles/</b>
+    iec/s2/                 mapping.yaml · vectors/ · NOTES.md
+    iec/61850/
+    iec/62325/
+    opc/ua-envelope/        EnvelopeType companion 草案 (NodeSet2.xml) · mapping.yaml
+    lfe/flexmeasures/
+    lfe/shapeshifter/
+    lfe/cupid/
+    lfe/everest/
+    cn/vpp/                 GB/T 44241 + T/CITS 195 + T/CIEP 0261 + T/BEPIA 001 → L0/L1/L2
+    cn/dr/                  GB/T 32672 + 负荷管理系统 → L1/ctx
+    cn/ess/                 GB/T 36547/36548 → bounds · 测试向量
+    cn/der/                 GB/T 33593 → bounds
+    cn/market/              现货基本规则 → L2；ext["cn.market.&lt;省&gt;"]
+    cn/NOTES.md             采标对照（DL/T 860 ↔ 61850 版本）· 安全分区 · 出境
+<b>envelope/</b>                四层 schema · 规则集 · 一致性向量（库的"目标端"）
+<b>tools/</b>                   校验器 · 适配器参考实现</pre>
+<p><span class="k">mapping.yaml</span> 的每条映射是一个五元组：源字段、目标层与字段、单位换算、缺省值、是否有损。库里实际的 S2 → L0 节选：</p>
+<pre>source: {standard: iec.s2, version: "1.0", object: FRBC.SystemDescription}
+target: {layer: envelope, version: "0.0.3"}
+fields:
+- from: actuator_descriptions[].operation_modes[].elements[].power_ranges[]
+  to: bounds.p
+  note: 取各模式并集为外框；模式细节进 modes[]
+- from: actuator_descriptions[].operation_modes[]
+  to: modes[]
+  note: OMBC/FRBC 模式 → mode 变量；transitions → env.mode 最小持续时间
+- from: storage.fill_level_range
+  to: params.storage.soc_min/soc_max
+  unit: fraction
+- from: (none)
+  to: consent
+  default: {cross_border: false, training_use: false, retention_days: 0}
+lossy_back: true   # L0 → S2 会丢失非模式类耦合约束</pre>
+<p>一条映射被接受的条件只有一个：<span class="k">vectors/</span> 里至少一对输入/期望输出，且参考适配器跑通。没有向量的映射是意见，不是库的内容。</p>
+</section>
+
+<section id="s6">
+<h2><span class="n">§6</span>映射优先级：先做能立刻产生外部实现的</h2>
+<div class="tbl"><table>
+<thead><tr><th class="m">序</th><th>Profile</th><th>为什么先做</th><th>产出判据</th></tr></thead>
+<tbody>
+<tr><td class="m">1</td><td class="m">lfe/flexmeasures</td><td>唯一现成的开源 EMS 消费者；其 flex-model 字段与 L0 几乎一一对应；合并一个导出 PR 即等于第一个外部实现</td><td>FlexMeasures 侧 PR 合并；往返向量 ≥ 10</td></tr>
+<tr><td class="m">2</td><td class="m">iec/s2</td><td>唯一有开源 JSON schema 的正式标准；FRBC/OMBC 给 L0 的 modes 提供来源语义</td><td>三种控制类型各 ≥ 3 向量</td></tr>
+<tr><td class="m">3</td><td class="m">cn/vpp</td><td>中国唯一无国际对应物的层；GB/T 44241 全文公开可引用；三份团标给出接口细节</td><td>资源分类 → params 表；T/CITS 195 接口 → L0/L1 绑定说明</td></tr>
+<tr><td class="m">4</td><td class="m">opc/ua-envelope</td><td>让设备厂商零改造暴露 L0；依赖已有 61850 companion</td><td>NodeSet2.xml 草案 + 一个开源 OPC UA 服务器示例</td></tr>
+<tr><td class="m">5</td><td class="m">lfe/shapeshifter · iec/62325</td><td>L2 的两条载体；block/linked/exclusive 语义已存在</td><td>FlexOffer ⇄ L2、Bid_MarketDocument ⇄ L2 各 ≥ 5 向量</td></tr>
+<tr><td class="m">6</td><td class="m">lfe/cupid · lfe/everest</td><td>资源侧第二、三条 L0 生成路径</td><td>DERCapability → bounds；充电会话 → L0(modes)</td></tr>
+<tr><td class="m">7</td><td class="m">cn/market</td><td>依赖各省交易中心文档；先做通用字段，省级 ext 随需求</td><td>1 个省的 ext 子命名空间 + 向量</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s7">
+<h2><span class="n">§7</span>访问性与许可：库能放什么、不能放什么</h2>
+<div class="grid2">
+  <div class="card"><h4>可以放</h4><p>字段名、枚举值、单位、结构关系（这些是互操作所必需的"接口事实"）；GB/T 全文公开系统可免费阅读的国标的条款引用；开源项目（LF Energy、s2-json、CSIP）的 schema 引用；本库自己写的映射与向量。</p></div>
+  <div class="card"><h4>不能放</h4><p>IEC、IEEE、DL/T、团标的正文复制；付费标准的表格整段转录；任何标注"内部"的企业技术规范内容。向量里的示例数据须为自造或明确许可的公开数据。</p></div>
+  <div class="card"><h4>命名</h4><p>标准编号与名称可自由引用（事实）；OPC UA、OpenADR 等为各自组织的商标，只作互操作对象引用，不用于本库自身的名称或宣传。</p></div>
+  <div class="card"><h4>中国团标的特殊性</h4><p>T/ 标准由社会团体发布，文本通常付费或会员获取；但其范围与目次在国家标准馆公开。库只登记范围与接口位置，字段级映射需取得文本后由贡献者以"引用字段名"方式提交。</p></div>
+</div>
+</section>
+
+<section id="s8">
+<h2><span class="n">§8</span>待核清单</h2>
+<div class="tbl"><table>
+<thead><tr><th class="m">#</th><th>事项</th><th>影响</th><th>怎么核</th></tr></thead>
+<tbody>
+<tr><td class="m">V1</td><td>"新型电力负荷管理系统"的技术规范是否有公开可引用版本，抑或仅为电网企业企标</td><td>决定 cn/dr 能否做字段级映射</td><td>国家标准馆 / 电网企业公开技术规范目录</td></tr>
+<tr><td class="m">V2</td><td>各省现货交易中心报价接口文档的公开程度</td><td>决定 cn/market 的省级 ext 能否落地</td><td>逐省交易中心网站"技术支持系统"文档</td></tr>
+<tr><td class="m">V3</td><td>DL/T 860 当前采标对应的 IEC 61850 版本（Ed.1 / Ed.2）及 7-420 是否已采标</td><td>决定 scl 适配器在中国部署是否需版本分支</td><td>DL/T 860 系列最新发布号</td></tr>
+<tr><td class="m">V4</td><td>GB/T 44241 中资源分类与可调能力指标的具体字段</td><td>cn/vpp 的 params 映射表</td><td>国家标准全文公开系统阅读原文</td></tr>
+<tr><td class="m">V5</td><td>OPC Foundation 是否已有能源灵活性方向的联合工作组</td><td>EnvelopeType companion 的提交路径</td><td>OPC Foundation 工作组列表</td></tr>
+<tr><td class="m">V6</td><td>电力运行数据在出境评估中的"重要数据"认定口径</td><td>consent 在中国的默认值与开放数据集脱敏规则</td><td>网信办数据出境相关问答与行业目录</td></tr>
+</tbody></table></div>
+<p class="small" id="sources">统一来源编号见仓库 <span class="k">docs/SOURCES.md</span>。本页直接依赖：<a href="https://www.ndls.org.cn/standard/detail/979be8aa25f98df56c8bfe8385e7078f">[C1] GB/T 44241-2024 ★</a> · <a href="https://www.ndls.org.cn/standard/detail/eee9253d00dd6810da398ea2fc859ae4">[C2] T/CITS 195-2024 ★</a> · <a href="https://www.ndls.org.cn/standard/detail/fd592b94ce196e9cfa6a79915f56d407">[C3] T/CIEP 0261-2025 ★</a> · <a href="https://ndls.org.cn/standard/detail/c7565773d6f3e86fbe6882953a01876b">[C4] T/BEPIA 001-2025 ★</a> · <a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=197EB71D389F2A4BE06397BE0A0A9756">[C5] 虚拟电厂技术导则 ★</a> · <a href="https://std.samr.gov.cn/hb/search/stdHBDetailed?id=8B1827F14D65BB19E05397BE0A0AB44A">[C6] DL/T 860 ★</a> · <a href="https://www.energytrend.com/news/20250409-49201.html">[C7] VPP 指导意见 2025 ◆</a> · <a href="https://sunspec.org/ieee-2030-5-csip-certification/">[E2] SunSpec CSIP ◆</a> · <a href="https://lfenergy.org/our-projects/">[L9] LF Energy projects ◆</a> · <a href="https://opcfoundation.org/markets-collaboration/iec61850/">[O1] OPC UA for 61850 ◆</a></p><p class="small">其余 GB/T、DL/T 编号与范围为 ◆，条款级内容未核。本文为参考架构材料，非法律意见。</p>
+</section>
+</main>
+</div>
+
+</body>
+</html>

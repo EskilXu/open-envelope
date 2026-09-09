@@ -1,0 +1,42 @@
+{
+ "oe": "0.0.3",
+ "layer": "envelope",
+ "id": "urn:oe:env:site-A",
+ "resource_ref": {
+  "area": {
+   "scheme": "jp.occto.area",
+   "id": "03"
+  }
+ },
+ "aggregation": {
+  "approximation": "inner",
+  "of": [
+   "urn:oe:env:demo",
+   "urn:oe:env:pv1"
+  ],
+  "method": "box-sum"
+ },
+ "window": {
+  "start": "2026-09-04T12:00:00+09:00",
+  "end": "2026-09-04T13:00:00+09:00",
+  "step_min": 30
+ },
+ "vars": [
+  "p"
+ ],
+ "bounds": {
+  "p": [
+   -250,
+   750
+  ]
+ },
+ "consent": {
+  "cross_border": false,
+  "training_use": true,
+  "retention_days": 30
+ },
+ "provenance": {
+  "source": "example",
+  "retrieved_at": "2026-09-04T00:00:00+00:00"
+ }
+}

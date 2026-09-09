@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>OpenEnvelope 战略审查</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+:root{
+  --ground:#0d1416; --panel:#131d1f; --panel2:#182527; --rule:#24363a; --rule2:#2f464b;
+  --ink:#d8ddd9; --ink2:#a9b6b3; --mute:#7a8f8c;
+  --teal:#4fb3a9; --teal2:#2c6f69; --amber:#d9a441; --red:#c95c4b; --green:#6fb07a; --blue:#6f9fc9;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --serif:"Noto Serif SC","Songti SC","Hiragino Mincho ProN",Georgia,serif;
+  --cond:"IBM Plex Sans Condensed","Arial Narrow",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--serif);font-size:15.5px;line-height:1.75;}
+a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal2)}
+a:hover{border-bottom-color:var(--teal)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;max-width:1180px;margin:0 auto;padding:36px 28px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:20px}.rail{position:static!important;display:flex;flex-wrap:wrap;gap:6px 14px}}
+.rail{position:sticky;top:24px;align-self:start;font-family:var(--mono);font-size:12px;line-height:1.5}
+.rail .brand{color:var(--teal);letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.rail a{display:block;color:var(--mute);border:0;padding:4px 0 4px 10px;border-left:2px solid var(--rule)}
+.rail a:hover{color:var(--ink);border-left-color:var(--teal)}
+.rail .meta{margin-top:22px;color:var(--mute);border-top:1px solid var(--rule);padding-top:12px}
+.rail .meta b{color:var(--ink2);font-weight:500}
+main{min-width:0}
+header h1{font-family:var(--cond);font-weight:600;font-size:38px;line-height:1.1;margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance}
+header .sub{font-family:var(--mono);font-size:12.5px;color:var(--mute);letter-spacing:.04em}
+header .sub b{color:var(--amber);font-weight:500}
+h2{font-family:var(--cond);font-size:22px;font-weight:600;margin:52px 0 14px;padding-top:18px;border-top:1px solid var(--rule);letter-spacing:.01em;text-wrap:balance}
+h2 .n{font-family:var(--mono);color:var(--teal);font-size:12px;letter-spacing:.14em;display:block;margin-bottom:6px;font-weight:500}
+h3{font-family:var(--cond);font-size:16.5px;font-weight:600;margin:26px 0 8px;color:var(--ink)}
+p{max-width:68ch;margin:0 0 14px}
+p.lead{font-size:17px;color:var(--ink);max-width:62ch}
+.k{font-family:var(--mono);font-size:.88em;color:var(--teal)}
+.q{border-left:2px solid var(--teal2);padding:6px 16px;color:var(--ink2);margin:16px 0;max-width:66ch}
+.q b{color:var(--ink);font-weight:500}
+/* annunciator */
+.ann{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.ann .tile{background:var(--panel);padding:12px 14px;font-family:var(--mono);min-height:88px;display:flex;flex-direction:column;justify-content:space-between}
+.ann .lbl{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.ann .val{font-size:22px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.ann .val small{font-size:11px;font-weight:400;color:var(--mute);margin-left:4px}
+.ann .st{font-size:11px;display:flex;align-items:center;gap:6px;color:var(--ink2)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:var(--mute);box-shadow:0 0 0 2px var(--panel)}
+.dot.ok{background:var(--green);box-shadow:0 0 8px rgba(111,176,122,.6)}
+.dot.warn{background:var(--amber);box-shadow:0 0 8px rgba(217,164,65,.6)}
+.dot.crit{background:var(--red);box-shadow:0 0 8px rgba(201,92,75,.6)}
+.dot.info{background:var(--blue)}
+/* chips */
+.chip{font-family:var(--mono);font-size:11px;padding:1px 7px;border:1px solid var(--rule2);border-radius:2px;color:var(--ink2);white-space:nowrap}
+.chip.t1{color:var(--green);border-color:rgba(111,176,122,.5)}
+.chip.t2{color:var(--blue);border-color:rgba(111,159,201,.5)}
+.chip.t3{color:var(--amber);border-color:rgba(217,164,65,.5)}
+.chip.bad{color:var(--red);border-color:rgba(201,92,75,.5)}
+/* tables */
+.tbl{overflow-x:auto;margin:14px 0 20px;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;padding:10px 12px;background:var(--panel);border-bottom:1px solid var(--rule2);font-weight:500}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:0}
+td.m,th.m{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.r{text-align:right}
+tbody tr:hover td{background:rgba(79,179,169,.04)}
+/* figures */
+figure{margin:18px 0 22px;background:var(--panel);border:1px solid var(--rule);padding:16px}
+figcaption{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:10px;letter-spacing:.03em}
+svg text{font-family:var(--mono)}
+/* two-col cards for review */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--rule);padding:14px 16px}
+.card h4{margin:0 0 8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:500;display:flex;justify-content:space-between;align-items:center}
+.card p{font-size:14px;margin:0 0 8px;max-width:none}
+.card p:last-child{margin:0}
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;font-size:14px;margin:14px 0}
+.verdict .v{font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding-top:5px;color:var(--mute);white-space:nowrap}
+.marker{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--rule)}
+.marker:last-child{border-bottom:0}
+.marker .d{font-family:var(--mono);font-size:12.5px;color:var(--amber)}
+.marker .pf{font-size:14px}
+.marker .pf b{font-weight:500;color:var(--ink)}
+.small{font-size:12.5px;color:var(--mute);font-family:var(--mono)}
+.legend{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin:10px 0 0}
+.legend span{margin-right:14px}
+@media (prefers-reduced-motion:no-preference){.dot.warn,.dot.crit{animation:pulse 2.4s ease-in-out infinite}@keyframes pulse{50%{opacity:.55}}}
+.hubbar{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--rule);padding:0 0 10px;margin:0 0 22px;color:var(--mute)}.hubbar a{border:0;color:var(--teal)}.hubbar a:hover{text-decoration:underline}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<nav class="rail" aria-label="目录">
+  <div class="brand">AI Flow · Review</div>
+  <a href="#s0">状态板</a>
+  <a href="#s1">一句话</a>
+  <a href="#s2">标准是什么</a>
+  <a href="#s3">设计审查</a>
+  <a href="#s4">生态位置</a>
+  <a href="#s5">业务与影响力</a>
+  <a href="#s6">投入产出</a>
+  <a href="#s7">风险与可证伪标记</a>
+  <a href="#s8">决策请求</a>
+  <div class="meta">rev 3 · 2026-09-09<br><b>★</b> 一手已核 <b>◆</b> 可信二手<br><b>◇</b> 未核/估算<br><br>open &amp; secure —<br>don't trust, verify it</div>
+</nav>
+
+<main>
+<div class="hubbar"><a href="/">◂ OpenEnvelope 工作台</a><span>战略审查 · 内部</span></div>
+<header>
+  <h1>OpenEnvelope 战略审查</h1>
+  <div class="sub">rev 3 · 2026-09-09 · 暂定名 · 原 OFB · 桥接格式 HDEB v0.1 已交付 · 本页对象：<b>标准设计 / 生态位 / 业务与影响力 / 投入产出</b></div>
+</header>
+
+<section id="s0">
+<div class="ann" role="list">
+  <div class="tile" role="listitem"><span class="lbl">交付状态</span><span class="val">7<small>tests pass</small></span><span class="st"><i class="dot ok"></i>hdeb-open v0.1 + envelope 0.0.3</span></div>
+  <div class="tile" role="listitem"><span class="lbl">核实清单</span><span class="val">4/4<small>closed</small></span><span class="st"><i class="dot ok"></i>2★ 2◆ · 0◇ 阻塞</span></div>
+  <div class="tile" role="listitem"><span class="lbl">生态空位</span><span class="val">L0<small>约束集</small></span><span class="st"><i class="dot ok"></i>LF Energy 无同类交换格式 ★</span></div>
+  <div class="tile" role="listitem"><span class="lbl">监管窗口</span><span class="val">2030s<small>前半</small></span><span class="st"><i class="dot warn"></i>同時市場 TPO 字段未定 ★</span></div>
+  <div class="tile" role="listitem"><span class="lbl">法律边界</span><span class="val">指示<small>= 红线</small></span><span class="st"><i class="dot warn"></i>届出制不适用于纯校验 ◆</span></div>
+  <div class="tile" role="listitem"><span class="lbl">最大风险</span><span class="val">0<small>外部实现</small></span><span class="st"><i class="dot crit"></i>标准墓地：无第二实现即死</span></div>
+</div>
+<div class="legend"><span><i class="dot ok"></i> 正常</span><span><i class="dot warn"></i> 注意</span><span><i class="dot crit"></i> 需要决策</span></div>
+</section>
+
+<section id="s1">
+<h2><span class="n">§1</span>一句话</h2>
+<p class="lead">OpenEnvelope 把"一段时间内一台（或一群）设备能做什么"写成一个可交换、可校验、可签名的对象；免费开放的是<b>格式与判定</b>，收费的是<b>决策</b>，沉淀的是别人用你的格式喂回来的<b>结构化负样本</b>。</p>
+<p>它不是产品，是产品的入口和护城河的地基。它的价值不能用直接收入衡量，只能用三件事衡量：有多少外部系统写出了这个格式、有多少校验请求带着真实越界样本回来、以及当同時市場 2030 年代前半定稿字段时我们是否已经坐在桌边。</p>
+</section>
+
+<section id="s2">
+<h2><span class="n">§2</span>标准是什么：四层，各自独立</h2>
+<p>HDEB 把物理、市场、层级、回退、来源压在一条记录里。OpenEnvelope 把它拆成四层，每层可独立传输、独立版本。一个 EMS 只实现 L0+L1；交易所接口只实现 L2；校验服务读 L0+L1、写 L3。</p>
+<figure>
+<svg viewBox="0 0 760 300" width="100%" role="img" aria-label="四层模型">
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7a8f8c"/></marker></defs>
+  <g font-size="12">
+    <rect x="20" y="20" width="440" height="52" fill="#182527" stroke="#4fb3a9" stroke-width="1.2"/>
+    <text x="34" y="42" fill="#4fb3a9" font-weight="600">L3 · Attestation</text><text x="34" y="60" fill="#a9b6b3">谁 · 哪版规则 · 输入哈希 · verdict · violations[] · 签名</text>
+    <rect x="20" y="84" width="440" height="52" fill="#131d1f" stroke="#2f464b"/>
+    <text x="34" y="106" fill="#d8ddd9" font-weight="600">L2 · Offer</text><text x="34" y="124" fill="#a9b6b3">price · divisible · linked / exclusive · market_ref · ext["jp.doji"]</text>
+    <rect x="20" y="148" width="440" height="52" fill="#131d1f" stroke="#2f464b"/>
+    <text x="34" y="170" fill="#d8ddd9" font-weight="600">L1 · Position</text><text x="34" y="188" fill="#a9b6b3">schedule / cleared / measured 的实际轨迹 series.p[t]</text>
+    <rect x="20" y="212" width="440" height="52" fill="#182527" stroke="#4fb3a9" stroke-width="1.2"/>
+    <text x="34" y="234" fill="#4fb3a9" font-weight="600">L0 · Envelope</text><text x="34" y="252" fill="#a9b6b3">window × bounds × 约束集 A·u ≤ b · params · fallback · consent</text>
+    <!-- right side: who implements -->
+    <text x="500" y="46" fill="#7a8f8c">校验服务 / 第三方审计</text>
+    <text x="500" y="110" fill="#7a8f8c">交易所 · 聚合商投标端</text>
+    <text x="500" y="174" fill="#7a8f8c">EMS · 结算 · 偏差</text>
+    <text x="500" y="238" fill="#7a8f8c">EMS · 设备厂商 · 物理层</text>
+    <line x1="470" y1="238" x2="490" y2="238" stroke="#7a8f8c" marker-end="url(#ar)"/>
+    <line x1="470" y1="174" x2="490" y2="174" stroke="#7a8f8c" marker-end="url(#ar)"/>
+    <line x1="470" y1="110" x2="490" y2="110" stroke="#7a8f8c" marker-end="url(#ar)"/>
+    <line x1="470" y1="46" x2="490" y2="46" stroke="#7a8f8c" marker-end="url(#ar)"/>
+    <text x="20" y="290" fill="#7a8f8c" font-size="11">高亮层 = 本项目的差异化所在：L0 是空位，L3 是飞轮。L1/L2 只是对既有实践的规范化。</text>
+  </g>
+</svg>
+<figcaption>图 1 · 四层模型与各层的自然实现方。HDEB 一条记录 ≈ L0∪L1∪L2 压扁后加 provenance，可无损映射到 OpenEnvelope；反向有损。</figcaption>
+</figure>
+<p>三个设计承诺值得单独说明。第一，<b>灵活性是约束集不是字段集</b>：L0 用线性约束加少量命名参数表达可行域，FlexMeasures 的 flex-model 字段与 S2 的 FRBC 都能无损落进去，换设备类型不必改 schema。第二，<b>验证是一等对象</b>：L3 记录用哪版规则对哪个输入哈希得到什么结论，任何人可重跑。第三，<b>同意显式</b>：每个 Envelope 带 <span class="k">consent{cross_border, training_use, retention_days}</span>，默认全部最保守。</p>
+</section>
+
+<section id="s3">
+<h2><span class="n">§3</span>设计审查：站得住的与站不住的</h2>
+<p>以下是把自己当审稿人给出的判断。每条附 verdict。</p>
+<div class="verdict">
+  <span class="v" style="color:var(--green)">HOLDS</span><div><b>L0 空位真实存在。</b>FlexMeasures 用命名字段（power-capacity、soc-minima、group、S2 power bands）内部编成 MILP，约束集本身不可交换 ★。S2、Shapeshifter 是消息协议。学界有 polytope/zonotope 表示但无交换格式。这是可以填的洞，不是想象出来的洞。</div>
+  <span class="v" style="color:var(--green)">HOLDS</span><div><b>L3 与法律边界重合。</b>特定卸供給事業的定义是"集约并供电"，法条里的关键词是"指示" ◆。只输出 verdict 不输出 instruction，既是商业分界也是监管分界。这种重合极少见，应当写进服务条款并作为对外叙事的核心。</div>
+  <span class="v" style="color:var(--green)">HOLDS</span><div><b>命名跨语言零摩擦。</b>flexibility envelope 是学界既有术语；運転エンベロープ、可行域包络在日中都是现成工程词；对齐 OpenADR/OpenSTEF/OpenLEADR 家族；GitHub 与能源标准域无撞名（2026-09-04 检索）。</div>
+  <span class="v" style="color:var(--amber)">WEAK</span><div><b>线性约束集装不下同時市場的核心。</b><span class="chip t1" style="margin-left:6px">已修正 · schema 0.0.3 modes / 架构 env.mode</span> Three-part offer 的起動費、最低出力、最小稼働/停止時間本质是<b>整数/逻辑约束</b>（开/关、模式切换）★。当前 L0 只有 <span class="k">A·u ≤ b</span>，表达不了。必须在 0.0.3 加入 mode/binary 变量（可借 S2 OMBC 的 operation-mode 语义），否则 L0 对日本最重要的市场场景是残缺的。<b>这是本审查发现的最大设计缺陷。</b></div>
+  <span class="v" style="color:var(--amber)">WEAK</span><div><b>层级聚合 aggregation_of 语义未定义。</b><span class="chip t1" style="margin-left:6px">已修正 · aggregation.approximation ∈ {inner,outer,exact}</span> 多个 Envelope 聚合成一个上层 Envelope 在数学上是 Minkowski 和，一般不精确、不可逆。若不写明"上层是内近似还是外近似"，两个实现会得出不同的可行域，一致性测试无法判定。</div>
+  <span class="v" style="color:var(--amber)">WEAK</span><div><b>consent 是 schema 字段，不是执行机制。</b>字段能声明意愿，不能阻止滥用。没有配套的数据处理协议和审计日志，consent 只是一个好看的 JSON 键。需要一个最薄的"consent 一致性检查"进一致性套件：任何把 training_use=false 的数据写入训练集的实现即不合规。</div>
+  <span class="v" style="color:var(--red)">RISK</span><div><b>标准墓地。</b>能源领域的开放格式绝大多数死于"只有提出者一个实现"。当前外部实现数 = 0。所有战略价值都以"至少一个非本方 EMS 写出 L0"为前提。这不是设计缺陷，是存在性风险，见 §7 标记 M1。</div>
+  <span class="v" style="color:var(--red)">RISK</span><div><b>HDEB 的血缘。</b>桥接格式沿用了第三方白皮书的术语。已在 NOTICE 声明改名承诺，但公开仓库先以 HDEB 名字出现，会让日本审查方和欧洲社区先读到"深度动力"再读到"中立"。建议公开时 <b>直接以 openenvelope 为主仓库</b>，hdeb-open 作为其中的 <span class="k">compat/</span> 目录或私有。</div>
+</div>
+</section>
+
+<section id="s4">
+<h2><span class="n">§4</span>生态位置：夹在四个既有标准之间</h2>
+<div class="tbl"><table>
+<thead><tr><th>既有标准</th><th>管什么</th><th>与 OpenEnvelope 的关系</th><th>置信</th></tr></thead>
+<tbody>
+<tr><td class="m">S2 · EN 50491-12-2</td><td>建筑/户内：CEM ↔ 资源管理器的消息协议；FRBC/OMBC/PEBC 控制类型</td><td>资源侧上游。FRBC/OMBC 应能无损映射进 L0；OpenEnvelope 是 S2 之上的"聚合层 profile"</td><td><span class="chip t1">★</span></td></tr>
+<tr><td class="m">Shapeshifter / UFTP</td><td>聚合商 ↔ DSO/TSO 的 flex request/offer/order/settlement 消息</td><td>L2 的传输载体之一；OpenEnvelope 补它缺的可行域与证明对象</td><td><span class="chip t2">◆</span></td></tr>
+<tr><td class="m">IEC 62325 CIM</td><td>交易所市场文档：Bid / Schedule / Publication MarketDocument</td><td>L2 的欧洲交易所侧映射；block/linked/exclusive 语义已有对应</td><td><span class="chip t2">◆</span></td></tr>
+<tr><td class="m">OpenADR 3</td><td>事件驱动的需求响应程序与报告</td><td>L1 的事件侧；不涉及可行域</td><td><span class="chip t2">◆</span></td></tr>
+<tr><td class="m">FlexMeasures (LF Energy)</td><td>开源 EMS/调度器；flex-model 命名字段</td><td><b>第一个应争取的外部实现</b>：让 FlexMeasures 能导出/导入 L0，即等于拿到 LF Energy 的入场券</td><td><span class="chip t1">★</span></td></tr>
+<tr><td class="m">LBNL EFOnt</td><td>建筑能源灵活性本体</td><td>术语对齐对象，非交换格式</td><td><span class="chip t2">◆</span></td></tr>
+<tr><td class="m">同時市場 TPO（日本）</td><td>起動費/最低出力費用/阶梯增分曲线 + 運転パラメータ；2030 年代前半</td><td>L2 日本 profile 的目标；字段未定 → 用 <span class="k">ext["jp.doji"]</span> 隔离，等详细设计</td><td><span class="chip t1">★</span></td></tr>
+</tbody></table></div>
+<p>结论：OpenEnvelope 不与任何一个竞争，它是这四个之间缺失的<b>通用中间表示</b>。这既是它能被接受的原因，也是它难以被注意到的原因——中间层没有自己的用户，只有别人的用户。所以 §5 的业务设计必须给它一个"自己的用户"。</p>
+</section>
+
+<section id="s5">
+<h2><span class="n">§5</span>业务与影响力：入口、飞轮、桌位</h2>
+<h3>入口：免费校验，不免费决策</h3>
+<p>第一个对外产品不是预测或投标建议，是校验器：客户把计划用 L0+L1 发来，我们返回 L3。对客户零风险（不接管控制），对我们零法律负担（不"指示"），每一条请求都是结构化的。付费层是"怎么改"——优化、反事实、回退策略——那是物理层 14B 权重的工作。</p>
+<figure>
+<svg viewBox="0 0 760 250" width="100%" role="img" aria-label="数据飞轮">
+  <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4fb3a9"/></marker></defs>
+  <g font-size="12" fill="#d8ddd9">
+    <rect x="20" y="95" width="150" height="60" fill="#131d1f" stroke="#2f464b"/><text x="95" y="120" text-anchor="middle" font-weight="600">格式被采用</text><text x="95" y="140" text-anchor="middle" fill="#7a8f8c" font-size="11">外部 EMS 写出 L0/L1</text>
+    <rect x="215" y="95" width="150" height="60" fill="#131d1f" stroke="#2f464b"/><text x="290" y="120" text-anchor="middle" font-weight="600">校验请求</text><text x="290" y="140" text-anchor="middle" fill="#7a8f8c" font-size="11">L3 violations[] = 负样本</text>
+    <rect x="410" y="95" width="150" height="60" fill="#182527" stroke="#4fb3a9"/><text x="485" y="120" text-anchor="middle" font-weight="600" fill="#4fb3a9">物理层更准</text><text x="485" y="140" text-anchor="middle" fill="#7a8f8c" font-size="11">仅 consent.training_use=true</text>
+    <rect x="605" y="95" width="135" height="60" fill="#131d1f" stroke="#2f464b"/><text x="672" y="120" text-anchor="middle" font-weight="600">拒绝更少</text><text x="672" y="140" text-anchor="middle" fill="#7a8f8c" font-size="11">口碑 · 可复核</text>
+    <line x1="170" y1="125" x2="213" y2="125" stroke="#4fb3a9" marker-end="url(#ar2)"/>
+    <line x1="365" y1="125" x2="408" y2="125" stroke="#4fb3a9" marker-end="url(#ar2)"/>
+    <line x1="560" y1="125" x2="603" y2="125" stroke="#4fb3a9" marker-end="url(#ar2)"/>
+    <path d="M672 155 C672 215, 95 215, 95 157" fill="none" stroke="#4fb3a9" stroke-dasharray="4 4" marker-end="url(#ar2)"/>
+    <text x="380" y="225" text-anchor="middle" fill="#7a8f8c" font-size="11">燃料不是数据量，是负样本 + 人工标注（对方填的物理约束字段）+ 跨市场对齐</text>
+    <text x="380" y="40" text-anchor="middle" fill="#a9b6b3" font-size="12">免费层 = 可验证性边界 ｜ 付费层 = 可执行性边界 ｜ 两条边界重合于 L3</text>
+    <line x1="60" y1="55" x2="700" y2="55" stroke="#24363a"/>
+  </g>
+</svg>
+<figcaption>图 2 · 飞轮的正确画法。数据量是副产品；负样本和标注是主产品。</figcaption>
+</figure>
+
+<h3>口碑：开放的是可复核性，不是代码</h3>
+<p>电力行业不信 demo，信"我能自己重跑你的数字"。每季度公开一个复现榜：用 OPFData、RL2Grid 等公开数据集跑校验器与公开 baseline，结果、脚本、失败案例全放出来。这直接对应经济安保法审查看重的"可审计、供应商可识别"，也是对 Emerald AI–JERA 这类先发关系的反向定位：他们卖的是闭源结果，我们卖的是可复核过程。</p>
+
+<h3>桌位：2030 年代前半的字段定稿</h3>
+<p>同時市場第二次中間取りまとめ给了一个官方数字：スポット売り入札中<b>ブロック入札占 60–80%，約定率仅数%</b> ★。这是监管方自己量化的"能量块表达能力不足"。当详细设计开始定 DER 的投标形式（§6.6 待检討，脚注 15 "複数の電源をまとめて入札もありうる"）时，桌边已有一个开源的、有外部实现的、能表达约束集的格式，与桌边什么都没有，是两种截然不同的谈判位置。这是 OpenEnvelope 最大的单项期权价值，也是最难量化的。</p>
+
+<h3>首批用户：阈值以下的聚合商</h3>
+<p>经济安保法基幹インフラ制度只指定 ≥50 万 kW 的特定卸供給事业者。阈值以下的聚合商没有審査负担、有重写投标管道的痛点、数量多。免费校验 API 的首批用户就是他们；积累到"被审计过的供应商"身份后再上探大聚合商。</p>
+</section>
+
+<section id="s6">
+<h2><span class="n">§6</span>投入产出：以期权定价，不以收入定价</h2>
+<p>先说清楚：下表全部是<b>估算 ◇</b>。投入按日本市场一名资深工程师年薪 ¥12–15M、日本律师按小时计费、无差旅的假设；产出不是收入，是三种可计数的期权。凡是我没有一手依据的数字都标了 ◇。</p>
+<div class="tbl"><table>
+<thead><tr><th>阶段</th><th>内容</th><th class="m">时长</th><th class="m">投入（JPY）</th><th>可计数产出</th><th>置信</th></tr></thead>
+<tbody>
+<tr><td class="m">P0 · 已完成</td><td>HDEB 桥接 schema · JEPX 转换器 · KCL/KVL 校验器 · envelope 0.0.3 草案（含 modes / aggregation） · 4 项核实</td><td class="m">2 人日</td><td class="m r">≈ 0</td><td>7 tests · 2★2◆ 核实 · 可发布仓库</td><td><span class="chip t1">★</span></td></tr>
+<tr><td class="m">P1 · 可信的 0.1</td><td>L0 加 mode/binary · aggregation 语义 · 一致性测试套件 · FlexMeasures ↔ L0 双向映射 PR · S2 FRBC 映射 · 参考校验 API（只 verdict）</td><td class="m">3–4 月</td><td class="m r">4.0–6.0M</td><td>≥1 外部实现（FlexMeasures 合并即算）· 一致性套件 ≥40 用例</td><td><span class="chip t3">◇</span></td></tr>
+<tr><td class="m">P2 · 桌位</td><td>LF Energy sandbox 申请 · 3 家阈值以下聚合商试点 · 服务条款（"不指示"）· 日本律师审阅 · 季度复现榜 ×2</td><td class="m">+6 月</td><td class="m r">3.0–5.0M</td><td>试点 3 家中 ≥1 家持续发送 L1 · sandbox 接受或书面拒绝 · 负样本 ≥1,000 条（consent=true）</td><td><span class="chip t3">◇</span></td></tr>
+<tr><td class="m">P3 · 变现</td><td>付费"怎么改"层（优化/反事实）接在 L3 之后；此阶段属产品，不属标准</td><td class="m">P2 后</td><td class="m r">另计</td><td>免费→付费转化率；每客户 CAC 相对无标准路径的下降</td><td><span class="chip t3">◇</span></td></tr>
+</tbody></table></div>
+
+<h3>三种情景</h3>
+<div class="tbl"><table>
+<thead><tr><th>情景</th><th>12 个月后的状态</th><th>对主业务的影响</th><th>该怎么做</th></tr></thead>
+<tbody>
+<tr><td class="m" style="color:var(--red)">悲观</td><td>0 外部实现；试点 3 家均未持续；LF Energy 未受理</td><td>损失 ≈ 7–11M JPY 与 10 个月注意力。留下的：一套可复用的校验器与 JEPX 管道、一份被引用过的 RFC</td><td>P1 结束时若 M1 未过即停，不进 P2。沉没成本可控</td></tr>
+<tr><td class="m" style="color:var(--amber)">基准</td><td>FlexMeasures 映射合并；1 家聚合商持续发送；LF Energy 在评估</td><td>付费层 CAC 明显低于冷启动；有可引用的中立身份进入大聚合商审查；负样本开始有统计意义</td><td>进入 P3；把 L2 日本 profile 提到 OCCTO/METI 公开意见征集</td></tr>
+<tr><td class="m" style="color:var(--green)">乐观</td><td>≥2 外部实现；LF Energy 接纳；同時市場详细设计引用约束集表达</td><td>标准成为管道默认格式；物理层的每次改进都通过 L3 自动可见；"可复核"成为对 Emerald AI 类竞争者的结构性差异</td><td>把维护交给基金会治理，本方退居"最好的实现"而非"标准所有者"</td></tr>
+</tbody></table></div>
+<div class="q"><b>投入产出的诚实版本：</b>这不是一笔按 IRR 算的投资。它是用 7–11M JPY 和约 10 个月，买三张期权——外部实现、审计身份、2030 年代的桌位。P1 末的 M1 标记是止损点；过了 M1，期权的执行价才开始下降。</div>
+</section>
+
+<section id="s7">
+<h2><span class="n">§7</span>风险与可证伪标记</h2>
+<p>每条标记有时限、有明确 pass/fail。到期后在后续会话中标为 confirmed 或 falsified，不许改口。</p>
+<div class="marker"><div class="d">M1 · 2026-12-31</div><div class="pf"><b>至少一个非本方系统写出合法的 L0 Envelope</b>（FlexMeasures 导出 PR 合并、或任一聚合商 EMS 发出）。Fail → 不进 P2，仓库转为个人研究项目。</div></div>
+<div class="marker"><div class="d">M2 · 2027-01-31</div><div class="pf"><b>L0 支持 mode/binary 且通过一致性用例</b>能表达"最小稼働時間 + 起動費"。Fail → 承认 OpenEnvelope 不适合同時市場 L2，只做 S2 之上的聚合 profile。</div></div>
+<div class="marker"><div class="d">M3 · 2027-03-31</div><div class="pf"><b>LF Energy sandbox 申请得到正式回复</b>（接受或书面拒绝均算 pass；无回复算 fail）。</div></div>
+<div class="marker"><div class="d">M4 · 2027-06-30</div><div class="pf"><b>3 家阈值以下聚合商中 ≥1 家连续 8 周发送 L1 到校验器</b>，且至少 200 条 L3 verdict=fail 带 consent.training_use=true。Fail → 飞轮假设被证伪，保留标准、放弃数据积累叙事。</div></div>
+<div class="marker"><div class="d">M5 · 2027-12-31</div><div class="pf"><b>同時市場详细设计公开资料中出现 DER 集约投标的字段定义</b>。这条不是我们能控制的，但决定 L2 日本 profile 何时能定稿；若晚于此日，桌位价值顺延而非消失。</div></div>
+
+<h3>三条不进标记但要盯的风险</h3>
+<div class="grid2">
+  <div class="card"><h4>单一维护者 <span class="chip bad">结构性</span></h4><p>今天全部代码与文档出自一人一日。基金会不会接纳单维护者项目。P1 至少需要一名外部 co-maintainer，哪怕只维护一致性测试。</p></div>
+  <div class="card"><h4>许可被稀释 <span class="chip t3">治理</span></h4><p>Apache-2.0 + CC BY 4.0 是对的，但若日后为了商业层引入"开放核心"式的字段（只有付费版能读的 ext），中立性叙事立刻崩塌。规则：ext 命名空间任何人可注册，本方不得独占。</p></div>
+  <div class="card"><h4>血缘被读出来 <span class="chip t3">叙事</span></h4><p>日本审查方会看仓库历史。hdeb-open 的名字和 NOTICE 里的说明，在中立性上是负资产。建议公开顺序：openenvelope 先，hdeb 作为兼容目录后。</p></div>
+</div>
+</section>
+
+<section id="s8">
+<h2><span class="n">§8</span>决策请求</h2>
+<p>以下四项需要你决定，我不能替你定：</p>
+<div class="tbl"><table>
+<thead><tr><th class="m">#</th><th>决策</th><th>我的建议</th><th>不决定的后果</th></tr></thead>
+<tbody>
+<tr><td class="m">D1</td><td>公开仓库名与顺序</td><td>以 <span class="k">openenvelope</span> 为主仓库公开；hdeb-open 转为其 <span class="k">compat/hdeb</span> 目录或保持私有</td><td>以 HDEB 名字先公开，中立性叙事从第一天起带伤</td></tr>
+<tr><td class="m">D2</td><td>是否投入 P1（3–4 月，4–6M JPY）</td><td>投，但把 M1 写进预算审批：M1 fail 则 P2 不启动</td><td>仓库停在 0.0.2，期权价值归零，但无损失</td></tr>
+<tr><td class="m">D3</td><td>L0 是否加 mode/binary</td><td>加。否则 L0 对日本最重要的市场是残缺的（§3 WEAK #1）</td><td>只能做 S2 之上的建筑侧 profile，放弃同時市場桌位</td></tr>
+<tr><td class="m">D4</td><td>服务条款是否明写"不指示"</td><td>写。这是把法律边界（届出制）、商业边界（付费层）、标准边界（L3）钉在同一句话上的机会</td><td>未来任一功能越线时没有既定原则可依</td></tr>
+</tbody></table></div>
+<p class="small" id="sources">统一来源编号见仓库 <span class="k">docs/SOURCES.md</span>。本页直接依赖：<a href="https://www.meti.go.jp/shingikai/energy_environment/doji_shijo_kento/pdf/20251015_1.pdf">[J1] 同時市場 第二次中間取りまとめ ★</a> · <a href="https://flexmeasures.readthedocs.io/stable/concepts/flexibility-configuration.html">[L4] FlexMeasures flex-model ★</a> · <a href="https://lfenergy.org/interoperability-technologies-behind-the-meter-s2-standard/">[L1] LF Energy · S2 ★</a> · <a href="https://www.enecho.meti.go.jp/category/electricity_and_gas/electricity_measures/009/shiryou/06_shiryou1.pdf">[J4] 特定卸供給事業 届出説明会 ◆</a> · <a href="https://www.entsoe.eu/Documents/EDI/Library/EIC_Short_Guide_and_FAQ_V3_Approved%20April%202016.pdf">[E1] ENTSO-E EIC ◆</a></p><p class="small">所有 JPY 金额与时长为估算 ◇。审查记录见《审查与图景》页。</p>
+</section>
+</main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenEnvelope 术语辞典</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+:root{--ground:#0d1416;--panel:#131d1f;--panel2:#182527;--rule:#24363a;--rule2:#2f464b;--ink:#d8ddd9;--ink2:#a9b6b3;--mute:#7a8f8c;--teal:#4fb3a9;--teal2:#2c6f69;--amber:#d9a441;--green:#6fb07a;--blue:#6f9fc9;
+--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--serif:"Noto Serif SC","Songti SC","Hiragino Mincho ProN",Georgia,serif;--cond:"IBM Plex Sans Condensed","Arial Narrow",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--serif);font-size:15px;line-height:1.7}
+a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal2)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;max-width:1140px;margin:0 auto;padding:36px 28px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:20px}.rail{position:static!important;display:flex;flex-wrap:wrap;gap:6px 14px}}
+.rail{position:sticky;top:24px;align-self:start;font-family:var(--mono);font-size:12px;line-height:1.5}
+.rail .brand{color:var(--teal);letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.rail a{display:block;color:var(--mute);border:0;padding:4px 0 4px 10px;border-left:2px solid var(--rule)}
+.rail a:hover{color:var(--ink);border-left-color:var(--teal)}
+.rail .meta{margin-top:22px;color:var(--mute);border-top:1px solid var(--rule);padding-top:12px}
+main{min-width:0}
+header h1{font-family:var(--cond);font-weight:600;font-size:38px;line-height:1.1;margin:0 0 6px}
+header .sub{font-family:var(--mono);font-size:12.5px;color:var(--mute)}
+.search{margin:22px 0 6px;display:flex;gap:10px;align-items:center}
+.search input{flex:1;background:var(--panel);border:1px solid var(--rule2);color:var(--ink);font-family:var(--mono);font-size:13.5px;padding:9px 12px;border-radius:2px}
+.search input::placeholder{color:var(--mute)}
+.search .cnt{font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+h2{font-family:var(--cond);font-size:21px;font-weight:600;margin:44px 0 10px;padding-top:16px;border-top:1px solid var(--rule)}
+h2 .n{font-family:var(--mono);color:var(--teal);font-size:12px;letter-spacing:.14em;display:block;margin-bottom:6px;font-weight:500}
+p{max-width:68ch;margin:0 0 12px}
+dl{margin:0;display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:0}
+dt,dd{padding:11px 12px;border-bottom:1px solid var(--rule)}
+dt{font-family:var(--mono);font-size:13px;color:var(--teal);font-weight:500;background:var(--panel);line-height:1.45}
+dt small{display:block;color:var(--mute);font-weight:400;font-size:11px;margin-top:3px;letter-spacing:.02em}
+dd{margin:0;font-size:14.5px;line-height:1.65}
+dd .pos{display:block;font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:5px;letter-spacing:.03em}
+dd .pos b{color:var(--ink2);font-weight:500}
+.tier{font-family:var(--mono);font-size:10.5px;padding:0 5px;border:1px solid var(--rule2);border-radius:2px;color:var(--ink2);margin-left:6px;vertical-align:middle}
+.tier.a{color:var(--green);border-color:rgba(111,176,122,.5)}.tier.b{color:var(--blue);border-color:rgba(111,159,201,.5)}.tier.c{color:var(--amber);border-color:rgba(217,164,65,.5)}
+.k{font-family:var(--mono);font-size:.9em;color:var(--teal)}
+.hidden{display:none}
+@media (max-width:640px){dl{grid-template-columns:1fr}dt{border-bottom:0;padding-bottom:4px}}
+.hubbar{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--rule);padding:0 0 10px;margin:0 0 22px;color:var(--mute)}.hubbar a{border:0;color:var(--teal)}.hubbar a:hover{text-decoration:underline}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<nav class="rail" aria-label="目录">
+  <div class="brand">Glossary</div>
+  <a href="#g0">本标准对象</a>
+  <a href="#g1">设备侧协议</a>
+  <a href="#g2">市场与运营侧协议</a>
+  <a href="#g3">基础数据规范</a>
+  <a href="#g4">LF Energy 项目</a>
+  <a href="#g5">组织与机构</a>
+  <a href="#g6">市场角色</a>
+  <a href="#g7">电力物理与数学</a>
+  <a href="#g8">校验与治理概念</a>
+  <a href="#g9">附：相邻页面的日本术语</a>
+  <div class="meta">v2 · 2026-09-09<br>★ 一手已核 ◆ 可信二手 ◇ 未核<br><br>覆盖：参考架构 v0.3 · 标准库 v0.2<br>图 1 · 1b · 2 · 3 · 4 及各表</div>
+</nav>
+
+<main>
+<div class="hubbar"><a href="/">◂ OpenEnvelope 工作台</a><span>术语辞典 · 中立</span></div>
+<header>
+  <h1>OpenEnvelope 术语辞典</h1>
+  <div class="sub">参考架构页上出现过的每一个专有名词：它是什么、谁维护、在架构里坐哪个位置</div>
+</header>
+<div class="search"><input id="q" type="search" placeholder="搜索术语、缩写或中文关键词…" aria-label="搜索"><span class="cnt" id="cnt"></span></div>
+<p style="color:var(--mute);font-size:13px">每条末尾的 <span class="k">位置</span> 指该名词在参考架构图 1 中的所在列或所交换的层（L0 Envelope / L1 Position / L2 Offer / L3 Attestation）。置信标记只针对"该组织/标准的事实描述"，不针对本标准的设计判断。</p>
+
+<section id="g0">
+<h2><span class="n">§0</span>本标准自己的对象</h2>
+<dl>
+<dt>OpenEnvelope<small>暂定名</small></dt><dd>本参考架构描述的开放、中立的灵活性资源交换标准。名字取自"flexibility envelope（灵活性包络）"这一既有学术术语；日语工程界称運転エンベロープ，中文称可行域包络。四层对象 + 聚合语义 + 规则集 + 一致性测试。<span class="pos"><b>位置</b> 图 1 中央总线</span></dd>
+<dt>Envelope<small>L0</small></dt><dd>"一个时间窗内，一台或一群资源能做什么"的可行域描述：时间窗、变量上下界、线性约束集 <span class="k">A·u ≤ b</span>、模式变量、命名参数（储能、爬坡）、回退方式、同意声明、来源。它描述能力，不描述打算。<span class="pos"><b>位置</b> 由资源管理器发布，聚合商读取</span></dd>
+<dt>Position<small>L1</small></dt><dd>包络内的一条具体轨迹：<span class="k">schedule</span>（计划）、<span class="k">cleared</span>（市场成交后的计划）、<span class="k">measured</span>（计量实测）。三者同格式，便于逐点比较。<span class="pos"><b>位置</b> 总线上双向流动；计量数据回流为 measured</span></dd>
+<dt>Offer<small>L2</small></dt><dd>对一个 Envelope 的市场包装：价格、可否分割、最低接受比例、关联/互斥报价组、市场引用。它引用 L0 而不复制 L0。<span class="pos"><b>位置</b> 聚合商写，经交易所/系统运营者协议提交</span></dd>
+<dt>Attestation<small>L3</small></dt><dd>校验结果的证明对象：被检对象引用、输入哈希、规则集 id 与版本、结论（pass / fail / inconclusive）、违规清单、检查时间、签名。任何人可用同一输入与规则版本复算。<span class="pos"><b>位置</b> 校验服务写；透明日志存；请求方持有</span></dd>
+<dt>Envelope 适配器</dt><dd>把既有协议（S2、IEEE 2030.5、OCPP、OPC UA、IEC 61850…）的语义映射为 L0/L1 对象的开源组件；反向把 L1 schedule 变为设备可懂的设定值。映射规则是标准的一部分。<span class="pos"><b>位置</b> 资源管理器内</span></dd>
+<dt>Envelope 总线</dt><dd>抽象概念，不是具体消息中间件：任何能承载四层对象的方式（文件、REST、消息队列）都算。总线上只允许出现四层对象。<span class="pos"><b>位置</b> 图 1 中央</span></dd>
+<dt>consent<small>同意声明</small></dt><dd>L0 上的三个字段：<span class="k">cross_border</span>（可否出境）、<span class="k">training_use</span>（可否用于训练）、<span class="k">retention_days</span>（保留期）。未声明视为全部禁止。规则 <span class="k">consent.scope</span> 检查请求上下文与之一致。<span class="pos"><b>位置</b> L0；影响图 1 右下"开放数据集"的虚线路径</span></dd>
+<dt>provenance<small>来源</small></dt><dd>每个对象必带的元数据：数据来自哪里、何时取得、许可条款、生成工具、原始记录引用。让每个数字都能追到源头。<span class="pos"><b>位置</b> 所有四层</span></dd>
+<dt>ext<small>扩展命名空间</small></dt><dd>核心 schema 之外的字段容器，按反向域名命名（如 <span class="k">ext["lfenergy.cds"]</span>）。任何人可注册命名空间，无独占。市场特定字段（例如某国的报价形式）放这里，不进核心。<span class="pos"><b>位置</b> 所有四层</span></dd>
+<dt>{scheme, id}<small>命名空间标识</small></dt><dd>本标准不发明任何编码。所有标识写成"发码机构反向域名 + 该机构原码"，如 <span class="k">{"scheme":"iec.cim.mrid","id":"…"}</span>。这样可以同时引用欧洲的 EIC、各国系统运营者的区域码、变电站的 CIM 标识而不冲突。<span class="pos"><b>位置</b> L0 resource_ref</span></dd>
+</dl>
+</section>
+
+<section id="g1">
+<h2><span class="n">§1</span>设备侧协议（图 1 左列、图 1b）</h2>
+<dl>
+<dt>S2<small>EN 50491-12-2</small><span class="tier a">★</span></dt><dd>欧洲标准（CENELEC，2022 批准），定义建筑内"客户能源管理器（CEM）"与"资源管理器（RM）"之间如何沟通设备灵活性。由 FAN 主导开发，有开源 JSON schema 与多语言实现。它是 L0 在户内/楼宇层的最近亲：S2 告诉 CEM 设备能怎么动，Envelope 把这件事带到楼宇之外。<span class="pos"><b>位置</b> 储能、可控负荷 → 资源管理器</span></dd>
+<dt>FRBC / OMBC / PEBC<small>S2 控制类型</small><span class="tier a">★</span></dt><dd>S2 的三种主要控制模型。<b>FRBC</b>（Fill Rate Based Control）用"填充率"描述带储量的设备（电池、热水箱、EV），含存储描述与填充水平；<b>OMBC</b>（Operation Mode Based Control）用离散运行模式描述设备，是 L0 中 mode 变量的直接来源；<b>PEBC</b>（Power Envelope Based Control）直接给出功率包络。三者都能无损映射进 L0。<span class="pos"><b>位置</b> L0 生成</span></dd>
+<dt>IEEE 2030.5<small>Smart Energy Profile 2.0</small><span class="tier b">◆</span></dt><dd>IEEE 标准，基于 HTTP/REST 与 XML 的 DER 通信协议，定义 DER 能力（DERCapability）、设定（DERSettings）、状态（DERStatus）、计量镜像点等资源。美国加州（CSIP）与澳大利亚（CSIP-AUS）作为逆变器并网的强制接口。LF Energy 的 CUPID 是其开源实现。<span class="pos"><b>位置</b> 分布式发电、储能 → 资源管理器；DERCapability → L0 bounds</span></dd>
+<dt>CSIP / CSIP-AUS<small>Common Smart Inverter Profile</small><span class="tier b">◆</span></dt><dd>IEEE 2030.5 的实施规范（profile）：规定用哪些资源、什么安全模型、什么消息节奏，使不同厂商互操作。加州版由 SunSpec 联盟维护；澳大利亚版由 DER 集成专家小组维护。<span class="pos"><b>位置</b> 同 IEEE 2030.5</span></dd>
+<dt>SunSpec<small>SunSpec Alliance</small><span class="tier b">◆</span></dt><dd>光伏/储能行业联盟，维护基于 Modbus 的逆变器信息模型（SunSpec Modbus）与 CSIP。图 1 中作为光伏侧的既有数据模型。<span class="pos"><b>位置</b> 分布式发电</span></dd>
+<dt>Modbus<span class="tier b">◆</span></dt><dd>1979 年起的工业串行/TCP 协议，寄存器读写，无信息模型、无安全。仍是大量逆变器、电表、PCS 的事实接口。适配器需要外部字典（如 SunSpec）才能把寄存器变成 L0。<span class="pos"><b>位置</b> 设备侧遗留接口</span></dd>
+<dt>BACnet<small>ISO 16484-5</small><span class="tier b">◆</span></dt><dd>楼宇自动化协议（暖通、照明），ASHRAE 维护。热泵、空调类可控负荷常经 BACnet 暴露。<span class="pos"><b>位置</b> 可控负荷</span></dd>
+<dt>OCPP<small>Open Charge Point Protocol</small><span class="tier b">◆</span></dt><dd>充电桩与充电运营商后台之间的开放协议，Open Charge Alliance 维护，2.0.1 起支持智能充电曲线与 ISO 15118 集成。LF Energy 的 EVerest 是其开源实现。<span class="pos"><b>位置</b> 电动车/充电桩 → 资源管理器</span></dd>
+<dt>ISO 15118<span class="tier b">◆</span></dt><dd>车辆与充电桩之间的通信标准，含即插即充身份认证与双向充放电（-20）。它提供 EV 的离场时间、目标电量等信息——正是生成每桩 L0 所需的参数。<span class="pos"><b>位置</b> 电动车 → L0 生成</span></dd>
+<dt>IEC 61850<span class="tier b">◆</span></dt><dd>IEC TC57 的变电站与电力自动化通信标准族。核心是信息模型：<b>7-3</b> 公共数据类（CDC）、<b>7-4</b> 逻辑节点（LN）、<b>7-420</b> DER 专用逻辑节点；<b>SCL</b>（系统配置语言）描述整站配置。发电机组、变电站、大型 DER 的额定值、限值、状态都在这里。<span class="pos"><b>位置</b> 常规机组/抽蓄 → 资源管理器；SCL → 网络模型来源</span></dd>
+<dt>OPC UA<small>IEC 62541</small><span class="tier b">◆</span></dt><dd>OPC Foundation 维护的工业互操作架构：一个面向对象的地址空间（信息模型）+ 服务（浏览、读写、订阅、方法调用）+ 多种传输绑定。与 Modbus 不同，它自带类型系统与安全模型。本标准把 Envelope 做成它的一个 companion 信息模型（图 1b）。<span class="pos"><b>位置</b> 可控负荷、数据中心、常规机组 → 资源管理器</span></dd>
+<dt>OPC UA PubSub<small>Part 14</small><span class="tier b">◆</span></dt><dd>OPC UA 的发布/订阅传输模式，可走 UDP 多播或 MQTT，用于高频、一对多的数据推送。图 1b 中 L1 measured 经此推送。<span class="pos"><b>位置</b> 设备 → 适配器</span></dd>
+<dt>Companion Specification<small>OPC UA 伴随规范</small><span class="tier b">◆</span></dt><dd>OPC Foundation 与行业组织联合发布的领域信息模型（如机床、机器人、注塑机），定义该领域的对象类型与变量，使不同厂商设备在 OPC UA 上"说同一种话"。本标准提议的 <span class="k">EnvelopeType</span> 即属此类。<span class="pos"><b>位置</b> 图 1b</span></dd>
+<dt>OPC UA for IEC 61850<span class="tier b">◆</span></dt><dd>已有的 companion 规范（2018 发布候选），把 61850-7-4 全部逻辑节点与 7-3 公共数据类映射进 OPC UA 对象。意义：工厂里同一套 OPC UA 系统可以同时看到工艺数据与电气数据。对本标准：DER 节点的额定与限值可机器读出，直接作为 L0 bounds 来源。<span class="pos"><b>位置</b> 图 1b 右上</span></dd>
+<dt>Redfish<small>DMTF</small><span class="tier b">◆</span></dt><dd>数据中心硬件管理的 REST/JSON 标准（服务器、电源、机柜），DMTF 维护。数据中心作为大负荷时其电源遥测经此暴露；不属本标准范围，只作为站点级 L0 的输入来源之一。<span class="pos"><b>位置</b> 数据中心 → 资源管理器</span></dd>
+<dt>NATS<span class="tier b">◆</span></dt><dd>云原生的轻量消息系统（CNCF 项目）。LF Energy 的 CUPID 用它承载 IEEE 2030.5 消息以取代纯 REST 轮询。出现在此仅因 CUPID 使用它。<span class="pos"><b>位置</b> CUPID 内部</span></dd>
+</dl>
+</section>
+
+<section id="g2">
+<h2><span class="n">§2</span>市场与运营侧协议（图 1 右列）</h2>
+<dl>
+<dt>IEC 62325 CIM<small>市场通信 CIM</small><span class="tier b">◆</span></dt><dd>IEC TC57 的能源市场通信标准，是 CIM（公共信息模型）在市场侧的部分。62325-451 系列定义欧洲式市场文档：<b>Bid_MarketDocument</b>（报价）、<b>Schedule_MarketDocument</b>（计划）、<b>Publication_MarketDocument</b>（公布结果）等，含 block bid、linked bids、exclusive bids 的既有语义。本标准 L2 直接映射，不重定义。<span class="pos"><b>位置</b> 聚合商 ↔ 交易所 / TSO</span></dd>
+<dt>CIM<small>Common Information Model · IEC 61970/61968/62325</small><span class="tier b">◆</span></dt><dd>电力行业的统一数据模型：61970 输电、61968 配电、62325 市场。<b>mRID</b>（master resource identifier）是其中每个对象的全局唯一标识，本标准用 <span class="k">{"scheme":"iec.cim.mrid"}</span> 引用它来指节点与设备。<span class="pos"><b>位置</b> resource_ref · 网络模型</span></dd>
+<dt>Shapeshifter<small>原 UFTP</small><span class="tier b">◆</span></dt><dd>LF Energy 项目，源自荷兰 USEF 框架的"USEF Flex Trading Protocol"：定义聚合商与配电/输电运营者之间的灵活性请求（FlexRequest）、报价（FlexOffer）、订单（FlexOrder）、结算（FlexSettlement）消息。本标准的 L2 可作为 FlexOffer 的载荷，FlexOrder 映射为 L1 cleared。<span class="pos"><b>位置</b> 聚合商 ↔ DSO/TSO</span></dd>
+<dt>USEF<small>Universal Smart Energy Framework</small><span class="tier b">◆</span></dt><dd>荷兰产业联盟提出的灵活性市场角色与流程框架，定义聚合商、BRP、DSO 之间的互动。UFTP 是其协议部分，后捐给 LF Energy 成为 Shapeshifter。<span class="pos"><b>位置</b> 背景</span></dd>
+<dt>OpenADR 3<small>Open Automated Demand Response</small><span class="tier b">◆</span></dt><dd>OpenADR Alliance 的需求响应协议，3.0 版改为 REST/JSON，核心对象是 program（项目）、event（事件）、report（报告）、priceMap（价格）。事件驱动，适合"某时段请削减"类信号；不表达可行域。LF Energy 的 OpenLEADR 是其参考实现。<span class="pos"><b>位置</b> DSO → 聚合商；event → L1 上下文，priceMap → L2 price</span></dd>
+</dl>
+</section>
+
+<section id="g3">
+<h2><span class="n">§3</span>基础数据与许可规范</h2>
+<dl>
+<dt>JSON Schema 2020-12<span class="tier a">★</span></dt><dd>描述 JSON 文档结构与约束的规范，2020-12 是当前草案版本。四层对象的 schema 均以此编写；校验流水线第一步即按它验证。<span class="pos"><b>位置</b> 图 3 ①</span></dd>
+<dt>SHA-256<small>input_sha256</small><span class="tier a">★</span></dt><dd>密码学哈希函数，输出 64 个十六进制字符。对规范化后的输入求哈希，得到 L3 中的 <span class="k">input_sha256</span>——它是"我检查的确实是这份文件"的指纹，也是复算路径的比对键。<span class="pos"><b>位置</b> 图 3 ②</span></dd>
+<dt>规范化<small>canonicalization</small></dt><dd>把语义相同但写法不同的 JSON（键顺序、空白、数值表示）变成唯一字节串，否则同一份计划会得到不同哈希。<span class="pos"><b>位置</b> 图 3 ②</span></dd>
+<dt>ISO 8601<span class="tier a">★</span></dt><dd>日期时间表示标准。本标准要求所有时间带时区偏移（如 <span class="k">2026-09-04T12:00:00+09:00</span>），杜绝"本地时间"歧义。<span class="pos"><b>位置</b> 所有 window 字段</span></dd>
+<dt>ISO 4217<span class="tier a">★</span></dt><dd>三字母货币代码（JPY、EUR、USD）。L2 price.currency 用它。<span class="pos"><b>位置</b> L2</span></dd>
+<dt>EIC<small>Energy Identification Code · ENTSO-E</small><span class="tier b">◆</span></dt><dd>ENTSO-E 维护的 16 位标识码，用于欧洲内部市场的参与方、区域、资源。由中央发码办公室与各国本地发码办公室颁发；范围限于欧洲，无日本等地办公室。因此本标准不以它为唯一全球码，而以 {scheme,id} 引用。<span class="pos"><b>位置</b> resource_ref（欧洲）</span></dd>
+<dt>Apache-2.0<span class="tier a">★</span></dt><dd>宽松开源软件许可，含明确的专利授权条款——贡献者授予使用者其贡献所涉专利的许可。本标准的 schema、适配器、校验器、测试均采用。选择它而非 MIT 正是为了专利条款。<span class="pos"><b>位置</b> 治理</span></dd>
+<dt>CC BY 4.0<span class="tier a">★</span></dt><dd>知识共享"署名"许可：任何用途（含商业）均可，只须署名。用于规范文本与开放数据集。刻意不用 NC（非商业）变体——NC 会让企业不敢在生产中使用。<span class="pos"><b>位置</b> 治理 · 开放数据集</span></dd>
+</dl>
+</section>
+
+<section id="g4">
+<h2><span class="n">§4</span>LF Energy 托管项目（§2b 表）</h2>
+<dl>
+<dt>FlexMeasures<span class="tier a">★</span></dt><dd>开源能源管理/调度平台（Python），用"flex-context"描述系统层面的目标与价格，用"flex-model"描述每台设备的能力（power-capacity、soc-minima/maxima/targets、group 共享容量、S2 power bands），内部用 Pyomo 或 HiGHS 求解混合整数线性规划。其资产树天然对应本标准的五级层级。<b>本标准首选的第一个外部实现对象</b>。<span class="pos"><b>位置</b> 资源管理器 · 聚合商优化器；L0 ⇄ L1</span></dd>
+<dt>OpenLEADR<span class="tier b">◆</span></dt><dd>OpenADR 的开源参考实现（Python），支持 2.0b 与 3。<span class="pos"><b>位置</b> DSO ↔ 聚合商事件边界</span></dd>
+<dt>EVerest<span class="tier b">◆</span></dt><dd>开源电动车充电固件栈，实现 OCPP、ISO 15118 等，可直接跑在充电桩控制器上。它掌握每个充电会话的车辆需求，是生成充电桩 L0（含充/放/停模式）的自然位置。<span class="pos"><b>位置</b> 电动车/充电桩</span></dd>
+<dt>CUPID<small>Controllable Unit Protocol Interface for DER</small><span class="tier b">◆</span></dt><dd>2026 年加入 LF Energy 的 DER 互操作工具包，源自欧盟资助的 InterStore 项目：IEEE 2030.5 客户端/服务端（经 NATS 传输）、遗留协议转换器、自动化测试工具。曾在意、德、葡、奥四个试点部署。<span class="pos"><b>位置</b> 光伏/储能/逆变器 → L0 生成</span></dd>
+<dt>CoMPAS<small>Configuration Modules for Power industry Automation Systems</small><span class="tier b">◆</span></dt><dd>IEC 61850 配置工具（SCL 文件的生成与校验）。SCL 中的机组额定与拓扑可作为 L0 bounds 与校验用网络模型的来源。<span class="pos"><b>位置</b> 变电站/机组侧；L0 来源</span></dd>
+<dt>SEAPATH<small>Software Enabled Automation Platform And Artifacts (THerein)</small><span class="tier b">◆</span></dt><dd>变电站自动化的开源虚拟化平台（实时 Linux + 虚拟机/容器），让 IEC 61850 应用跑在通用硬件上。校验服务的边界内部署（拓扑 A）可落在这类平台上。<span class="pos"><b>位置</b> 变电站侧</span></dd>
+<dt>Power Grid Model<span class="tier b">◆</span></dt><dd>高性能配网/输网稳态计算库（C++ 核心，Python 接口）：潮流、状态估计、短路。可作为 R-PHYS 规则组比直流潮流更强的后端（交流潮流）。<span class="pos"><b>位置</b> 校验服务内部</span></dd>
+<dt>PowSyBl<small>Power System Blocks</small><span class="tier b">◆</span></dt><dd>Java 电网建模与仿真框架（源自法国 RTE），支持 CIM/CGMES 导入、潮流、安全分析（N-1）、动态仿真。同样可作 R-PHYS 后端，尤其 N-1。<span class="pos"><b>位置</b> 校验服务内部</span></dd>
+<dt>OpenSTEF<small>Short Term Energy Forecasting</small><span class="tier b">◆</span></dt><dd>短期负荷/发电预测流水线（Python，机器学习）。预测是生成 L0 的输入之一，但不是标准对象——列出它是为了划清边界。<span class="pos"><b>位置</b> 聚合商内部；不对接</span></dd>
+<dt>OperatorFabric<span class="tier b">◆</span></dt><dd>电网运营者的通用告警/卡片界面框架：把来自各系统的事件整理成需要人处理的"卡片"。L3 verdict=fail 生成卡片是它在本架构中的自然落点。<span class="pos"><b>位置</b> 系统运营者；L3 → 人</span></dd>
+<dt>URPX<small>Utility Rate Plan eXchange</small><span class="tier b">◆</span></dt><dd>2026 年加入 LF Energy 的公用事业费率计划数据交换标准。费率结构复杂（分时、阶梯、需量），本标准借用它而不自定义。<span class="pos"><b>位置</b> L2 price 上下文</span></dd>
+<dt>AINETUS<span class="tier b">◆</span></dt><dd>2026 年加入 LF Energy 的电网运行 AI 决策支持项目。系统级 L0 外近似可作其输入；L3 可作其建议可信度的证据。本标准不介入其决策逻辑。<span class="pos"><b>位置</b> 系统运营者</span></dd>
+<dt>Carbon Data Specification<small>CDS</small><span class="tier b">◆</span></dt><dd>LF Energy 的电网碳强度/排放数据规范。经 <span class="k">ext["lfenergy.cds"]</span> 挂到 Envelope 上，不进核心层。<span class="pos"><b>位置</b> ext</span></dd>
+<dt>Sandbox · Incubation · Graduated<small>LF Energy 项目阶段</small><span class="tier b">◆</span></dt><dd>Linux Foundation 系基金会通用的项目生命周期：沙箱（早期，门槛低）→ 孵化（有多组织贡献、有治理）→ 毕业（成熟、被广泛采用）。本标准的托管目标路径。<span class="pos"><b>位置</b> 治理</span></dd>
+</dl>
+</section>
+
+<section id="g5">
+<h2><span class="n">§5</span>组织与机构</h2>
+<dl>
+<dt>LF Energy<span class="tier a">★</span></dt><dd>Linux Foundation 下属的能源开源基金会（2018 年成立），托管上节所有项目，成员含欧洲多家输配电运营者、软件厂商与研究机构。每年办 LF Energy Summit（2026 年欧洲峰会 9 月 15 日于柏林）。本标准的目标托管方。</dd>
+<dt>Linux Foundation<span class="tier a">★</span></dt><dd>非营利技术联盟，托管 Linux 内核及数百个开源项目与子基金会（CNCF、LF Energy 等），提供中立的治理与法律框架。</dd>
+<dt>OPC Foundation<span class="tier b">◆</span></dt><dd>维护 OPC UA 及其 companion 规范的行业联盟（1996 年成立）。companion 规范由其与领域组织组成联合工作组发布。本标准的 EnvelopeType 若要成为正式 companion，须经此路径。</dd>
+<dt>IEC TC57<span class="tier b">◆</span></dt><dd>国际电工委员会第 57 技术委员会"电力系统管理与信息交换"，负责 IEC 61850、61970/61968（CIM）、62325（市场 CIM）、62351（安全）等。本标准引用其模型，不与之竞争。</dd>
+<dt>ENTSO-E<span class="tier b">◆</span></dt><dd>欧洲输电系统运营者联盟，维护 EIC 编码、CIM 市场 profile 的欧洲实施、透明度平台。</dd>
+<dt>FAN<small>Flexiblepower Alliance Network</small><span class="tier b">◆</span></dt><dd>荷兰起源的产业联盟，S2 标准的主导开发者，维护 s2-json 等开源实现。</dd>
+<dt>CENELEC<span class="tier b">◆</span></dt><dd>欧洲电工标准化委员会，欧洲标准（EN）的发布机构；S2 的正式编号 EN 50491-12-2 由此而来。</dd>
+<dt>IEEE<span class="tier a">★</span></dt><dd>电气电子工程师学会，标准协会发布 IEEE 2030.5、1547（DER 并网）等。</dd>
+<dt>OCP<small>Open Compute Project</small><span class="tier b">◆</span></dt><dd>数据中心硬件开放设计基金会（机柜、电源、服务器）。目前没有面向电网的灵活性接口规范 ◇；数据中心在本架构中作为"站点"级 Envelope 对接。</dd>
+<dt>DMTF<span class="tier b">◆</span></dt><dd>分布式管理任务组，Redfish 的维护者。</dd>
+<dt>Open Charge Alliance<span class="tier b">◆</span></dt><dd>OCPP 的维护组织。</dd>
+</dl>
+</section>
+
+<section id="g6">
+<h2><span class="n">§6</span>市场角色（图 1 各列）</h2>
+<dl>
+<dt>资源管理器<small>EMS · CEM · RM</small></dt><dd>站点/楼宇/园区一级的能源管理系统。S2 语境中分为 CEM（客户能源管理器，做决策）与 RM（资源管理器，代表设备）；本架构统称资源管理器，它是 Envelope 适配器的宿主，也是回退规则库所在。<span class="pos"><b>位置</b> 图 1 第二列</span></dd>
+<dt>回退规则库<small>fallback rulebook</small></dt><dd>离线预先计算并固化的保守安全策略：当上层计划缺失、超时或校验失败时，设备按规则库运行而不依赖在线优化或推理。原则："刹车不能依赖油门的健康"。L0 的 <span class="k">fallback</span> 字段引用它。<span class="pos"><b>位置</b> 资源管理器</span></dd>
+<dt>聚合商<small>Aggregator · VPP</small></dt><dd>把大量小型资源的灵活性汇集后，以一个整体参与市场或向系统运营者提供服务的主体。<b>VPP</b>（虚拟电厂）是其常用产品名。本架构中它做三件事：聚合 L0、生成 L2、分解 cleared L1。<span class="pos"><b>位置</b> 图 1 第四列</span></dd>
+<dt>售电公司 · BRP<small>Balance Responsible Party</small></dt><dd>向终端用户售电的零售商；BRP 是欧洲术语，指对自己组合的"计划与实际一致"负财务责任的主体（日本称"计划值同时同量"义务）。偏差按不平衡费结算。<span class="pos"><b>位置</b> 图 1 第四列</span></dd>
+<dt>批发电力交易所</dt><dd>日前/日内电能交易平台（如 EPEX、Nord Pool、JEPX）。接受报价、出清、公布价格。本架构中 L2 经交易所 API 或 CIM 提交，成交回流为 L1 cleared。<span class="pos"><b>位置</b> 图 1 右列</span></dd>
+<dt>平衡 / 调节力市场</dt><dd>系统运营者采购实时平衡能力（备用、调频）的市场。资源须在被调用时真的能动——这正是校验 L1 ∈ L0 的价值所在。<span class="pos"><b>位置</b> 图 1 右列</span></dd>
+<dt>DSO<small>配电系统运营者</small></dt><dd>负责中低压配电网的运营者。关心馈线/变压器是否过载，是 Shapeshifter、OpenADR 的主要对手方，也是 L0 外近似的接收者。<span class="pos"><b>位置</b> 图 1 右列</span></dd>
+<dt>TSO<small>输电系统运营者</small></dt><dd>负责高压输电网与系统整体平衡的运营者。接收计划（Schedule）、采购调节力、结算不平衡。<span class="pos"><b>位置</b> 图 1 右列</span></dd>
+<dt>计量数据管理</dt><dd>智能电表数据的采集、校核与分发方（各国制度不同：可能是 DSO、独立机构或市场运营者）。其数据是 L1 measured 的权威来源。<span class="pos"><b>位置</b> 图 1 右下</span></dd>
+<dt>关键基础设施<small>阈值型监管</small></dt><dd>许多辖区按聚合规模指定"关键基础设施运营者"，对其系统的供应商、网络安全、变更施加审查。本标准只在聚合商级记录容量，不判断适用性。<span class="pos"><b>位置</b> 图 2 注</span></dd>
+</dl>
+</section>
+
+<section id="g7">
+<h2><span class="n">§7</span>电力物理与数学</h2>
+<dl>
+<dt>KCL<small>基尔霍夫电流定律</small></dt><dd>任一节点流入电流之和等于流出之和。在功率层面：节点注入 − 负荷 − 净支路流出 = 0。规则 <span class="k">phys.kcl</span> 计算每节点残差。<span class="pos"><b>位置</b> R-PHYS</span></dd>
+<dt>KVL<small>基尔霍夫电压定律</small></dt><dd>任一闭合回路电压降之和为零。在直流潮流近似下：支路流量乘电抗，沿环路求和为零；等价于存在一组节点相角 θ 使 <span class="k">X·f = A·θ</span>。规则 <span class="k">phys.kvl</span> 用最小二乘求残差。<span class="pos"><b>位置</b> R-PHYS</span></dd>
+<dt>直流潮流<small>DC power flow</small></dt><dd>交流潮流的线性化近似：忽略电阻与无功，假设电压幅值为 1、相角差小。计算极快、无收敛问题，适合校验与市场出清；代价是看不到电压与无功问题。本标准基础规则集用它；可换 Power Grid Model / PowSyBl 的交流潮流。<span class="pos"><b>位置</b> R-PHYS 方法</span></dd>
+<dt>交流潮流<small>AC power flow</small></dt><dd>完整的非线性潮流方程（有功、无功、电压幅值、相角），需迭代求解（牛顿-拉夫逊）。更准，但可能不收敛。<span class="pos"><b>位置</b> R-PHYS 可选后端</span></dd>
+<dt>N-1<small>安全准则</small></dt><dd>任一单一元件（线路、变压器、机组）故障退出后，系统仍应无过载、无失稳。PowSyBl 的安全分析可做此校验。<span class="pos"><b>位置</b> R-PHYS 可选</span></dd>
+<dt>线路限额 · 支路流</dt><dd>每条线路/变压器允许的最大功率（热极限或稳定极限）；支路流是流经它的功率。规则 <span class="k">phys.limit</span> 逐支路比较。<span class="pos"><b>位置</b> R-PHYS</span></dd>
+<dt>节点相角 θ</dt><dd>直流潮流中每个节点电压的相位角；相角差驱动功率沿线路流动。其存在性即 KVL 成立的判据。<span class="pos"><b>位置</b> phys.kvl</span></dd>
+<dt>最小二乘残差</dt><dd>找一组 θ 使 <span class="k">X·f − A·θ</span> 的平方和最小；剩下的量就是"无论怎么选相角都解释不掉的部分"，即 KVL 违反量。<span class="pos"><b>位置</b> phys.kvl 方法</span></dd>
+<dt>约束集 A·u ≤ b<small>线性不等式组</small></dt><dd>用矩阵 A、向量 b 描述的可行域：所有满足全部不等式的功率序列 u 都"做得到"。几何上是一个凸多面体（polytope）。这是 L0 的核心表示，也是"字段式"表示的一般化。<span class="pos"><b>位置</b> L0</span></dd>
+<dt>模式变量 · 整数约束<small>mode / binary</small></dt><dd>只能取离散值的变量（开/关、充/放/停），以及依赖它们的约束（最小持续时间、最大切换次数、起动费用）。线性不等式表达不了它们，故 L0 需单独的 <span class="k">modes</span> 定义，规则 <span class="k">env.mode</span> 枚举检查。<span class="pos"><b>位置</b> L0 · R-ENV</span></dd>
+<dt>SOC<small>State of Charge</small></dt><dd>储能当前电量占容量的比例（0–1）。SOC 轨迹由功率序列、效率、初始值前向积分得到；规则 <span class="k">env.soc</span> 检查它是否始终在 [soc_min, soc_max] 内。<span class="pos"><b>位置</b> L0 params.storage · R-ENV</span></dd>
+<dt>爬坡<small>ramp</small></dt><dd>功率在相邻时步之间的最大变化量。L0 用 <span class="k">diff</span> 约束表达，规则 <span class="k">env.ramp</span> 检查。<span class="pos"><b>位置</b> L0 · R-ENV</span></dd>
+<dt>Minkowski 和</dt><dd>两个集合 A、B 的 Minkowski 和是 {a + b : a∈A, b∈B}。多个资源可行域的聚合正是它们的 Minkowski 和；精确计算在高维下不可行，故实际只能取内近似或外近似。<span class="pos"><b>位置</b> 图 2 · R-AGG</span></dd>
+<dt>inner / outer / exact<small>近似声明</small></dt><dd><b>inner</b>（内近似）⊆ 真实可行域：承诺的每一点都能兑现，用于向系统运营者承诺。<b>outer</b>（外近似）⊇ 真实可行域：不泄露内部结构，用于对市场公布可用性，但成交后须能分解。<b>exact</b> 仅当下级全为盒约束且无耦合时成立。L0 聚合时必须声明其一。<span class="pos"><b>位置</b> 图 2 · agg.approx</span></dd>
+<dt>盒约束<small>box constraint</small></dt><dd>每个变量独立的上下界、彼此无耦合（像一个长方体）。盒约束的 Minkowski 和可以精确算（上下界分别相加），是 exact 声明的前提。<span class="pos"><b>位置</b> agg.approx</span></dd>
+<dt>分解<small>disaggregation</small></dt><dd>把上级成交的 L1 拆成各下级的 L1ᵢ。规则 <span class="k">agg.sum</span> 要求 Σ L1ᵢ = L1 且每个 L1ᵢ ∈ L0ᵢ。<span class="pos"><b>位置</b> 图 2 · 图 4 ⑥</span></dd>
+<dt>Block / linked / exclusive<small>报价类型</small></dt><dd>交易所报价语义：<b>block</b> 多时段捆绑、全量成交或全不成交；<b>linked</b> 子报价成交以父报价成交为条件；<b>exclusive group</b> 组内最多一个成交。源自欧洲交易所与 CIM 62325。规则 <span class="k">mkt.links</span> 检查其图结构无环。<span class="pos"><b>位置</b> L2 · R-MKT</span></dd>
+<dt>偏差 · 不平衡<small>imbalance</small></dt><dd>measured 与 cleared/schedule 之差，按不平衡费结算。图 4 ⑧ 的 L3 用同一规则集出具"偏差证明"。<span class="pos"><b>位置</b> 计量/结算</span></dd>
+</dl>
+</section>
+
+<section id="g8">
+<h2><span class="n">§8</span>校验与治理概念</h2>
+<dl>
+<dt>校验服务<small>validator</small></dt><dd>读 L0+L1(+L2)、按规则集判定、写 L3 的无状态确定性程序。可有任意多个、由不同方运行。只输出 verdict 与 violations，不输出指令。<span class="pos"><b>位置</b> 图 1 下 · 图 3</span></dd>
+<dt>确定性 · 无状态</dt><dd>同样输入、同样规则版本 → 同样输出，且不依赖此前的任何请求。这两条是"任何人可复算"的前提。<span class="pos"><b>位置</b> 图 3</span></dd>
+<dt>规则集<small>rule set</small></dt><dd>标准的可执行部分：一组有稳定 id、版本、输入层、输出字段与测试向量的判定规则，分 R-PHYS / R-ENV / R-MKT / R-AGG / R-CONSENT 五组。明确排除任何"是否最优""应如何改"的判定。<span class="pos"><b>位置</b> 图 3 ③ · §6 表</span></dd>
+<dt>规则集注册表</dt><dd>存放各版本规则与其测试向量的公开仓库。L3 记录所用版本；复算时从此拉取同版规则。它是整个体系中需要被信任的两处之一（另一处是透明日志）。<span class="pos"><b>位置</b> 图 3 下</span></dd>
+<dt>一致性测试向量<small>conformance test vectors</small></dt><dd>成对的"输入 → 期望输出"文件。"符合标准"的唯一定义就是对全部向量产生期望输出。<span class="pos"><b>位置</b> 治理</span></dd>
+<dt>verdict · violations</dt><dd>L3 的两个核心字段：结论（pass / fail / inconclusive）与违规清单，每条含规则 id、位置、残差、说明。violations 是开放数据集里"负样本"的来源。<span class="pos"><b>位置</b> L3</span></dd>
+<dt>透明日志<small>transparency log</small></dt><dd>只追加、哈希链式、公开可查的记录，仅存 L3 与输入哈希，不存任何明文。任何人可审计"某个 L3 确实在某时被记录且未被改动"。概念借自证书透明度（Certificate Transparency）。<span class="pos"><b>位置</b> 图 1 右下 · 图 3</span></dd>
+<dt>哈希链<small>hash chain</small></dt><dd>每条记录包含前一条记录的哈希，改任一条都会使后续全部失效。只追加日志的防篡改基础。<span class="pos"><b>位置</b> 透明日志</span></dd>
+<dt>复算路径<small>reproduce</small></dt><dd>第三方取 L3 中的规则版本 → 从注册表拉同版规则 → 用原输入重跑 → 比对哈希与 verdict。一致即证明成立；不一致则校验方作假或注册表被改。校验方本身不需被信任。<span class="pos"><b>位置</b> 图 3 底</span></dd>
+<dt>签名<small>signer{id, alg, sig}</small></dt><dd>校验方对 L3 的数字签名。密钥属校验方，可多方。签名证明"是谁说的"，哈希证明"说的是哪份"。<span class="pos"><b>位置</b> 图 3 ④</span></dd>
+<dt>拓扑 A / B / C<small>部署</small></dt><dd><b>A</b> 边界内本地：明文不出边界，只有 L3 外发；<b>B</b> 托管：把数据发给第三方校验；<b>C</b> 多方交叉：同一输入送 ≥2 校验方比对。三者 L3 格式相同。<span class="pos"><b>位置</b> §8</span></dd>
+<dt>数据驻留<small>data residency</small></dt><dd>数据必须留在某个法律辖区内的要求。拓扑 A 与 consent.cross_border 共同满足它。<span class="pos"><b>位置</b> §8</span></dd>
+<dt>开放数据集</dt><dd>仅在 consent.training_use=true 时，把脱敏后的 violations 汇入的公开数据集（CC BY 4.0）。它是校验体系对研究界的回馈，也是任何人（不限于某一方）训练模型的共同底料。<span class="pos"><b>位置</b> 图 1 右下（虚线）</span></dd>
+<dt>Profile<small>标准的实施规范</small></dt><dd>在一个更宽泛的标准之上，规定"用哪一子集、怎么用"的窄化文档（如 CSIP 之于 IEEE 2030.5）。本标准自我定位为 S2 之上的聚合层 profile、Shapeshifter/CIM 之下的可行域与证明层。<span class="pos"><b>位置</b> 治理</span></dd>
+<dt>中立性硬约束</dt><dd>维护者中任一雇主不得占多数；规则变更须两个独立组织的实现通过测试；不成立新联盟；ext 无独占。这些是写进治理文件的规则，不是承诺。<span class="pos"><b>位置</b> §9</span></dd>
+<dt>退出条款</dt><dd>若既有标准吸收了约束集表示与证明对象，本标准转为兼容层并冻结。"被吸收后消失"被定义为成功的一种。<span class="pos"><b>位置</b> §9</span></dd>
+<dt>Flexibility envelope<small>灵活性包络 · 术语来源</small><span class="tier b">◆</span></dt><dd>Nosair &amp; Bouffard（IEEE Trans. Sustainable Energy 6(3), 2015）提出：用「时间约束下可部署的功率/能量范围」同时表达系统对灵活性的需求与资源能提供的灵活性 [A1]。后续扩展到配电网 [A2] 与能源社区 [A16]。本标准的 L0 与此同名同义。<span class="pos"><b>位置</b> 命名依据</span></dd>
+<dt>Realizability<small>可实现性</small><span class="tier b">◆</span></dt><dd>聚合可行域中的一点能否真的分解到各成员、且每个成员都满足自身约束。近年文献（Elsaadany / Almassalkhi / Tindemans 2025；arXiv 2606.01562, 2026）给出电池群聚合可实现性的线性充分条件 [A4][A5]。对应本标准：<span class="k">aggregation.approximation=inner</span> + 规则 <span class="k">agg.sum</span>。<span class="pos"><b>位置</b> §4 · R-AGG</span></dd>
+<dt>Polymatroid / zonotope<small>聚合可行域的精确与近似表示</small><span class="tier b">◆</span></dt><dd>广义拟阵（generalized polymatroid）可精确刻画某类能量受限负荷的聚合可行域 [A7][A11]；约束 zonotope 用于电网感知的多时段聚合近似 [A10]。它们是 L0 约束集之上的「更紧表示」，可作 <span class="k">aggregation.method</span> 取值。<span class="pos"><b>位置</b> L0 aggregation</span></dd>
+<dt>CSIP 认证<small>SunSpec IEEE 2030.5 certification</small><span class="tier b">◆</span></dt><dd>SunSpec 联盟运营的 IEEE 2030.5 CSIP 一致性认证；CSIP 从 2030.5 中选取 18 个功能集并规定实现方式。近期数据 52 家公司 77 项认证 [E2]；CSIP-AUS 有独立测试认证手册 [R12]。本标准一致性测试的组织形式可参照。<span class="pos"><b>位置</b> 治理 · 资源侧</span></dd>
+<dt>Network Code on Demand Response<small>欧盟需求响应网络准则</small><span class="tier b">◆</span></dt><dd>ACER 2025-03-07 向欧委会提交的欧盟统一网络准则，使需求响应、储能、分布式发电全面参与批发市场；成员国须在 2026-07 前完成国家灵活性需求评估，2027-01 前设定指示性目标 [R6][R7]。L2/L1 在欧洲的制度落点。<span class="pos"><b>位置</b> 市场侧 · 欧洲</span></dd>
+<dt>FERC Order 2222<span class="tier b">◆</span></dt><dd>美国联邦能源监管委员会 2020 年命令，要求各 RTO/ISO 允许 DER 聚合体参与批发市场；各区实施进度不一（ISO-NE 能量/辅助服务市场定于 2026-11-01）[R10]。美国版「聚合商 ↔ 批发市场」制度。<span class="pos"><b>位置</b> 市场侧 · 美国</span></dd>
+<dt>虚拟电厂 指导意见（2025）<small>发改委 · 能源局</small><span class="tier b">◆</span></dt><dd>2025-04-08《关于加快推进虚拟电厂发展的指导意见》：定义 VPP 为聚合分布式电源、可调节负荷、储能的运营组织模式；目标 2027 年 &gt;20 GW、2030 年 &gt;50 GW [C7]。GB/T 44241 与三份团标是其技术落点。<span class="pos"><b>位置</b> 市场侧 · 中国</span></dd>
+<dt>DCFlex<small>EPRI 数据中心灵活性倡议</small><span class="tier b">◆</span></dt><dd>EPRI 2024 年启动的三年计划，&gt;40 家参与（Google、Meta、Microsoft、Duke Energy、PJM 等），实测需求响应、负载转移、UPS 作为电网资源 [R2]。数据中心作为「站点」级 Envelope 的现实试验场。<span class="pos"><b>位置</b> 资源侧 · 数据中心</span></dd>
+
+</dl>
+</section>
+
+<section id="g9">
+<h2><span class="n">§9</span>附：相邻页面（战略审查 / 核实记录）出现的日本市场术语</h2>
+<dl>
+<dt>同時市場<small>どうじしじょう</small><span class="tier a">★</span></dt><dd>日本正在设计的未来市场：把电能（kWh）与调节力（ΔkW）放在同一个市场里同时出清，取代现行的现货市场 + 需给调整市场。目标 2030 年代前半启用，五阶段路线图。由経済産業省下属检讨会与 OCCTO 设计。</dd>
+<dt>Three-Part Offer<small>スリーパート・オファー</small><span class="tier a">★</span></dt><dd>同時市場的报价形式：按发电机登记 ①起動費（可按停机时长分档）②最低出力費用 ③阶梯式增分費用カーブ，加上運転パラメータ（出力上下限、起動時間、出力変化速度等）。源自北美市场。字段清单尚未最终确定。</dd>
+<dt>SCUC / SCED<span class="tier a">★</span></dt><dd>Security Constrained Unit Commitment / Economic Dispatch：考虑电网安全约束的机组起停组合与出力分配优化，北美市场的出清方式，同時市場拟采用。</dd>
+<dt>需給調整市場<small>じゅきゅうちょうせいしじょう</small><span class="tier a">★</span></dt><dd>日本现行的调节力（ΔkW）采购市场，2024 年 4 月起全部五种商品上市；出现过约定量大幅低于募集量、价格高企的问题。</dd>
+<dt>特定卸供給事業<small>とくていおろしきょうきゅうじぎょう</small><span class="tier b">◆</span></dt><dd>日本电気事業法中"聚合商"的法定名称：从发电事业者以外的、拥有供给能力者处集约超过 1,000 kW 电力，供给给一般送配电/售电等。届出制（备案），2022 年 4 月起。纯校验服务因不供电、不集约而不属此类；边界在法条中的"指示"一词。</dd>
+<dt>ブロック入札<small>block bid</small><span class="tier a">★</span></dt><dd>JEPX 现货市场中把多个时段捆绑、全量成交或全不成交的报价。监管方数据：卖方报价中 60–80% 为 block，成交率仅数个百分点。</dd>
+<dt>計画値同時同量<small>けいかくちどうじどうりょう</small><span class="tier b">◆</span></dt><dd>日本的平衡责任制度：发电/需求平衡组须使实际值与提交的计划值一致，偏差按不平衡费结算。对应欧洲的 BRP 义务。</dd>
+<dt>JEPX · OCCTO<span class="tier a">★</span></dt><dd>JEPX：日本卸電力取引所，唯一的批发电力交易所（现货 30 分钟 × 48 时段、区域价格）。OCCTO：電力広域的運営推進機関，全国电力事业者强制加盟的协调机构，运营容量市场与需给调整市场、汇总供需计划。</dd>
+<dt>経済安全保障推進法 · 基幹インフラ制度<span class="tier a">★</span></dt><dd>日本 2022 年法律及其关键基础设施制度：指定的电力事业者（含聚合规模 ≥50 万 kW 的特定卸供給事業者）导入"特定重要設備"（含 EMS 及其软件）前须提交计划书接受审查，审查项包括供应商属性。</dd>
+</dl>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  var q=document.getElementById('q'),cnt=document.getElementById('cnt');
+  var dts=[].slice.call(document.querySelectorAll('dt'));
+  var total=dts.length;
+  function upd(){
+    var s=q.value.trim().toLowerCase(),n=0;
+    dts.forEach(function(dt){
+      var dd=dt.nextElementSibling;
+      var hit=!s||(dt.textContent+' '+dd.textContent).toLowerCase().indexOf(s)>=0;
+      dt.classList.toggle('hidden',!hit);dd.classList.toggle('hidden',!hit);if(hit)n++;
+    });
+    document.querySelectorAll('section').forEach(function(sec){
+      var any=sec.querySelector('dt:not(.hidden)');sec.classList.toggle('hidden',!any);
+    });
+    cnt.textContent=n+' / '+total+' 条';
+  }
+  q.addEventListener('input',upd);upd();
+})();
+</script>
+
+</body>
+</html>

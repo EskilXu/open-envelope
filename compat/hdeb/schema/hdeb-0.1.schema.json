@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/OWNER/hdeb-open/schema/hdeb-0.1.schema.json",
+  "title": "HDEB — Hierarchical Dynamic Energy Block (open reconstruction, v0.1)",
+  "description": "A time-bounded, hierarchically nestable block of electrical energy/power with explicit physical constraints, market attributes and provenance. Lineage: Block Order (EPEX/JEPX) -> flexible energy block -> HDEB. This is an independent, field-level reconstruction; no proprietary material is included.",
+  "type": "object",
+  "required": [
+    "hdeb_version",
+    "block_id",
+    "kind",
+    "window",
+    "power",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "hdeb_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+    "block_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Globally unique within the document; recommend URN or UUID."
+    },
+    "parent_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Hierarchy: id of the enclosing block (aggregation). null = root."
+    },
+    "hierarchy_level": {
+      "type": "string",
+      "enum": [
+        "device",
+        "site",
+        "aggregator",
+        "area",
+        "system"
+      ],
+      "description": "Coarse level in the H of HDEB."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "capability",
+        "bid",
+        "offer",
+        "schedule",
+        "cleared",
+        "measured"
+      ],
+      "description": "Lifecycle stage of the block."
+    },
+    "resource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "generator",
+            "load",
+            "storage",
+            "aggregate",
+            "market",
+            "unknown"
+          ]
+        },
+        "bus": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Electrical node id; required for KCL/KVL checks."
+        },
+        "area": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Market/balancing area code (e.g. JP-TOKYO)."
+        },
+        "voltage_kv": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "window": {
+      "type": "object",
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "resolution_min": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "power": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "kW, generator convention: positive = injection into grid.",
+      "properties": {
+        "min_kw": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "max_kw": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "scheduled_kw": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ramp_up_kw_per_min": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "ramp_down_kw_per_min": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "energy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kwh": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "export",
+            "import",
+            "bidirectional"
+          ]
+        }
+      }
+    },
+    "storage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "capacity_kwh": {
+          "type": "number",
+          "minimum": 0
+        },
+        "soc_start": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "soc_min": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "soc_max": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "eta_charge": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "eta_discharge": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "price": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "per_kWh",
+            "per_MWh",
+            "per_kW"
+          ]
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "reference": {
+          "type": "string",
+          "enum": [
+            "system",
+            "area",
+            "node",
+            "pay_as_bid",
+            "pay_as_clear"
+          ]
+        }
+      }
+    },
+    "market_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Block-order semantics inherited from EPEX/JEPX block bids.",
+      "properties": {
+        "divisible": {
+          "type": "boolean"
+        },
+        "min_acceptance_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "linked_block_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclusive_group": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sell_block_bid_kwh": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "sell_block_cleared_kwh": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "buy_block_bid_kwh": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "buy_block_cleared_kwh": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "market_volume": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sell_bid_kwh": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "buy_bid_kwh": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "cleared_kwh": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Rule-based safe state if the optimizer/AI fails (offline MPC rulebook).",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "hold",
+            "curtail",
+            "island",
+            "rulebook"
+          ]
+        },
+        "rulebook_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timeout_s": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "source",
+        "retrieved_at"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "license": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "attribution": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "generator": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Tool + version that produced this block."
+        },
+        "raw_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Row/line/record reference into the source."
+        }
+      }
+    },
+    "ext": {
+      "type": "object",
+      "description": "Namespaced extensions, e.g. ext['jp.jepx'] or ext['s2']."
+    }
+  }
+}

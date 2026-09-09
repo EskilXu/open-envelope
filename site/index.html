@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenEnvelope 工作台</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+:root{--ground:#0d1416;--panel:#131d1f;--panel2:#182527;--rule:#24363a;--rule2:#2f464b;--ink:#d8ddd9;--ink2:#a9b6b3;--mute:#7a8f8c;--teal:#4fb3a9;--teal2:#2c6f69;--amber:#d9a441;--red:#c95c4b;--green:#6fb07a;--blue:#6f9fc9;
+--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--serif:"Noto Serif SC","Songti SC","Hiragino Mincho ProN",Georgia,serif;--cond:"IBM Plex Sans Condensed","Arial Narrow",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--serif);font-size:15.5px;line-height:1.7}
+a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal2)}
+a:hover{border-bottom-color:var(--teal)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 28px 80px}
+header{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;border-bottom:1px solid var(--rule);padding-bottom:18px}
+header h1{font-family:var(--cond);font-weight:600;font-size:42px;line-height:1.05;margin:0 0 6px;letter-spacing:-.01em}
+header .sub{font-family:var(--mono);font-size:12.5px;color:var(--mute);letter-spacing:.04em}
+header .stamp{font-family:var(--mono);font-size:11.5px;color:var(--mute);text-align:right;line-height:1.6}
+header .stamp b{color:var(--teal);font-weight:500}
+h2{font-family:var(--cond);font-size:20px;font-weight:600;margin:40px 0 12px;letter-spacing:.01em}
+h2 .n{font-family:var(--mono);color:var(--teal);font-size:11.5px;letter-spacing:.14em;margin-right:12px;font-weight:500}
+p{max-width:70ch;margin:0 0 12px}
+.k{font-family:var(--mono);font-size:.88em;color:var(--teal)}
+/* annunciator */
+.ann{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:22px 0 0}
+.ann .tile{background:var(--panel);padding:12px 14px;font-family:var(--mono);min-height:86px;display:flex;flex-direction:column;justify-content:space-between}
+.ann .lbl{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.ann .val{font-size:22px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.ann .val small{font-size:11px;font-weight:400;color:var(--mute);margin-left:4px}
+.ann .st{font-size:11px;display:flex;align-items:center;gap:6px;color:var(--ink2)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:var(--mute)}
+.dot.ok{background:var(--green);box-shadow:0 0 8px rgba(111,176,122,.6)}
+.dot.warn{background:var(--amber);box-shadow:0 0 8px rgba(217,164,65,.6)}
+.dot.crit{background:var(--red);box-shadow:0 0 8px rgba(201,92,75,.6)}
+@media (prefers-reduced-motion:no-preference){.dot.warn,.dot.crit{animation:pulse 2.4s ease-in-out infinite}@keyframes pulse{50%{opacity:.55}}}
+/* page cards */
+.pages{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:14px 0}
+.page{background:var(--panel);border:1px solid var(--rule);padding:16px 18px;display:flex;flex-direction:column;gap:8px;position:relative}
+.page.primary{border-color:var(--teal);background:var(--panel2)}
+.page .ico{font-size:20px;line-height:1}
+.page h3{font-family:var(--cond);font-size:18px;font-weight:600;margin:0}
+.page h3 a{border:0;color:var(--ink)}
+.page h3 a:hover{color:var(--teal)}
+.page .ver{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:.04em}
+.page p{font-size:14px;margin:0;color:var(--ink2);max-width:none}
+.page .for{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:auto;padding-top:8px;border-top:1px dashed var(--rule)}
+.page .for b{color:var(--ink2);font-weight:500}
+.page .open{position:absolute;top:14px;right:16px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--teal);border:1px solid var(--teal2);padding:2px 8px;border-radius:2px}
+.page .open:hover{background:var(--teal2);color:var(--ink)}
+.badge{font-family:var(--mono);font-size:10.5px;padding:1px 6px;border:1px solid var(--rule2);border-radius:2px;color:var(--ink2);white-space:nowrap}
+.badge.int{color:var(--amber);border-color:rgba(217,164,65,.5)}
+.badge.neu{color:var(--green);border-color:rgba(111,176,122,.5)}
+/* reading paths */
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0}
+.path{background:var(--panel);border:1px solid var(--rule);padding:14px 16px}
+.path h4{margin:0 0 8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.path ol{margin:0;padding-left:1.3em;font-size:14px;color:var(--ink2)}
+.path li{margin-bottom:4px}
+.path li a{color:var(--ink)}
+/* tables */
+.tbl{overflow-x:auto;margin:12px 0 18px;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;padding:9px 12px;background:var(--panel);border-bottom:1px solid var(--rule2);font-weight:500}
+td{padding:8px 12px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.5}
+tr:last-child td{border-bottom:0}
+td.m{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.marker .d{color:var(--amber)}
+pre{background:var(--panel);border:1px solid var(--rule);padding:12px 16px;font-family:var(--mono);font-size:12.5px;line-height:1.6;overflow-x:auto;margin:12px 0;color:var(--ink2)}
+pre b{color:var(--teal);font-weight:500}
+.small{font-size:12.5px;color:var(--mute);font-family:var(--mono)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>OpenEnvelope 工作台</h1>
+    <div class="sub">灵活性资源的开放交换标准（暂定名）· 五份文档 + 一个仓库 的统一入口</div>
+  </div>
+  <div class="stamp">2026-09-09<br><b>★</b> 一手已核 <b>◆</b> 可信二手 <b>◇</b> 未核<br>open &amp; secure — don't trust, verify it</div>
+</header>
+
+<div class="ann" role="list">
+  <div class="tile" role="listitem"><span class="lbl">Schema</span><span class="val">0.0.3</span><span class="st"><i class="dot ok"></i>modes · aggregation · 7 tests</span></div>
+  <div class="tile" role="listitem"><span class="lbl">文档</span><span class="val">5<small>页</small></span><span class="st"><i class="dot ok"></i>1 内部 · 4 中立</span></div>
+  <div class="tile" role="listitem"><span class="lbl">统一来源</span><span class="val">57<small>条</small></span><span class="st"><i class="dot ok"></i>14★ · 43◆</span></div>
+  <div class="tile" role="listitem"><span class="lbl">标准登记</span><span class="val">35<small>项</small></span><span class="st"><i class="dot ok"></i>OPC · LFE · IEC · CN</span></div>
+  <div class="tile" role="listitem"><span class="lbl">待决策</span><span class="val">4<small>D1–D4</small></span><span class="st"><i class="dot crit"></i>见战略审查 §8</span></div>
+  <div class="tile" role="listitem"><span class="lbl">下一标记</span><span class="val">M1<small>12-31</small></span><span class="st"><i class="dot warn"></i>≥1 外部 L0 实现</span></div>
+</div>
+
+<h2><span class="n">§1</span>五份文档</h2>
+<div class="pages">
+  <div class="page">
+    <a class="open" href="/internal/review">OPEN ↗</a>
+    <div class="ico">⬡</div>
+    <h3><a href="/internal/review">战略审查</a></h3>
+    <div class="ver">rev 3 · 2026-09-09 · <span class="badge int">内部</span></div>
+    <p>为什么做、值不值、怎么止损。设计审查（HOLDS / WEAK / RISK）、生态位、入口与飞轮、以期权定价的投入产出、可证伪标记 M1–M5、四项决策请求。</p>
+    <div class="for"><b>给</b> 自己 · 投资人 · 合伙人 &nbsp;|&nbsp; 含内部语言，公开前需处理（F10）</div>
+  </div>
+  <div class="page primary">
+    <a class="open" href="/architecture">OPEN ↗</a>
+    <div class="ico">⬢</div>
+    <h3><a href="/architecture">参考架构</a></h3>
+    <div class="ver">v0.3 · 2026-09-09 · <span class="badge neu">中立</span></div>
+    <p>标准本身。四层对象、上下游对接全景（图 1）、OPC UA 与 LF Energy 对接（§2b）、层级聚合语义、校验流水线、规则集、生命周期时序、部署拓扑、治理。零公司语言。</p>
+    <div class="for"><b>给</b> EMS/聚合商工程师 · 标准组织 · 基金会审阅人</div>
+  </div>
+  <div class="page">
+    <a class="open" href="/standards-library">OPEN ↗</a>
+    <div class="ico">🗂️</div>
+    <h3><a href="/standards-library">标准库</a></h3>
+    <div class="ver">v0.2 · 2026-09-09 · <span class="badge neu">中立</span></div>
+    <p>既有标准怎么接进来。OPC / LF Energy / IEC / 中国 GB·DL/T·团标 × 四层的矩阵，35 项登记表，映射文件格式，优先级，访问性与许可。中国标准在设备层即 IEC、在 VPP 层分叉。</p>
+    <div class="for"><b>给</b> 适配器贡献者 · 中国/日本/欧洲落地团队</div>
+  </div>
+  <div class="page">
+    <a class="open" href="/glossary">OPEN ↗</a>
+    <div class="ico">📖</div>
+    <h3><a href="/glossary">术语辞典</a></h3>
+    <div class="ver">v2 · 2026-09-09 · 126 条 · 可搜索 · <span class="badge neu">中立</span></div>
+    <p>架构页上每个专有名词：是什么、谁维护、在图里坐哪。协议、LF Energy 项目、机构、市场角色、电力物理与数学、校验与治理概念，附日本市场术语。</p>
+    <div class="for"><b>给</b> 第一次读架构的人 · 跨领域协作者</div>
+  </div>
+  <div class="page">
+    <a class="open" href="/internal/review-landscape">OPEN ↗</a>
+    <div class="ico">🔍</div>
+    <h3><a href="/internal/review-landscape">审查与图景</a></h3>
+    <div class="ver">v1 · 2026-09-09 · <span class="badge int">内部</span></div>
+    <p>三轮审查记录（11 项发现，9 修 2 待办）、统一来源表、2024–26 研究话题、学者与团队、公司与产品、政策与报告，以及这些对本标准意味着什么。</p>
+    <div class="for"><b>给</b> 自己 · 学术合作者 · 尽调方</div>
+  </div>
+</div>
+
+<h2><span class="n">§2</span>按身份的阅读顺序</h2>
+<div class="paths">
+  <div class="path"><h4>15 分钟 · 决策者</h4><ol><li><a href="/internal/review">战略审查</a> §1 一句话 → §6 投入产出 → §8 决策请求</li><li><a href="/internal/review-landscape">审查与图景</a> §7 含义</li></ol></div>
+  <div class="path"><h4>1 小时 · 工程实现者</h4><ol><li><a href="/glossary">辞典</a> §0 本标准对象</li><li><a href="/architecture">参考架构</a> 全文，重点图 1 / 图 3 / §6 规则集</li><li>仓库 <span class="k">envelope/envelope-0.0.3.schema.json</span> 与 <span class="k">tools/</span></li></ol></div>
+  <div class="path"><h4>1 小时 · 标准/基金会审阅人</h4><ol><li><a href="/architecture">参考架构</a> §1 原则 → §2b 对接 → §9 治理</li><li><a href="/standards-library">标准库</a> §2 矩阵 → §7 访问性</li><li><a href="/internal/review-landscape">审查与图景</a> §3 话题图景</li></ol></div>
+  <div class="path"><h4>30 分钟 · 中国/日本落地</h4><ol><li><a href="/standards-library">标准库</a> §4 中国结构特征 → §6 优先级</li><li><a href="/glossary">辞典</a> §9 日本术语</li><li><a href="/internal/review">战略审查</a> §5 桌位（同時市場）</li></ol></div>
+</div>
+
+<div class="two">
+<div>
+<h2><span class="n">§3</span>仓库（zip 同步）</h2>
+<pre><b>hdeb-open/</b>
+  README.md · LICENSE (Apache-2.0) · NOTICE
+  <b>envelope/</b>        envelope-0.0.3.schema.json · PROPOSAL.md · 3 examples
+  <b>schema/</b>          hdeb 0.1 桥接格式（历史，含 JEPX 映射）
+  <b>tools/</b>           jepx_to_hdeb.py · kclkvl_check.py（20 行核心）
+  <b>registry/</b>        standards.yaml（35）· profiles/（映射格式 + S2 示例）
+  <b>tests/</b>           7 passing · fixtures/ JEPX 2026-04-01
+  <b>docs/</b>            五份 HTML · SOURCES.md（57）· VERIFICATION · mapping.md
+  <b>ofb/</b>             已弃用名（历史）</pre>
+<p class="small">发布前待办：F10 把战略审查与审查图景移出 <span class="k">docs/</span>；D1 以 openenvelope 为主仓库名。</p>
+</div>
+<div>
+<h2><span class="n">§4</span>可证伪标记（战略审查 §7）</h2>
+<div class="tbl"><table>
+<thead><tr><th class="m">到期</th><th>标记</th></tr></thead>
+<tbody class="marker">
+<tr><td class="m d">2026-12-31</td><td><b>M1</b> ≥1 非本方系统写出合法 L0。Fail → 不进 P2</td></tr>
+<tr><td class="m d">2027-01-31</td><td><b>M2</b> L0 mode/binary 通过一致性用例（schema 已就位，用例待写）</td></tr>
+<tr><td class="m d">2027-03-31</td><td><b>M3</b> LF Energy sandbox 申请得到正式回复</td></tr>
+<tr><td class="m d">2027-06-30</td><td><b>M4</b> ≥1 家聚合商连续 8 周发送 L1；≥200 条 consented fail</td></tr>
+<tr><td class="m d">2027-12-31</td><td><b>M5</b> 同時市場详细设计出现 DER 集约投标字段定义</td></tr>
+</tbody></table></div>
+</div>
+</div>
+
+<h2><span class="n">§5</span>四项待决策（战略审查 §8）</h2>
+<div class="tbl"><table>
+<thead><tr><th class="m">#</th><th>决策</th><th>建议</th></tr></thead>
+<tbody>
+<tr><td class="m">D1</td><td>公开仓库名与顺序</td><td>以 <span class="k">openenvelope</span> 为主仓库公开；hdeb-open 转为 <span class="k">compat/</span> 或私有</td></tr>
+<tr><td class="m">D2</td><td>是否投入 P1（3–4 月，估算 4–6M JPY ◇）</td><td>投，M1 写进预算审批作为止损</td></tr>
+<tr><td class="m">D3</td><td>L0 加 mode/binary</td><td>已在 schema 0.0.3 实现；剩余为一致性用例（M2）</td></tr>
+<tr><td class="m">D4</td><td>服务条款明写"不指示"</td><td>写。法律（届出制）、商业（付费层）、标准（L3）三条边界钉在一句话上</td></tr>
+</tbody></table></div>
+
+<p class="small">本页为入口，不含新论证；所有数字以各页与 <span class="k">docs/SOURCES.md</span> 为准。</p>
+</div>
+
+</body>
+</html>

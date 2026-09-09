@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/OWNER/hdeb-open/schema/hdeb-document-0.1.schema.json",
+  "title": "HDEB document (a set of blocks + optional network for physics checks)",
+  "type": "object",
+  "required": [
+    "hdeb_version",
+    "blocks"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "hdeb_version": {
+      "const": "0.1"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "$ref": "hdeb-0.1.schema.json"
+      }
+    },
+    "network": {
+      "type": "object",
+      "description": "Minimal DC network for KCL/KVL checks.",
+      "required": [
+        "buses",
+        "branches"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "buses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "slack": {
+                "type": "boolean"
+              },
+              "load_kw": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "branches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "from",
+              "to",
+              "x_pu"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              },
+              "x_pu": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "limit_kw": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "flow_kw": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "Optional user-declared flow, from->to. If given, KVL is checked against it."
+              }
+            }
+          }
+        },
+        "base_mva": {
+          "type": "number",
+          "default": 100
+        }
+      }
+    }
+  }
+}

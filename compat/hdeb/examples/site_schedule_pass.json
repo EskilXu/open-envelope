@@ -1,0 +1,28 @@
+{
+ "hdeb_version": "0.1",
+ "generated_at": "2026-09-04T00:00:00+00:00",
+ "network": {
+  "buses": [{"id": "B1", "slack": true}, {"id": "B2", "load_kw": 300}, {"id": "B3", "load_kw": 200}],
+  "branches": [
+   {"id": "L12", "from": "B1", "to": "B2", "x_pu": 0.1, "limit_kw": 400},
+   {"id": "L23", "from": "B2", "to": "B3", "x_pu": 0.1, "limit_kw": 400},
+   {"id": "L13", "from": "B1", "to": "B3", "x_pu": 0.2, "limit_kw": 400}
+  ]
+ },
+ "blocks": [
+  {"hdeb_version": "0.1", "block_id": "urn:site:pv1:2026-09-04T12:00", "parent_id": null, "hierarchy_level": "device", "kind": "schedule",
+   "resource": {"type": "generator", "bus": "B1", "area": "JP-TOKYO", "voltage_kv": 6.6},
+   "window": {"start": "2026-09-04T12:00:00+09:00", "end": "2026-09-04T12:30:00+09:00", "resolution_min": 30},
+   "power": {"min_kw": 0, "max_kw": 500, "scheduled_kw": 350, "ramp_up_kw_per_min": 50, "ramp_down_kw_per_min": 50},
+   "energy": {"kwh": 175, "direction": "export"},
+   "provenance": {"source": "example", "retrieved_at": "2026-09-04T00:00:00+00:00"}},
+  {"hdeb_version": "0.1", "block_id": "urn:site:bess1:2026-09-04T12:00", "parent_id": null, "hierarchy_level": "device", "kind": "schedule",
+   "resource": {"type": "storage", "bus": "B3", "area": "JP-TOKYO", "voltage_kv": 6.6},
+   "window": {"start": "2026-09-04T12:00:00+09:00", "end": "2026-09-04T12:30:00+09:00", "resolution_min": 30},
+   "power": {"min_kw": -250, "max_kw": 250, "scheduled_kw": 150},
+   "energy": {"kwh": 75, "direction": "export"},
+   "storage": {"capacity_kwh": 1000, "soc_start": 0.6, "soc_min": 0.1, "soc_max": 0.9, "eta_charge": 0.95, "eta_discharge": 0.95},
+   "fallback": {"mode": "rulebook", "rulebook_id": "mpc-safe-v3", "timeout_s": 2},
+   "provenance": {"source": "example", "retrieved_at": "2026-09-04T00:00:00+00:00"}}
+ ]
+}
