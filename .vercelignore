@@ -1,0 +1,5 @@
+# Keep Python tooling out of the Vercel deploy so it builds as a static site (outputDirectory: site)
+requirements.txt
+pyproject.toml
+*.py
+__pycache__/
