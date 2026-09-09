@@ -35,7 +35,7 @@ site/internal/   strategy review & review-landscape (noindex; internal language)
 ## Quick start
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 python -m pytest -q
 python compat/hdeb/tools/kclkvl_check.py compat/hdeb/examples/site_schedule_pass.json   # exit 0
 python compat/hdeb/tools/jepx_to_hdeb.py tests/fixtures/jepx_spot_summary_2026-04-01.csv --areas 東京 -o out.json
