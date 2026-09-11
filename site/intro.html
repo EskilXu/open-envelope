@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Open Envelope — 灵活性资源的开放交换标准。定位、架构、标准库、术语、第一个服务。">
+<title>Open Envelope 简介</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ground:#F6F9F8; --surface:#FFFFFF; --surface2:#F1F5F4; --wash:#E7F3F0;
+  --rule:#E3EAE8; --rule2:#CCDAD6;
+  --ink:#15201E; --ink2:#44534F; --mute:#6A7975;
+  --teal:#0F7A6A; --teal2:#8CC7BC; --amber:#A66A00; --red:#B0402C; --green:#2E7D4E; --blue:#2A6B99;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"IBM Plex Sans","Noto Sans SC","PingFang SC","Hiragino Sans",system-ui,sans-serif;
+  --body:"Noto Sans SC","PingFang SC","Hiragino Sans",var(--sans);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D1416; --surface:#131D1F; --surface2:#172325; --wash:#182527;
+    --rule:#24363A; --rule2:#2F464B;
+    --ink:#D8DDD9; --ink2:#A9B6B3; --mute:#7A8F8C;
+    --teal:#4FB3A9; --teal2:#2C6F69; --amber:#D9A441; --red:#C95C4B; --green:#6FB07A; --blue:#6F9FC9;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D1416; --surface:#131D1F; --surface2:#172325; --wash:#182527;
+  --rule:#24363A; --rule2:#2F464B;
+  --ink:#D8DDD9; --ink2:#A9B6B3; --mute:#7A8F8C;
+  --teal:#4FB3A9; --teal2:#2C6F69; --amber:#D9A441; --red:#C95C4B; --green:#6FB07A; --blue:#6F9FC9;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--body);font-size:15.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal2)}
+a:hover{border-bottom-color:var(--teal)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px}
+[hidden]{display:none!important}
+
+/* ── shell ─────────────────────────────────────────────── */
+.page{max-width:880px;margin:0 auto;padding:0 28px 110px}
+.topbar{border-bottom:1px solid var(--rule);margin-bottom:52px}
+.topbar .in{max-width:880px;margin:0 auto;padding:15px 28px;display:flex;align-items:baseline;
+  gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px}
+.topbar .mark{font-family:var(--sans);font-weight:600;font-size:16px;letter-spacing:-.01em;
+  color:var(--ink);border:0;display:flex;align-items:center;gap:9px}
+.topbar .mark i{width:12px;height:12px;border:2px solid var(--teal);transform:rotate(45deg);
+  border-radius:2px;display:inline-block}
+.topbar nav{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+.topbar nav a{color:var(--mute);border:0}
+.topbar nav a:hover{color:var(--teal)}
+
+/* ── masthead ──────────────────────────────────────────── */
+.mast{display:grid;gap:20px;padding-bottom:44px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+h1{font-family:var(--sans);font-weight:600;font-size:clamp(28px,4.2vw,42px);line-height:1.14;
+  letter-spacing:-.022em;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--teal)}
+.standfirst{font-size:17px;color:var(--ink2);max-width:60ch;margin:0;line-height:1.8}
+.mast .facts{display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+.mast .facts b{color:var(--ink2);font-weight:500}
+
+/* ── sections ──────────────────────────────────────────── */
+section{padding-top:60px}
+.shead{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
+.shead .num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--teal);
+  font-weight:500;flex:none}
+h2{font-family:var(--sans);font-size:24px;font-weight:600;letter-spacing:-.012em;margin:0;text-wrap:balance}
+h3{font-family:var(--sans);font-size:16.5px;font-weight:600;margin:30px 0 8px}
+p{max-width:66ch;margin:0 0 15px}
+.k{font-family:var(--mono);font-size:.87em;color:var(--teal);background:var(--wash);
+  padding:1px 5px;border-radius:4px}
+.rule-line{border-left:2px solid var(--teal);padding-left:18px;margin:24px 0;color:var(--ink2);max-width:64ch}
+.rule-line b{color:var(--ink);font-weight:600}
+.more{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:22px}
+
+/* ── layer ladder (§1) ─────────────────────────────────── */
+.ladder{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);
+  border-radius:10px;overflow:hidden;margin:26px 0 6px}
+.rung{background:var(--surface);display:grid;grid-template-columns:112px minmax(0,1fr);gap:0}
+@media (max-width:620px){.rung{grid-template-columns:1fr}}
+.rung .tag{padding:15px 16px;background:var(--surface2);font-family:var(--mono);font-size:12px;
+  color:var(--teal);font-weight:500;line-height:1.5}
+.rung .tag span{display:block;color:var(--mute);font-size:10px;letter-spacing:.06em;margin-top:4px}
+.rung .def{padding:15px 18px;font-size:14.5px;color:var(--ink2);line-height:1.75}
+.rung .def b{color:var(--ink);font-weight:600}
+
+/* ── figure ────────────────────────────────────────────── */
+figure{margin:26px 0 10px;background:var(--surface);border:1px solid var(--rule);
+  border-radius:10px;padding:22px 20px;overflow-x:auto}
+figure svg{display:block;width:100%;min-width:700px;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--mute);line-height:1.8;margin-top:16px}
+svg text{font-family:var(--mono)}
+svg .box{fill:var(--surface);stroke:var(--rule2);stroke-width:1}
+svg .box-a{fill:var(--wash);stroke:var(--teal);stroke-width:1.2}
+svg .box-s{fill:var(--surface2);stroke:var(--rule2);stroke-width:1}
+svg .t{fill:var(--ink);font-size:11.5px}
+svg .t-s{fill:var(--mute);font-size:9.5px}
+svg .t-a{fill:var(--teal);font-size:11.5px;font-weight:500}
+svg .t-h{fill:var(--mute);font-size:9.5px;letter-spacing:.12em}
+svg .t-w{fill:var(--red);font-size:9.5px}
+svg .ln{stroke:var(--rule2);stroke-width:1.2;fill:none}
+svg .ln-a{stroke:var(--teal);stroke-width:1.4;fill:none}
+svg .ln-d{stroke:var(--mute);stroke-width:1.1;fill:none;stroke-dasharray:4 3}
+svg .ln-x{stroke:var(--red);stroke-width:1.1;fill:none;stroke-dasharray:3 3}
+svg .sep{stroke:var(--rule);stroke-width:1}
+
+/* ── registry table (§3) ───────────────────────────────── */
+.tblwrap{overflow-x:auto;margin:22px 0 6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:600px}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute);text-align:left;font-weight:500;padding:0 14px 10px 0;
+  border-bottom:1px solid var(--rule2);white-space:nowrap}
+td{padding:11px 14px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.65}
+th:last-child,td:last-child{padding-right:0}
+tbody tr:last-child td{border-bottom:0}
+td.m{font-family:var(--mono);font-size:12px;color:var(--ink2);white-space:nowrap}
+tr.eco td{font-family:var(--sans);font-weight:600;color:var(--teal);font-size:12.5px;
+  letter-spacing:.03em;padding-top:22px;border-bottom:1px solid var(--rule2)}
+.pin{font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:1px 7px;
+  border:1px solid var(--rule2);border-radius:5px;color:var(--ink2);white-space:nowrap;
+  display:inline-block;line-height:1.65}
+.pin.L0{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 45%,transparent)}
+.pin.L1{color:var(--blue);border-color:color-mix(in srgb,var(--blue) 45%,transparent)}
+.pin.L2{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 45%,transparent)}
+.pin.L3,.pin.net,.pin.ctx{color:var(--mute)}
+.pin.A{color:var(--green);border-color:color-mix(in srgb,var(--green) 45%,transparent)}
+.tally{display:flex;gap:28px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;
+  color:var(--mute);margin:0 0 4px}
+.tally b{color:var(--ink);font-weight:600;font-size:15px;font-variant-numeric:tabular-nums}
+
+/* ── glossary (§4) ─────────────────────────────────────── */
+dl{margin:22px 0 6px;display:grid;grid-template-columns:minmax(140px,196px) minmax(0,1fr);gap:0}
+dt,dd{padding:13px 0;border-bottom:1px solid var(--rule)}
+dt{font-family:var(--mono);font-size:12.5px;color:var(--teal);font-weight:500;
+  padding-right:22px;line-height:1.55}
+dt span{display:block;color:var(--mute);font-weight:400;font-size:10px;letter-spacing:.04em;margin-top:4px}
+dd{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.78}
+dd b{color:var(--ink);font-weight:600}
+dl>*:nth-last-child(-n+2){border-bottom:0}
+@media (max-width:600px){dl{grid-template-columns:1fr}dt{border-bottom:0;padding-bottom:2px}}
+
+/* ── wedge (§5) ────────────────────────────────────────── */
+.why{background:var(--wash);border:1px solid var(--teal2);border-radius:10px;
+  padding:20px 22px;margin:24px 0}
+.why h3{margin:0 0 8px;font-size:16px}
+.why p{margin:0;max-width:none;font-size:14.5px;color:var(--ink2)}
+.rules4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:22px 0}
+.rules4 li{list-style:none;background:var(--surface);border:1px solid var(--rule);
+  border-radius:9px;padding:14px 16px}
+.rules4 code{font-family:var(--mono);font-size:11.5px;color:var(--teal);display:block;margin-bottom:6px}
+.rules4 span{font-size:14px;color:var(--ink2);line-height:1.65}
+ul.rules4{padding:0}
+.steps{display:grid;gap:0;margin:24px 0;border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.step{display:grid;grid-template-columns:96px minmax(0,1fr);background:var(--surface);
+  border-top:1px solid var(--rule)}
+.step:first-child{border-top:0}
+@media (max-width:620px){.step{grid-template-columns:1fr}}
+.step .when{padding:15px 16px;background:var(--surface2);font-family:var(--mono);font-size:11px;
+  color:var(--mute);line-height:1.6}
+.step .when b{display:block;color:var(--amber);font-weight:500;margin-bottom:3px}
+.step .what{padding:15px 18px;font-size:14.5px;color:var(--ink2);line-height:1.75}
+.step .what b{color:var(--ink);font-weight:600}
+pre{background:var(--surface2);border:1px solid var(--rule);border-radius:8px;
+  padding:13px 15px;font-family:var(--mono);font-size:11.5px;line-height:1.75;
+  overflow-x:auto;margin:16px 0;color:var(--ink2)}
+pre b{color:var(--teal);font-weight:500}
+.marker{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:18px;
+  border-left:2px solid var(--amber);padding-left:16px;line-height:1.8}
+.marker b{color:var(--ink2);font-weight:500}
+
+footer{margin-top:70px;padding-top:26px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:11px;color:var(--mute);line-height:1.95}
+footer a{color:var(--ink2)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="in">
+  <a class="mark" href="/"><i></i>Open Envelope</a>
+  <nav>
+    <a href="#s1">定位</a>
+    <a href="#s2">架构</a>
+    <a href="#s3">标准库</a>
+    <a href="#s4">辞典</a>
+    <a href="#s5">服务</a>
+  </nav>
+</div></div>
+
+<div class="page">
+
+<div class="mast">
+  <div class="eyebrow">开放 · 中立 · 可复算 — 暂定名，草案 0.0.3</div>
+  <h1>把「这台资源能做什么」写成<em>一个对象</em>，把「这份计划做不做得到」写成<em>一份可复算的证明</em>。</h1>
+  <p class="standfirst">电池、充电桩、热泵、数据中心——它们的能力今天散落在十几种协议里，各说各话；而「这份计划是否可行」在多数市场里根本没人在交计划前检查。Open Envelope 补的是这两处缺口，不替换任何既有协议。</p>
+  <div class="facts">
+    <span>Apache-2.0 <b>代码</b></span>
+    <span>CC BY 4.0 <b>规范文本</b></span>
+    <span>Schema <b>0.0.3</b></span>
+    <span>标准登记 <b>35 项</b></span>
+    <span>术语 <b>126 条</b></span>
+  </div>
+</div>
+
+<!-- ═══ §1 定位 ═══════════════════════════════════════════ -->
+<section id="s1">
+  <div class="shead"><span class="num">§1</span><h2>定位</h2></div>
+
+  <p>这不是又一个通信协议，也不是调度或优化产品。它只做两件事：<b>用一种与设备类型无关的方式描述可行域</b>，以及<b>用一个任何人都能重跑的对象记录判定结果</b>。</p>
+
+  <p>可行域不按设备类型预设字段，而是写成显式变量加线性约束集 <span class="k">A·u ≤ b</span>，再加一组离散模式。这样电池、热泵、电解槽、电动车队用同一套表示；新增设备类型不改 schema。</p>
+
+  <div class="ladder">
+    <div class="rung"><div class="tag">L0<span>ENVELOPE</span></div>
+      <div class="def"><b>可行域。</b>时间窗 × 变量上下界 × 线性约束集 × 离散模式 × 命名参数（储能、爬坡）× 回退方式 × 同意声明 × 来源。描述<b>能力</b>，不描述打算。</div></div>
+    <div class="rung"><div class="tag">L1<span>POSITION</span></div>
+      <div class="def"><b>可行域内的一条轨迹。</b><span class="k">schedule</span> 计划 · <span class="k">cleared</span> 成交后计划 · <span class="k">measured</span> 计量实测。三者同格式，可逐点相比。</div></div>
+    <div class="rung"><div class="tag">L2<span>OFFER</span></div>
+      <div class="def"><b>市场包装。</b>价格、可否分割、最低接受比例、关联与互斥报价组、市场引用。它<b>引用</b> L0，不复制 L0。</div></div>
+    <div class="rung"><div class="tag">L3<span>ATTESTATION</span></div>
+      <div class="def"><b>证明对象。</b>规则集 id@版本 · 输入哈希 · 结论 pass / fail / inconclusive · 违规清单 · 签名。任何人用同一输入与同一规则版本可复算出同一结论。</div></div>
+  </div>
+
+  <div class="rule-line"><b>唯一的硬边界：只判定，不指令。</b>校验层输出「对不对、错在哪、差多少」，永不输出调度命令。这条线同时是技术边界（判定是确定性的，指令不是）、商业边界（不与客户的优化产品竞争）、监管边界（下指令的是市场运营者，要按市场运营者被监管）。</div>
+
+  <p>四层各自独立传输、独立版本化。只实现需要的那层即可——大量场景只用得到 L0 与 L3。</p>
+</section>
+
+<!-- ═══ §2 架构图 ═════════════════════════════════════════ -->
+<section id="s2">
+  <div class="shead"><span class="num">§2</span><h2>架构</h2></div>
+
+  <p>上半部是生产路径：既有协议经适配器产出四层对象，校验器读入并出具 L3。下半部才是关键——<b>校验器本身不需要被信任</b>。</p>
+
+  <figure>
+  <svg viewBox="0 0 880 372" role="img" aria-label="架构图：资源经适配器产出 L0/L1/L2 三层对象，校验器读入后出具 L3 证明；下半部显示任何第三方可拉取同版规则集、用输入哈希重跑并比对，从而无需信任校验方。校验器从不向资源下发指令。">
+
+    <text class="t-h" x="8" y="14">资源与既有协议</text>
+    <text class="t-h" x="168" y="14">适配器</text>
+    <text class="t-h" x="300" y="14">四层对象 · 可独立传输</text>
+    <text class="t-h" x="536" y="14">校验器</text>
+    <text class="t-h" x="676" y="14">证明</text>
+
+    <!-- resources -->
+    <rect class="box-s" x="8" y="28"  width="136" height="30" rx="6"/>
+    <text class="t"   x="20" y="47">电池 PCS<tspan class="t-s" dx="8">Modbus</tspan></text>
+    <rect class="box-s" x="8" y="64"  width="136" height="30" rx="6"/>
+    <text class="t"   x="20" y="83">充电桩<tspan class="t-s" dx="8">OCPP · 15118</tspan></text>
+    <rect class="box-s" x="8" y="100" width="136" height="30" rx="6"/>
+    <text class="t"   x="20" y="119">热泵 · 楼宇<tspan class="t-s" dx="8">S2</tspan></text>
+    <rect class="box-s" x="8" y="136" width="136" height="30" rx="6"/>
+    <text class="t"   x="20" y="155">数据中心<tspan class="t-s" dx="8">Redfish</tspan></text>
+
+    <path class="ln" d="M148 97 L 164 97"/>
+
+    <!-- adapter -->
+    <rect class="box" x="168" y="28" width="94" height="138" rx="7"/>
+    <text class="t"   x="215" y="88" text-anchor="middle">Envelope</text>
+    <text class="t"   x="215" y="104" text-anchor="middle">适配器</text>
+    <text class="t-s" x="215" y="122" text-anchor="middle">开源 · 各自独立</text>
+
+    <path class="ln-a" d="M266 97 L 292 97" marker-end="url(#ah-a)"/>
+
+    <!-- objects -->
+    <rect class="box-a" x="296" y="28"  width="184" height="40" rx="7"/>
+    <text class="t-a" x="308" y="46">L0 · Envelope</text>
+    <text class="t-s" x="308" y="60">窗口 × 界 × A·u ≤ b × 模式</text>
+    <rect class="box"  x="296" y="76"  width="184" height="40" rx="7"/>
+    <text class="t"   x="308" y="94">L1 · Position</text>
+    <text class="t-s" x="308" y="108">计划 / 成交 / 实测</text>
+    <rect class="box"  x="296" y="124" width="184" height="40" rx="7"/>
+    <text class="t"   x="308" y="142">L2 · Offer</text>
+    <text class="t-s" x="308" y="156">价格 · 分割 · 关联 · 互斥</text>
+
+    <path class="ln-a" d="M484 48 L 508 48 L 508 88" marker-end="url(#ah-a)"/>
+    <path class="ln-a" d="M484 96 L 512 96" marker-end="url(#ah-a)"/>
+    <path class="ln-a" d="M484 144 L 508 144 L 508 104" marker-end="url(#ah-a)"/>
+
+    <!-- validator -->
+    <rect class="box" x="516" y="46" width="118" height="100" rx="7"/>
+    <text class="t"   x="575" y="72" text-anchor="middle">校验器</text>
+    <text class="t-s" x="575" y="90" text-anchor="middle">确定性 · 无状态</text>
+    <text class="t-s" x="575" y="106" text-anchor="middle">R-PHYS · R-ENV</text>
+    <text class="t-s" x="575" y="120" text-anchor="middle">R-MKT · R-AGG</text>
+    <text class="t-s" x="575" y="134" text-anchor="middle">R-CONSENT</text>
+
+    <path class="ln-a" d="M638 96 L 664 96" marker-end="url(#ah-a)"/>
+
+    <!-- attestation -->
+    <rect class="box-a" x="668" y="46" width="204" height="100" rx="7"/>
+    <text class="t-a" x="682" y="70">L3 · Attestation</text>
+    <text class="t-s" x="682" y="88">rule_set@version</text>
+    <text class="t-s" x="682" y="103">input_sha256</text>
+    <text class="t-s" x="682" y="118">verdict · violations[]</text>
+    <text class="t-s" x="682" y="133">signer{id, alg, sig}</text>
+
+    <!-- never instruct -->
+    <path class="ln-x" d="M560 150 L 560 186 L 76 186 L 76 172"/>
+    <line class="ln-x" x1="306" y1="180" x2="318" y2="192"/>
+    <line class="ln-x" x1="318" y1="180" x2="306" y2="192"/>
+    <text class="t-w" x="328" y="182">从不下发调度指令 — 只判定，不指令</text>
+
+    <!-- divider -->
+    <line class="sep" x1="8" y1="218" x2="872" y2="218"/>
+    <text class="t-h" x="8" y="240">以下：任何人可独立复算 — 无须信任校验方</text>
+
+    <!-- reproduce loop -->
+    <rect class="box" x="668" y="256" width="204" height="76" rx="7"/>
+    <text class="t"   x="682" y="280">任何第三方</text>
+    <text class="t-s" x="682" y="298">监管者 · 对手方 · 研究者</text>
+    <text class="t-s" x="682" y="316">拿到 L3，走下面三步</text>
+
+    <path class="ln-d" d="M770 150 L 770 252" marker-end="url(#ah-d)"/>
+    <text class="t-s" x="778" y="205">L3 公开</text>
+
+    <path class="ln-d" d="M664 294 L 640 294" marker-end="url(#ah-d)"/>
+
+    <rect class="box-s" x="472" y="262" width="164" height="64" rx="7"/>
+    <text class="t"   x="484" y="284">① 拉同版规则集</text>
+    <text class="t-s" x="484" y="302">公开注册表 · 含测试向量</text>
+    <text class="t-s" x="484" y="317">rule_set@version 决定</text>
+
+    <path class="ln-d" d="M468 294 L 444 294" marker-end="url(#ah-d)"/>
+
+    <rect class="box-s" x="276" y="262" width="164" height="64" rx="7"/>
+    <text class="t"   x="288" y="284">② 用原输入重跑</text>
+    <text class="t-s" x="288" y="302">input_sha256 比对</text>
+    <text class="t-s" x="288" y="317">确认检的是同一份</text>
+
+    <path class="ln-d" d="M272 294 L 248 294" marker-end="url(#ah-d)"/>
+
+    <rect class="box-a" x="8" y="262" width="236" height="64" rx="7"/>
+    <text class="t-a" x="20" y="284">③ 比对 verdict</text>
+    <text class="t-s" x="20" y="302">一致 → 证明成立</text>
+    <text class="t-s" x="20" y="317">不一致 → 校验方作假，或注册表被改</text>
+
+    <defs>
+      <marker id="ah-a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L8 4 L0 8 z" fill="currentColor" style="fill:var(--teal)"/>
+      </marker>
+      <marker id="ah-d" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L8 4 L0 8 z" fill="currentColor" style="fill:var(--mute)"/>
+      </marker>
+    </defs>
+  </svg>
+  <figcaption>整个体系里只有两处需要被信任：<b>公开的规则集注册表</b>，与只追加、哈希链式的<b>透明日志</b>（概念取自证书透明度 Certificate Transparency，日志只存 L3 与输入哈希，不存任何明文）。校验方本身不在其中——它作假会在第 ③ 步暴露。</figcaption>
+  </figure>
+
+  <p class="more">完整参考架构（上下游对接全景、接口矩阵、层级聚合语义、规则集、生命周期时序、部署拓扑与数据驻留、治理）见 <a href="/architecture">参考架构 v0.3.2</a>。</p>
+</section>
+
+<!-- ═══ §3 标准库实例 ═════════════════════════════════════ -->
+<section id="s3">
+  <div class="shead"><span class="num">§3</span><h2>标准库</h2></div>
+
+  <p>标准库是一张机器可读的登记表：既有标准各自负责哪一层、经哪个适配器接入、全文是否免费、以及这一条我们核到了什么程度。<b>它决定了本标准需要自己写的东西有多少——答案是很少。</b></p>
+
+  <div class="tally">
+    <span><b>35</b> 项标准</span>
+    <span><b>4</b> 个生态</span>
+    <span><b>7</b> 项一手已核</span>
+    <span><b>22</b> 项全文免费</span>
+  </div>
+
+  <div class="tblwrap">
+  <table>
+    <thead><tr><th>标准</th><th>承担角色</th><th>映射层</th><th>获取</th><th>核实</th></tr></thead>
+    <tbody>
+      <tr class="eco"><td colspan="5">OPC Foundation · 工业互操作</td></tr>
+      <tr><td class="m">OPC UA (IEC 62541)</td><td>设备信息模型 + 传输</td>
+        <td><span class="pin L0">L0</span> <span class="pin L1">L1</span></td><td class="m">免费</td><td class="m">二手</td></tr>
+      <tr><td class="m">OPC UA for IEC 61850</td><td>61850 逻辑节点 → OPC UA</td>
+        <td><span class="pin L0">L0</span> <span class="pin net">net</span></td><td class="m">免费</td><td class="m">二手</td></tr>
+
+      <tr class="eco"><td colspan="5">LF Energy · 开源基金会</td></tr>
+      <tr><td class="m">FlexMeasures</td><td>EMS / 调度器，flex-model 与 flex-context</td>
+        <td><span class="pin L0">L0</span> <span class="pin L1">L1</span></td><td class="m">免费</td><td><span class="pin A">一手</span></td></tr>
+      <tr><td class="m">Shapeshifter (UFTP)</td><td>聚合商 ↔ DSO/TSO 灵活性消息</td>
+        <td><span class="pin L2">L2</span> <span class="pin L1">L1</span></td><td class="m">免费</td><td class="m">二手</td></tr>
+      <tr><td class="m">CUPID</td><td>IEEE 2030.5 over NATS，遗留协议转换</td>
+        <td><span class="pin L0">L0</span> <span class="pin L1">L1</span></td><td class="m">免费</td><td class="m">二手</td></tr>
+      <tr><td class="m">Power Grid Model</td><td>潮流 / 状态估计 — R-PHYS 的可选后端</td>
+        <td><span class="pin net">net</span></td><td class="m">免费</td><td class="m">二手</td></tr>
+
+      <tr class="eco"><td colspan="5">IEC · CENELEC · IEEE</td></tr>
+      <tr><td class="m">S2 · EN 50491-12-2</td><td>设备灵活性控制类型 FRBC / OMBC / PEBC</td>
+        <td><span class="pin L0">L0</span> <span class="pin L1">L1</span></td><td class="m">规范付费<br>JSON 免费</td><td><span class="pin A">一手</span></td></tr>
+      <tr><td class="m">IEC 62325 CIM</td><td>欧洲式市场文档（报价、计划）</td>
+        <td><span class="pin L2">L2</span> <span class="pin L1">L1</span></td><td class="m">付费</td><td class="m">二手</td></tr>
+      <tr><td class="m">IEEE 2030.5 / CSIP</td><td>DER 能力、设定与状态</td>
+        <td><span class="pin L0">L0</span> <span class="pin L1">L1</span></td><td class="m">IEEE 付费<br>CSIP 免费</td><td class="m">二手</td></tr>
+
+      <tr class="eco"><td colspan="5">中国 GB / DL/T / 团体标准</td></tr>
+      <tr><td class="m">GB/T 44241-2024</td><td>虚拟电厂管理规范 — 聚合层语义</td>
+        <td><span class="pin L0">L0 聚合</span> <span class="pin ctx">ctx</span></td><td class="m">全文公开</td><td><span class="pin A">一手</span></td></tr>
+      <tr><td class="m">T/CITS 195-2024</td><td>虚拟电厂信息通信技术规范</td>
+        <td><span class="pin L0">L0</span> <span class="pin L1">L1</span> <span class="pin L2">L2</span></td><td class="m">团标</td><td><span class="pin A">一手</span></td></tr>
+      <tr><td class="m">GB/T 36547</td><td>电化学储能并网技术规定 — L0 上下界来源</td>
+        <td><span class="pin L0">L0 bounds</span></td><td class="m">免费</td><td class="m">二手</td></tr>
+      <tr><td class="m">DL/T 860</td><td>IEC 61850 等同采标</td>
+        <td><span class="pin L0">L0</span> <span class="pin net">net</span></td><td class="m">付费</td><td><span class="pin A">一手</span></td></tr>
+      <tr><td class="m">数据安全法 · 出境评估办法</td><td>约束 <span class="k">consent.cross_border</span> 与部署拓扑</td>
+        <td><span class="pin ctx">consent</span></td><td class="m">免费</td><td class="m">二手</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="more">以上 14 项摘自 35 项登记表；完整表格连同映射文件格式、优先级、访问性与许可见 <a href="/standards-library">标准库 v0.3</a>，机器可读源在仓库 <span class="k">registry/standards.yaml</span>。</p>
+</section>
+
+<!-- ═══ §4 术语辞典 ═══════════════════════════════════════ -->
+<section id="s4">
+  <div class="shead"><span class="num">§4</span><h2>术语</h2></div>
+
+  <p>这套东西横跨三个互不通话的圈子——电力系统、市场制度、软件工程。多数误解出在同一个词各自有意思。以下十条是读懂前三节的最小集。</p>
+
+  <dl>
+    <dt>Flexibility envelope<span>灵活性包络 · 术语来源</span></dt>
+    <dd>本标准名字的出处。Nosair &amp; Bouffard（IEEE Trans. Sustainable Energy 6(3), 2015）提出：用「时间约束下可部署的功率 / 能量范围」同时表达能力与限制。日语工程界称<b>運転エンベロープ</b>，中文文献称<b>可行域包络</b>。</dd>
+
+    <dt>A·u ≤ b<span>线性约束集</span></dt>
+    <dd>用矩阵 A 与向量 b 描述可行域：所有满足全部不等式的功率序列 u 都「做得到」。几何上是一个凸多面体。这是 L0 的核心表示，也是各种「字段式」表示的一般化——<b>不为每类设备预设字段，因此新设备类型不改 schema</b>。</dd>
+
+    <dt>模式变量<span>mode · 整数约束</span></dt>
+    <dd>只能取离散值的变量（开 / 关、充 / 放 / 停），以及依赖它们的约束：最小持续时间、最大切换次数、起动费用。线性不等式表达不了它们，所以 L0 另有 <span class="k">modes</span> 定义，L1 另有等长的 <span class="k">mode_series</span>。</dd>
+
+    <dt>Minkowski 和<span>聚合的数学形式</span></dt>
+    <dd>集合 A、B 的 Minkowski 和是 <span class="k">{a + b : a∈A, b∈B}</span>。多个资源可行域的聚合正是它们的 Minkowski 和。高维下精确计算不可行，所以实际只能取近似——<b>于是必须声明取的是哪种近似</b>。</dd>
+
+    <dt>inner / outer / exact<span>聚合近似声明</span></dt>
+    <dd><b>inner</b>（内近似）⊆ 真实可行域：承诺的每一点都能兑现，用于向系统运营者承诺。<b>outer</b>（外近似）⊇ 真实可行域：不泄露内部结构，用于对市场公布可用性，但成交后必须能分解。<b>exact</b>：仅当各成员是盒约束等特殊情形才可能。这个字段在 schema 里是<b>必填</b>。</dd>
+
+    <dt>Realizability<span>可实现性</span></dt>
+    <dd>聚合可行域中的一点，能否真的分解回各成员、且每个成员都满足自身约束。这是近年文献的核心问题，也是 <b>inner + 规则 <span class="k">agg.sum</span></b> 在工程上要落实的东西。</dd>
+
+    <dt>直流潮流<span>DC power flow</span></dt>
+    <dd>交流潮流的线性化近似：忽略电阻与无功，假设电压幅值为 1、相角差小。极快、无收敛问题，适合校验与市场出清；代价是看不到电压与无功问题。基础规则集用它，可换成交流潮流后端。</dd>
+
+    <dt>确定性 · 无状态<span>determinism</span></dt>
+    <dd>同样输入、同样规则版本 → 同样输出，且不依赖此前任何请求。<b>这两条是「任何人可复算」的前提</b>，也是为什么规则一旦用到求解器后端，L3 就必须记录后端名、版本与随机种子。</dd>
+
+    <dt>透明日志<span>transparency log</span></dt>
+    <dd>只追加、哈希链式、公开可查的记录。<b>只存 L3 与输入哈希，不存任何明文。</b>任何人可审计「某个 L3 确实在某时被记录且此后未被改动」。概念取自证书透明度（Certificate Transparency）。</dd>
+
+    <dt>consent<span>同意声明</span></dt>
+    <dd>L0 上的三个字段：<span class="k">cross_border</span>（可否出境）、<span class="k">training_use</span>（可否用于训练）、<span class="k">retention_days</span>（保留期）。<b>未声明视为全部禁止。</b>规则 <span class="k">consent.scope</span> 在校验前先判它。</dd>
+  </dl>
+
+  <p class="more">完整 126 条辞典（含日、欧、中三地市场制度术语与全部图上专名）见 <a href="/glossary">术语辞典</a>。</p>
+</section>
+
+<!-- ═══ §5 切入点服务 ═════════════════════════════════════ -->
+<section id="s5">
+  <div class="shead"><span class="num">§5</span><h2>第一个服务</h2></div>
+
+  <p>四层标准是完整图景，但产品不从图景开始。第一个服务只做一件事：<b>储能在投标或提交计划之前，先自查这份计划是否真的做得到。</b></p>
+
+  <div class="why">
+    <h3>为什么是储能，为什么是现在</h3>
+    <p>储能的可行域由五个参数闭式确定——功率上下限、容量、SOC 走廊、效率、爬坡。<b>四条规则就能判完，不需要网络模型，也不需要任何模型权重。</b>而日本两个相关市场都不做这件事：现货市场的投标只有区域、价格、量，格式上就不承载资源身份，原理上无法检查物理可行性；需给调整市场只核事前审查通过的功率上限，不核逐时段轨迹。痛已经在用偏差费与扣减付账，工具却还没有。</p>
+  </div>
+
+  <ul class="rules4">
+    <li><code>env.membership</code><span>每一步功率是否在上下界内</span></li>
+    <li><code>env.soc</code><span>SOC 轨迹是否始终在走廊内</span></li>
+    <li><code>env.ramp</code><span>相邻时步变化是否超过爬坡限</span></li>
+    <li><code>env.mode</code><span>充 / 放 / 停的最小持续与切换次数</span></li>
+  </ul>
+
+  <div class="steps">
+    <div class="step"><div class="when"><b>现在</b>已发布</div>
+      <div class="what"><b>命令行校验器。</b>20 行核心的 KCL / KVL 直流潮流检查器，加一个把日本交易所公开成交数据转成能量块的转换器。今天就能跑，附真实数据夹具。</div></div>
+    <div class="step"><div class="when"><b>2026 Q4</b>目标</div>
+      <div class="what"><b>Envelope Check for BESS。</b>先是一个 pip 包：储能计划 CSV 加五个电池参数进，pass / fail、每步越界量、attestation JSON 出。<b>CLI 先于 API</b>——先让人在自己机器上跑通，再谈端点。</div></div>
+    <div class="step"><div class="when"><b>之后</b>目标</div>
+      <div class="what"><b>Validate API。</b>一个无状态 HTTPS 端点：提交 L0 + L1（+ L2），返回 L3。免费；不存明文；每个响应带规则版本与输入指纹，可离线复算。可自托管镜像，<b>边界内部署优先</b>。</div></div>
+  </div>
+
+<pre>$ envelope-check schedule.csv --battery bess.yaml
+<b>FAIL</b>  env.soc     t=07  soc=-0.04   下越界 12.5 kWh
+<b>FAIL</b>  env.ramp    t=19  Δ=+820 kW   超爬坡限 320 kW
+<b>PASS</b>  env.membership · env.mode
+      attestation → att_9f3c1e.json   rule_set oe-rules@0.1.0</pre>
+
+  <p>输出里没有一句「你应该怎么改」。改法是客户自己的优化问题，也是客户既有供应商的生意——<b>我们出具的是判定，不是方案</b>。这条边界从第一个产品起就写在服务条款里。</p>
+
+  <div class="marker"><b>到期检验 M1（2026-12-31）：</b>三家储能聚合商中至少一家连续四周使用。日期是目标不是承诺；到期没做到会在公开的工作台上标为失败，不改口。</div>
+</section>
+
+<footer>
+  Open Envelope · 暂定名 · 草案 0.0.3 · 2026-09-11<br>
+  Apache-2.0（代码、schema、校验器、测试）· CC BY 4.0（规范文本）· 无厂商名，无产品名<br>
+  仓库 <a href="https://github.com/EskilXu/open-envelope">github.com/EskilXu/open-envelope</a> ·
+  <a href="/architecture">参考架构</a> ·
+  <a href="/standards-library">标准库</a> ·
+  <a href="/glossary">术语辞典</a><br>
+  open &amp; secure — don't trust, verify it
+</footer>
+
+</div>
+</body>
+</html>
